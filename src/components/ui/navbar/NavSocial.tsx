@@ -47,7 +47,8 @@ export const NavSocial: React.FC<NavSocialProps> = ({
       target="_blank"
       rel="noopener noreferrer"
       className={clsx(
-        'text-foreground/60 hover:text-foreground transition-colors',
+        'text-foreground/60 hover:text-foreground transition-colors duration-200',
+        'hover:scale-110 transform',
         className
       )}
       aria-label={name}

@@ -29,6 +29,12 @@ export interface NavLinkProps {
    * Additional CSS classes
    */
   className?: string;
+
+  /**
+   * Whether to disable the active styles
+   * @default false
+   */
+  disableActiveStyles?: boolean;
 }
 
 /**
@@ -40,15 +46,18 @@ export const NavLink: React.FC<NavLinkProps> = ({
   children,
   onClick,
   className,
+  disableActiveStyles = false,
 }) => {
   return (
     <Link
       href={href}
       className={clsx(
-        'text-sm font-medium transition-colors',
+        'text-sm font-medium transition-all duration-200',
         isActive 
-          ? 'text-foreground' 
-          : 'text-foreground/60 hover:text-foreground',
+          ? disableActiveStyles
+            ? 'text-foreground/60 hover:text-foreground hover:scale-110 transform' // Same as inactive but with hover effect
+            : 'text-foreground font-semibold hover:scale-110 transform'
+          : 'text-foreground/60 hover:text-foreground hover:scale-110 transform',
         className
       )}
       onClick={onClick}

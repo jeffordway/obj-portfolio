@@ -3,7 +3,7 @@ import { clsx } from "clsx";
 import { getMutedTextClass } from "./constants";
 
 export type TextElement = "p" | "span" | "div" | "label" | "figcaption";
-export type TextSize = "xs" | "sm" | "base" | "lg" | "xl";
+export type TextSize = "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
 export type TextWeight = "light" | "normal" | "medium" | "semibold" | "bold";
 export type TextAlign = "left" | "center" | "right" | "justify";
 export type TextLeading =
@@ -46,6 +46,12 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   leading?: TextLeading;
 
   /**
+   * Whether to use full width instead of max-width constraints
+   * @default false
+   */
+  fullWidth?: boolean;
+
+  /**
    * Whether to apply muted styling (reduced opacity)
    * @default false
    */
@@ -74,6 +80,7 @@ export const Text: React.FC<TextProps> = ({
   weight = "normal",
   align = "left",
   leading = "normal",
+  fullWidth = false,
   muted = false,
   truncate = false,
   className,
@@ -87,6 +94,9 @@ export const Text: React.FC<TextProps> = ({
     base: "text-sm sm:text-base md:text-base",
     lg: "text-base sm:text-lg md:text-lg",
     xl: "text-lg sm:text-xl md:text-xl",
+    "2xl": "text-xl sm:text-2xl md:text-2xl",
+    "3xl": "text-2xl sm:text-3xl md:text-3xl",
+    "4xl": "text-3xl sm:text-4xl md:text-4xl lg:text-5xl",
   };
 
   // Font weight styles mapping
@@ -127,7 +137,7 @@ export const Text: React.FC<TextProps> = ({
         truncate && "truncate",
         "max-w-full", // Ensure text doesn't overflow container
         "break-words", // Allow long words to break
-        "md:max-w-prose", // Better reading width on medium screens and up
+        !fullWidth && "md:max-w-prose", // Better reading width on medium screens and up
         className
       )}
       {...props}

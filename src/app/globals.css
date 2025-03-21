@@ -47,3 +47,14 @@ body {
   color: var(--foreground);
   font-family: var(--font-m);
 }
+
+/* Isolate SVG styling for the logo only */
+.logo-svg path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}

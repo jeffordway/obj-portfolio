@@ -3,13 +3,14 @@
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
-import { FaXTwitter, FaGithub, FaLinkedin } from "react-icons/fa6";
 import { IoMenuSharp, IoCloseSharp } from "react-icons/io5";
+import { FaXTwitter, FaGithub, FaLinkedin } from "react-icons/fa6";
 import { createPortal } from "react-dom";
 
 import { NavLink } from "./NavLink";
 import { NavSocial } from "./NavSocial";
 import { NavLogo } from "./NavLogo";
+import { navItems, socialLinks } from "../../../constants";
 
 export interface NavbarProps {
   /**
@@ -17,30 +18,6 @@ export interface NavbarProps {
    */
   className?: string;
 }
-
-const navItems = [
-  { label: "Projects", href: "/projects" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
-
-const socialLinks = [
-  {
-    name: "GitHub",
-    href: "https://github.com",
-    icon: <FaGithub size={20} />,
-  },
-  {
-    name: "LinkedIn",
-    href: "https://linkedin.com",
-    icon: <FaLinkedin size={20} />,
-  },
-  {
-    name: "X (Twitter)",
-    href: "https://twitter.com",
-    icon: <FaXTwitter size={20} />,
-  },
-];
 
 /**
  * Main navigation bar component
@@ -97,15 +74,33 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
 
       {/* Social links at the bottom */}
       <div className="flex justify-center items-center space-x-8 p-8">
-        {socialLinks.map((link) => (
-          <NavSocial
-            key={link.name}
-            href={link.href}
-            name={link.name}
-            icon={link.icon}
-            onClick={() => setMobileMenuOpen(false)}
-          />
-        ))}
+        {socialLinks.map((link) => {
+          // Determine which icon to use based on iconName
+          let icon;
+          switch (link.iconName) {
+            case 'github':
+              icon = <FaGithub size={20} />;
+              break;
+            case 'linkedin':
+              icon = <FaLinkedin size={20} />;
+              break;
+            case 'twitter':
+              icon = <FaXTwitter size={20} />;
+              break;
+            default:
+              icon = null;
+          }
+          
+          return (
+            <NavSocial
+              key={link.name}
+              href={link.href}
+              name={link.name}
+              icon={icon}
+              onClick={() => setMobileMenuOpen(false)}
+            />
+          );
+        })}
       </div>
     </div>
   );
@@ -135,14 +130,32 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
 
         {/* Right Social Icons */}
         <div className="hidden md:flex items-center space-x-8">
-          {socialLinks.map((link) => (
-            <NavSocial
-              key={link.name}
-              href={link.href}
-              name={link.name}
-              icon={link.icon}
-            />
-          ))}
+          {socialLinks.map((link) => {
+            // Determine which icon to use based on iconName
+            let icon;
+            switch (link.iconName) {
+              case 'github':
+                icon = <FaGithub size={20} />;
+                break;
+              case 'linkedin':
+                icon = <FaLinkedin size={20} />;
+                break;
+              case 'twitter':
+                icon = <FaXTwitter size={20} />;
+                break;
+              default:
+                icon = null;
+            }
+            
+            return (
+              <NavSocial
+                key={link.name}
+                href={link.href}
+                name={link.name}
+                icon={icon}
+              />
+            );
+          })}
         </div>
 
         {/* Mobile Menu Button - Right aligned */}

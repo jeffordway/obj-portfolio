@@ -76,8 +76,6 @@ export interface MainLayoutProps {
 export const MainLayout: React.FC<MainLayoutProps> = ({
   children,
   heroHeight = 100,
-  showHeader = true,
-  showFooter = true,
   className,
 }) => {
   // State to track scroll position and direction

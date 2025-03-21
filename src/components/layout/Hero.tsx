@@ -48,7 +48,7 @@ const Hero: React.FC<HeroProps> = ({
       )}
       style={{ opacity }}
     >
-      <div className="w-full max-w-7xl mx-auto">
+      <div className="w-full mx-auto flex items-center justify-center">
         {children}
       </div>
     </div>

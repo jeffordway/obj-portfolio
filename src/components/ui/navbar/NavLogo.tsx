@@ -24,7 +24,7 @@ export interface NavLogoProps {
 }
 
 /**
- * Navigation logo component with hover effect
+ * Navigation logo component with synchronized hover effects
  */
 export const NavLogo: React.FC<NavLogoProps> = ({
   href = '/',
@@ -38,10 +38,9 @@ export const NavLogo: React.FC<NavLogoProps> = ({
     fetch('/images/icons/ordway_jeff_wordmark.svg')
       .then(response => response.text())
       .then(data => {
-        // Process the SVG to remove any fill attributes and add our classes
+        // Create a wrapper for the SVG that isolates its styles
         const processedSvg = data
-          .replace(/fill="[^"]*"/g, '')
-          .replace('<svg', '<svg class="h-full w-auto transition-colors" fill="currentColor"');
+          .replace('<svg', '<svg class="h-full w-auto logo-svg"');
         setSvgContent(processedSvg);
       })
       .catch(error => console.error('Error loading SVG:', error));
@@ -51,15 +50,22 @@ export const NavLogo: React.FC<NavLogoProps> = ({
     <Link 
       href={href}
       className={clsx(
-        'block h-12 text-foreground hover:text-accent transition-colors',
+        'group block h-12',
         className
       )}
     >
+      {/* Single container with all transitions applied */}
       <div 
-        className="h-full flex items-center" 
-        dangerouslySetInnerHTML={{ __html: svgContent }}
+        className={clsx(
+          'h-full flex items-center',
+          'text-foreground group-hover:text-accent',
+          'group-hover:scale-110 transform',
+          'transition-all duration-300 ease-in-out'
+        )}
         style={{ width: size }}
+        dangerouslySetInnerHTML={{ __html: svgContent }}
       />
     </Link>
   );
 };
+
