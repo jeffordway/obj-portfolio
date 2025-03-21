@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { MainLayout, Header, Footer } from "@/components/layout";
 
 const primaryFont = Inter({
   variable: "--font-main",
@@ -22,7 +23,11 @@ export default function RootLayout({
       <body
         className={`${primaryFont.variable} antialiased`}
       >
-        {children}
+        <MainLayout showHeader showFooter>
+          <Header />
+          {children}
+          <Footer copyrightText={`© ${new Date().getFullYear()} Jeff Ordway`} />
+        </MainLayout>
       </body>
     </html>
   );

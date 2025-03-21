@@ -1,6 +1,5 @@
 import { forwardRef } from "react";
 import { clsx } from "clsx";
-import { motion } from "framer-motion";
 
 // Button variants
 export type ButtonVariant =
@@ -58,7 +57,7 @@ export interface ButtonProps
    * @default false
    */
   fullWidth?: boolean;
-  
+
   /**
    * Whether to enable the hover zoom effect
    * @default true
