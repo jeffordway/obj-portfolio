@@ -92,16 +92,16 @@ export const Heading: React.FC<HeadingProps> = ({
   children,
   ...props
 }) => {
-  // Size styles mapping
+  // Size styles mapping with responsive breakpoints
   const sizeStyles = {
-    xs: "text-xs",
-    sm: "text-sm",
-    md: "text-base",
-    lg: "text-lg",
-    xl: "text-xl",
-    "2xl": "text-2xl",
-    "3xl": "text-3xl",
-    "4xl": "text-4xl",
+    xs: "text-xs sm:text-sm",
+    sm: "text-xs sm:text-sm md:text-base",
+    md: "text-sm sm:text-base md:text-lg",
+    lg: "text-base sm:text-lg md:text-xl",
+    xl: "text-lg sm:text-xl md:text-2xl",
+    "2xl": "text-xl sm:text-2xl md:text-3xl",
+    "3xl": "text-2xl sm:text-3xl md:text-4xl",
+    "4xl": "text-3xl sm:text-4xl md:text-5xl lg:text-6xl",
   };
 
   // Font weight styles mapping
@@ -114,14 +114,14 @@ export const Heading: React.FC<HeadingProps> = ({
     extrabold: "font-extrabold",
   };
 
-  // Letter spacing styles mapping
+  // Letter spacing styles mapping with responsive adjustments
   const trackingStyles = {
     tighter: "tracking-tighter",
     tight: "tracking-tight",
     normal: "tracking-normal",
-    wide: "tracking-wide",
-    wider: "tracking-wider",
-    widest: "tracking-widest",
+    wide: "tracking-wide md:tracking-wider",
+    wider: "tracking-wide sm:tracking-wider md:tracking-widest",
+    widest: "tracking-wider sm:tracking-widest",
   };
 
   // Gradient text effect
@@ -138,6 +138,8 @@ export const Heading: React.FC<HeadingProps> = ({
         muted && getMutedTextClass(),
         truncate && "truncate",
         gradientStyles,
+        "max-w-full", // Ensure text doesn't overflow container
+        "break-words", // Allow long words to break
         className
       )}
       {...props}

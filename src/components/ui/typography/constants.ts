@@ -10,7 +10,7 @@ export const TYPOGRAPHY = {
     /**
      * Opacity value for muted text (70%)
      */
-    muted: "70",
+    muted: "60",
   },
   
   /**

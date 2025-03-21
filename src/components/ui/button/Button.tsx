@@ -86,13 +86,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     // Base styles applied to all buttons
     const baseStyles =
-      "inline-flex items-center justify-center font-medium transition-all duration-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-50 transform";
+      "inline-flex items-center justify-center font-medium transition-all duration-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-50 transform whitespace-nowrap";
 
-    // Size-specific styles (height and padding)
+    // Size-specific styles (height and padding) with responsive adjustments
     const sizeStyles = {
-      sm: "h-8 px-4 text-xs",
-      md: "h-10 px-6 text-sm",
-      lg: "h-16 px-12 text-base",
+      sm: "h-8 px-3 sm:px-4 text-xs",
+      md: "h-9 sm:h-10 px-4 sm:px-6 text-xs sm:text-sm",
+      lg: "h-12 sm:h-14 md:h-16 px-6 sm:px-8 md:px-12 text-sm sm:text-base",
     };
 
     // Rounded corner styles
@@ -153,17 +153,18 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           roundedStyles[rounded],
           variantStyles[variant],
           fullWidth ? "w-full" : "",
-          hoverEffect ? "hover:scale-[1.05]" : "",
+          hoverEffect ? "hover:scale-[1.02] sm:hover:scale-[1.05]" : "",
           "transition-transform active:scale-[0.98] will-change-transform", // Apply the scale animation with CSS
+          "max-w-full", // Ensure button doesn't overflow container
           className
         )}
         disabled={disabled || isLoading}
         {...props}
       >
         {isLoading && <LoadingSpinner />}
-        {!isLoading && leftIcon && <span className="mr-2">{leftIcon}</span>}
-        {children}
-        {!isLoading && rightIcon && <span className="ml-2">{rightIcon}</span>}
+        {!isLoading && leftIcon && <span className="mr-1 sm:mr-2">{leftIcon}</span>}
+        <span className="truncate">{children}</span>
+        {!isLoading && rightIcon && <span className="ml-1 sm:ml-2">{rightIcon}</span>}
       </button>
     );
   }

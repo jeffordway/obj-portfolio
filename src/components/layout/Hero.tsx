@@ -42,11 +42,15 @@ const Hero: React.FC<HeroProps> = ({
       className={clsx(
         'fixed inset-0 flex items-center justify-center',
         'z-10', // Lower z-index than scrollable content
+        'px-4 sm:px-6 md:px-8', // Responsive padding
+        'overflow-hidden', // Prevent content overflow
         className
       )}
       style={{ opacity }}
     >
-      {children}
+      <div className="w-full max-w-7xl mx-auto">
+        {children}
+      </div>
     </div>
   );
 };

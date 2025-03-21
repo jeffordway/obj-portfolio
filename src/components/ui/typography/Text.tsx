@@ -80,13 +80,13 @@ export const Text: React.FC<TextProps> = ({
   children,
   ...props
 }) => {
-  // Size styles mapping
+  // Size styles mapping with responsive breakpoints
   const sizeStyles = {
-    xs: "text-xs",
-    sm: "text-sm",
-    base: "text-base",
-    lg: "text-lg",
-    xl: "text-xl",
+    xs: "text-xs sm:text-sm",
+    sm: "text-xs sm:text-sm md:text-base",
+    base: "text-sm sm:text-base md:text-base",
+    lg: "text-base sm:text-lg md:text-lg",
+    xl: "text-lg sm:text-xl md:text-xl",
   };
 
   // Font weight styles mapping
@@ -106,14 +106,14 @@ export const Text: React.FC<TextProps> = ({
     justify: "text-justify",
   };
 
-  // Line height styles mapping
+  // Line height styles mapping with responsive adjustments
   const leadingStyles = {
     none: "leading-none",
     tight: "leading-tight",
     snug: "leading-snug",
-    normal: "leading-normal",
-    relaxed: "leading-relaxed",
-    loose: "leading-loose",
+    normal: "leading-normal sm:leading-relaxed md:leading-normal",
+    relaxed: "leading-normal sm:leading-relaxed",
+    loose: "leading-relaxed sm:leading-loose",
   };
 
   return (
@@ -121,11 +121,13 @@ export const Text: React.FC<TextProps> = ({
       className={clsx(
         sizeStyles[size],
         weightStyles[weight],
-
         alignStyles[align],
         leadingStyles[leading],
         muted && getMutedTextClass(),
         truncate && "truncate",
+        "max-w-full", // Ensure text doesn't overflow container
+        "break-words", // Allow long words to break
+        "md:max-w-prose", // Better reading width on medium screens and up
         className
       )}
       {...props}

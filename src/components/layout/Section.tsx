@@ -42,19 +42,19 @@ const Section: React.FC<SectionProps> = ({
   padding = 'default',
   className,
 }) => {
-  // Width styles
+  // Width styles with responsive adjustments
   const widthStyles = {
     full: 'w-full',
-    container: 'container mx-auto',
-    narrow: 'container mx-auto max-w-3xl',
+    container: 'w-full max-w-7xl mx-auto',
+    narrow: 'w-full max-w-2xl sm:max-w-3xl mx-auto',
   };
   
-  // Padding styles
+  // Padding styles with responsive adjustments
   const paddingStyles = {
     none: 'py-0',
-    small: 'py-8',
-    default: 'py-16',
-    large: 'py-24',
+    small: 'py-6 sm:py-8',
+    default: 'py-10 sm:py-12 md:py-16',
+    large: 'py-16 sm:py-20 md:py-24',
   };
   
   return (
@@ -63,11 +63,14 @@ const Section: React.FC<SectionProps> = ({
       className={clsx(
         widthStyles[width],
         paddingStyles[padding],
-        'px-4 md:px-6 lg:px-8',
+        'px-4 sm:px-6 md:px-8 lg:px-12',
+        'transition-all duration-300', // Smooth transitions between breakpoints
         className
       )}
     >
-      {children}
+      <div className="w-full h-full">
+        {children}
+      </div>
     </section>
   );
 };
