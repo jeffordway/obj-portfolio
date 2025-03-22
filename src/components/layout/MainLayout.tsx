@@ -53,6 +53,12 @@ export interface MainLayoutProps {
   heroHeight?: number;
   
   /**
+   * Whether to show the hero section
+   * @default true
+   */
+  showHero?: boolean;
+  
+  /**
    * Whether to show the header
    * @default true
    */
@@ -76,25 +82,26 @@ export interface MainLayoutProps {
 export const MainLayout: React.FC<MainLayoutProps> = ({
   children,
   heroHeight = 100,
+  showHero = true,
   className,
 }) => {
   // State to track scroll position and direction
   const [scrollState, setScrollState] = useState<ScrollContextType>({
     scrollY: 0,
     scrollDirection: 0,
-    isPastHero: false,
+    isPastHero: !showHero, // If no hero, consider already past hero
     scrollProgress: 0,
   });
   
   // Effect to handle scroll events
   useEffect(() => {
     let lastScrollY = window.scrollY;
-    const heroThreshold = (heroHeight / 100) * window.innerHeight;
+    const heroThreshold = showHero ? (heroHeight / 100) * window.innerHeight : 0;
     
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const direction = currentScrollY > lastScrollY ? 1 : currentScrollY < lastScrollY ? -1 : 0;
-      const isPastHero = currentScrollY > heroThreshold;
+      const isPastHero = showHero ? currentScrollY > heroThreshold : true;
       
       // Calculate scroll progress (0-1)
       const documentHeight = Math.max(
@@ -119,17 +126,23 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
     
     // Add scroll event listener
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initialize values
     
-    // Clean up event listener
+    // Initial call to set correct initial state
+    handleScroll();
+    
+    // Clean up event listener on unmount
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [heroHeight]);
+  }, [heroHeight, showHero]);
   
   return (
     <ScrollContext.Provider value={scrollState}>
-      <div className={clsx('relative min-h-screen', className)}>
+      <div className={clsx(
+        'relative min-h-screen w-full', 
+        !showHero && 'no-hero-page', // Special class for pages without hero
+        className
+      )}>
         {children}
       </div>
     </ScrollContext.Provider>

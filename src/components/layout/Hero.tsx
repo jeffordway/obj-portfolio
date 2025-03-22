@@ -11,12 +11,6 @@ export interface HeroProps {
   children: React.ReactNode;
   
   /**
-   * Whether to fade out the hero content on scroll
-   * @default true
-   */
-  fadeOnScroll?: boolean;
-  
-  /**
    * Additional CSS classes
    */
   className?: string;
@@ -27,15 +21,9 @@ export interface HeroProps {
  */
 const Hero: React.FC<HeroProps> = ({
   children,
-  fadeOnScroll = true,
   className,
 }) => {
-  const { scrollY, isPastHero } = useScroll();
-  
-  // Calculate opacity based on scroll position
-  const opacity = fadeOnScroll 
-    ? Math.max(1 - scrollY / (window.innerHeight * 0.5), 0)
-    : 1;
+  const { isPastHero } = useScroll();
   
   return (
     <div 
@@ -46,7 +34,7 @@ const Hero: React.FC<HeroProps> = ({
         'overflow-hidden', // Prevent content overflow
         className
       )}
-      style={{ opacity }}
+
     >
       <div className="w-full mx-auto flex items-center justify-center">
         {children}

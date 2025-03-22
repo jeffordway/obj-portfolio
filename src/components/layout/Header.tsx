@@ -34,10 +34,8 @@ const Header = ({
 }: HeaderProps) => {
   const { scrollY } = useScroll();
   
-  // Calculate background opacity based on scroll position
-  const bgOpacity = dynamicOpacity && transparent
-    ? Math.min(scrollY / 200, 0.8)
-    : transparent ? 0 : 1;
+  // Determine if header should be transparent or solid
+  const isTransparent = dynamicOpacity && transparent ? scrollY <= 20 : transparent;
 
   return (
     <header 
@@ -46,11 +44,12 @@ const Header = ({
         'z-30', // Higher z-index than hero and content
         'py-6 md:py-8',
         'transition-all duration-200 ease-in-out',
-        'backdrop-blur-sm',
+
         className
       )}
       style={{ 
-        backgroundColor: `rgba(var(--background-rgb), ${bgOpacity})`,
+        backgroundColor: isTransparent ? 'transparent' : 'var(--background)',
+        boxShadow: isTransparent ? 'none' : '0 2px 10px rgba(0,0,0,0.05)'
       }}
     >
       <Container>

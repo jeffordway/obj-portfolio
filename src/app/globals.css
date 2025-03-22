@@ -28,6 +28,12 @@
   --font-primary: var(--font-m);
 }
 
+/* Custom styles for pages without hero sections */
+.no-hero-page .bg-gradient-to-b {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground: oklch(0.985 0.002 247.839); /* gray-50 */

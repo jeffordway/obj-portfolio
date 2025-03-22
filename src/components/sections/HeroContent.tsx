@@ -21,7 +21,7 @@ export const HeroContent: React.FC<HeroContentProps> = ({
       <Heading as="h1" size="xl" weight="medium">
         {title}
       </Heading>
-      <Text size="2xl" align="center" fullWidth={false}>
+      <Text size="2xl" align="center" fullWidth={false} className='text-white'>
         {subtitle}
       </Text>
     </div>

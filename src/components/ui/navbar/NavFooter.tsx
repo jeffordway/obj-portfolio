@@ -7,7 +7,7 @@ import { FaXTwitter, FaGithub, FaLinkedin } from "react-icons/fa6";
 
 import { NavLink } from './NavLink';
 import { NavSocial } from './NavSocial';
-import { navItems, socialLinks } from '../../../constants';
+import { navItems, footerLinks, socialLinks } from '../../../constants';
 
 export interface NavFooterProps {
   /**
@@ -71,6 +71,24 @@ export const NavFooter: React.FC<NavFooterProps> = ({ className }) => {
           );
         })}
       </div>
+      
+      {/* Footer links */}
+      <nav 
+        aria-label="Footer Legal Links" 
+        className="flex flex-wrap justify-center gap-x-6 gap-y-2"
+      >
+        {footerLinks.map((item) => (
+          <NavLink
+            key={item.href}
+            href={item.href}
+            isActive={pathname === item.href}
+            disableActiveStyles={true}
+            className="text-sm text-foreground/70 hover:text-foreground/90 transition-colors"
+          >
+            {item.label}
+          </NavLink>
+        ))}
+      </nav>
       
       {/* Copyright notice */}
       <p className="text-center text-sm text-foreground/60">
