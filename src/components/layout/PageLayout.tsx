@@ -34,6 +34,42 @@ export interface PageLayoutProps {
   showHero?: boolean;
   
   /**
+   * Whether to show background video in hero
+   * @default false
+   */
+  showBackgroundVideo?: boolean;
+  
+  /**
+   * Video opacity (0-100)
+   * @default 50
+   */
+  videoOpacity?: number;
+  
+  /**
+   * Whether to show a colored overlay with blur
+   * @default false
+   */
+  showColoredOverlay?: boolean;
+  
+  /**
+   * Overlay color
+   * @default 'bg-primary'
+   */
+  overlayColor?: string;
+  
+  /**
+   * Overlay opacity (0-100)
+   * @default 50
+   */
+  overlayOpacity?: number;
+  
+  /**
+   * Blur amount in pixels
+   * @default 8
+   */
+  blurAmount?: number;
+  
+  /**
    * Initial padding for content when no hero is shown (in viewport height units)
    * @default 0
    */
@@ -49,12 +85,25 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   heroContent,
   children,
   showHero = true,
+  showBackgroundVideo = false,
+  videoOpacity = 90,
+  showColoredOverlay = false,
+  overlayColor = 'bg-background',
+  overlayOpacity = 50,
+  blurAmount = 8,
   noHeroPadding = 0,
 }) => {
   return (
     <MainLayout showHero={showHero}>
       {showHero && (
-        <Hero>
+        <Hero
+          showBackgroundVideo={showBackgroundVideo}
+          videoOpacity={videoOpacity}
+          showColoredOverlay={showColoredOverlay}
+          overlayColor={overlayColor}
+          overlayOpacity={overlayOpacity}
+          blurAmount={blurAmount}
+        >
           {heroContent || (
             <div className="flex flex-col items-center justify-center h-full text-center px-4">
               {title && <h1 className="text-4xl font-bold mb-4">{title}</h1>}

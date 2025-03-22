@@ -40,11 +40,10 @@ const Header = ({
   return (
     <header 
       className={clsx(
-        'fixed top-0 left-0 right-0',
+        'fixed top-0 left-0 right-0', // Positioning
         'z-30', // Higher z-index than hero and content
-        'py-6 md:py-8',
-        'transition-all duration-200 ease-in-out',
-
+        'py-6 md:py-8', // Vertical spacing
+        'transition-all duration-200 ease-in-out', // Animation
         className
       )}
       style={{ 
