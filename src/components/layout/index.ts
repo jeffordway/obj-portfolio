@@ -13,12 +13,14 @@ export { default as ScrollableContent } from "./ScrollableContent";
 export { default as Section } from "./Section";
 export { default as Footer } from "./Footer";
 export { default as PageLayout } from "./PageLayout";
+export { Container } from "./Container";
 
 // Re-export all components as a default object for convenience
 import { MainLayout } from "./MainLayout";
 import Header from "./Header";
 import Hero from "./Hero";
 import ScrollableContent from "./ScrollableContent";
+import { Container } from "./Container";
 import Section from "./Section";
 import Footer from "./Footer";
 import PageLayout from "./PageLayout";

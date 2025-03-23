@@ -2,8 +2,8 @@
 
 import React from "react";
 import { clsx } from "clsx";
-import { Container } from "./Container";
 import { NavFooter } from "@/components/ui/navbar/NavFooter";
+import Section from "./Section";
 
 export interface FooterProps {
   /**
@@ -26,12 +26,10 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
         className
       )}
     >
-      <Container>
-        <div className="w-full mx-auto">
-          {/* Navigation and social links */}
-          <NavFooter />
-        </div>
-      </Container>
+      <Section>
+        {/* Navigation and social links */}
+        <NavFooter />
+      </Section>
     </footer>
   );
 };

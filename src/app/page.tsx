@@ -53,6 +53,8 @@ export default function Home() {
         id="content"
         title="Portfolio Content"
         description="This is a sample content section using the new structure"
+        padding="default"
+        width="container"
       >
         <div className="space-y-6">
           <Text>

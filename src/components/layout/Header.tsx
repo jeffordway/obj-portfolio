@@ -1,9 +1,10 @@
 "use client";
 
-import { clsx } from 'clsx';
-import { useScroll } from './MainLayout';
-import { Container } from "./Container";
+import React from "react";
+import { clsx } from "clsx";
+import { useScroll } from "./MainLayout";
 import { Navbar } from "@/components/ui/navbar";
+import Section from "./Section";
 
 export interface HeaderProps {
   /**
@@ -11,13 +12,13 @@ export interface HeaderProps {
    * @default true
    */
   transparent?: boolean;
-  
+
   /**
    * Whether to change opacity on scroll
    * @default true
    */
   dynamicOpacity?: boolean;
-  
+
   /**
    * Additional CSS classes
    */
@@ -27,32 +28,33 @@ export interface HeaderProps {
 /**
  * Header layout component that handles positioning and background effects
  */
-const Header = ({
+const Header: React.FC<HeaderProps> = ({
   transparent = true,
   dynamicOpacity = true,
   className,
 }: HeaderProps) => {
   const { scrollY } = useScroll();
-  
+
   // Determine if header should be transparent or solid
-  const isTransparent = dynamicOpacity && transparent ? scrollY <= 1000 : transparent;
+  const isTransparent =
+    dynamicOpacity && transparent ? scrollY <= 1000 : transparent;
 
   return (
-    <header 
+    <header
       className={clsx(
-        'fixed top-0 left-0 right-0', // Positioning
-        'z-30', // Higher z-index than hero and content
-        'py-6 md:py-8', // Vertical spacing
-        'transition-all duration-200 ease-in-out', // Animation
+        "fixed top-0 left-0 right-0", // Positioning
+        "z-30", // Higher z-index than hero and content
+        "py-6 md:py-8", // Vertical spacing
+        "transition-all duration-200 ease-in-out", // Animation
         className
       )}
-      style={{ 
-        backgroundColor: isTransparent ? 'transparent' : 'var(--background)',
+      style={{
+        backgroundColor: isTransparent ? "transparent" : "var(--background)",
       }}
     >
-      <Container>
+      <Section>
         <Navbar />
-      </Container>
+      </Section>
     </header>
   );
 };

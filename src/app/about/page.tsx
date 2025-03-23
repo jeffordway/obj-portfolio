@@ -1,4 +1,4 @@
-import { PageLayout } from "@/components/layout";
+import { PageLayout, Section, Container } from "@/components/layout";
 import { Heading, Text } from "@/components/ui/typography";
 import { SimpleHero } from "@/components/sections/hero";
 import { clsx } from "clsx";
@@ -45,19 +45,23 @@ export default function AboutPage() {
       overlayOpacity={60}
       blurAmount={5}
     >
-          {/* Top section with profile image and intro text */}
-          <div
-            className={clsx(
-              "grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16",
-              "items-start"
-            )}
+          <Section className="py-10 sm:py-12 md:py-16">
+            <Container
+              width="container"
+            >
+            {/* Top section with profile image and intro text */}
+            <div
+              className={clsx(
+                "grid grid-cols-1 lg:grid-cols-12 gap-6", // Grid layout
+                "items-start" // Alignment
+              )}
           >
             {/* Left column - Profile image */}
             <div className="lg:col-span-4">
               <div
                 className={clsx(
                   "relative aspect-square w-full",
-                  "rounded-md overflow-hidden"
+                  "rounded-none overflow-hidden"
                 )}
               >
                 <Image
@@ -254,6 +258,8 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
+            </Container>
+          </Section>
     </PageLayout>
   );
 }

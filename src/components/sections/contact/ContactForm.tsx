@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Input, Textarea } from '@/components/ui/form';
 import Button from '@/components/ui/button/Button';
 import { clsx } from 'clsx';
+import { z } from 'zod';
 
 export interface ContactFormProps {
   /**
@@ -12,12 +13,25 @@ export interface ContactFormProps {
   className?: string;
 }
 
+// Define the contact form schema with Zod
+const contactFormSchema = z.object({
+  name: z.string().min(1, { message: 'Name is required' }),
+  email: z.string().min(1, { message: 'Email is required' }).email({ message: 'Please enter a valid email address' }),
+  subject: z.string().min(1, { message: 'Subject is required' }),
+  message: z.string()
+    .min(10, { message: 'Message must be at least 10 characters' })
+    .max(1000, { message: 'Message cannot exceed 1000 characters' }),
+});
+
+// Infer the type from the schema
+type ContactFormData = z.infer<typeof contactFormSchema>;
+
 /**
  * Contact form component with validation and submission handling
  */
 const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
   // Form state
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
     subject: '',
@@ -30,63 +44,85 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
   // Form errors
   const [errors, setErrors] = useState<Record<string, string>>({});
   
-  // Handle input changes
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
+  // Validate a single field
+  const validateField = (name: keyof ContactFormData, value: string): string | null => {
+    // Create a partial schema for just this field
+    const fieldSchema = z.object({ [name]: contactFormSchema.shape[name] });
     
-    // Clear error for this field when user starts typing
-    if (errors[name]) {
-      setErrors(prev => {
-        const newErrors = { ...prev };
-        delete newErrors[name];
-        return newErrors;
-      });
+    // Validate just this field
+    const result = fieldSchema.safeParse({ [name]: value });
+    
+    if (!result.success) {
+      const error = result.error.errors.find(err => err.path[0] === name);
+      return error ? error.message : null;
     }
     
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
+    return null;
   };
   
-  // Validate form
+  // Handle input changes with real-time validation
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    const fieldName = name as keyof ContactFormData;
+    
+    // Update form data
+    setFormData(prev => ({
+      ...prev,
+      [fieldName]: value,
+    }));
+    
+    // Validate the field after a short delay (debounce)
+    const errorMessage = validateField(fieldName, value);
+    
+    // Update errors state
+    setErrors(prev => {
+      const newErrors = { ...prev };
+      
+      if (errorMessage) {
+        newErrors[fieldName] = errorMessage;
+      } else {
+        delete newErrors[fieldName];
+      }
+      
+      return newErrors;
+    });
+  };
+  
+  // Validate form using Zod
   const validateForm = (): boolean => {
-    const newErrors: Record<string, string> = {};
+    const result = contactFormSchema.safeParse(formData);
     
-    // Name validation
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+    if (!result.success) {
+      // Convert Zod errors to our error format
+      const newErrors: Record<string, string> = {};
+      result.error.errors.forEach((error) => {
+        if (error.path.length > 0) {
+          const field = error.path[0].toString();
+          newErrors[field] = error.message;
+        }
+      });
+      
+      setErrors(newErrors);
+      return false;
     }
     
-    // Email validation
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
-    }
-    
-    // Subject validation
-    if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
-    }
-    
-    // Message validation
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
-    }
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    // Clear any existing errors
+    setErrors({});
+    return true;
   };
   
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate form
+    // Validate entire form before submission
     if (!validateForm()) {
+      // Focus the first field with an error
+      const firstErrorField = Object.keys(errors)[0];
+      if (firstErrorField) {
+        const element = document.querySelector(`[name="${firstErrorField}"]`) as HTMLElement;
+        if (element) element.focus();
+      }
       return;
     }
     
@@ -96,6 +132,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
     try {
       // In a real app, you would send the form data to your API here
       // For now, we'll simulate a successful submission after a delay
+      
+      // Parse and validate the data one final time to ensure type safety
+      const validatedData = contactFormSchema.parse(formData);
+      
+      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
       
       // Reset form
@@ -128,7 +169,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
     <div 
       className={clsx(
         'w-full max-w-2xl mx-auto', // Layout
-        'bg-background-alt', // Background and padding        className
+        'bg-background-alt', // Background and padding
+        className
       )}
     >
       {status === 'success' ? (
@@ -199,16 +241,35 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
               required
             />
             
-            <Textarea
-              label="Message"
-              name="message"
-              placeholder="Your message here..."
-              rows={6}
-              value={formData.message}
-              onChange={handleChange}
-              error={errors.message}
-              required
-            />
+            <div className="relative">
+              <Textarea
+                label="Message"
+                name="message"
+                placeholder="Your message here..."
+                rows={6}
+                value={formData.message}
+                onChange={handleChange}
+                error={errors.message}
+                helperText={!errors.message ? `${formData.message.length}/1000 characters` : undefined}
+                required
+              />
+              {formData.message.length > 900 && (
+                <div 
+                  className={clsx(
+                    'text-xs mt-1',
+                    formData.message.length > 1000 ? 'text-[var(--error)]' : 
+                    formData.message.length > 950 ? 'text-[var(--warning)]' : 
+                    'text-[var(--info)]'
+                  )}
+                >
+                  {formData.message.length > 1000 ? (
+                    <span>Character limit exceeded by {formData.message.length - 1000} characters</span>
+                  ) : (
+                    <span>You have {1000 - formData.message.length} characters remaining</span>
+                  )}
+                </div>
+              )}
+            </div>
             
             <div>
               <Button
@@ -217,7 +278,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
                 disabled={status === 'submitting'}
                 size="lg"
                 rounded="none"
-                className="float-right"
+                
               >
                 Send Message
               </Button>
