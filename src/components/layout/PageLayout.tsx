@@ -34,16 +34,28 @@ export interface PageLayoutProps {
   showHero?: boolean;
   
   /**
-   * Whether to show background video in hero
+   * Whether to show background media in hero (video or image)
    * @default false
    */
-  showBackgroundVideo?: boolean;
+  showBackgroundMedia?: boolean;
   
   /**
-   * Video opacity (0-100)
+   * Type of background media to show
+   * @default 'video'
+   */
+  mediaType?: 'video' | 'image';
+  
+  /**
+   * Source path for the background media (video or image)
+   * @default '/videos/background_video.mp4' for video, '/images/background.jpg' for image
+   */
+  mediaSrc?: string;
+  
+  /**
+   * Media opacity (0-100)
    * @default 50
    */
-  videoOpacity?: number;
+  mediaOpacity?: number;
   
   /**
    * Whether to show a colored overlay with blur
@@ -85,8 +97,10 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   heroContent,
   children,
   showHero = true,
-  showBackgroundVideo = false,
-  videoOpacity = 90,
+  showBackgroundMedia = false,
+  mediaType = 'video',
+  mediaSrc,
+  mediaOpacity = 90,
   showColoredOverlay = false,
   overlayColor = 'bg-background',
   overlayOpacity = 50,
@@ -97,8 +111,10 @@ const PageLayout: React.FC<PageLayoutProps> = ({
     <MainLayout showHero={showHero}>
       {showHero && (
         <Hero
-          showBackgroundVideo={showBackgroundVideo}
-          videoOpacity={videoOpacity}
+          showBackgroundMedia={showBackgroundMedia}
+          mediaType={mediaType}
+          mediaSrc={mediaSrc}
+          mediaOpacity={mediaOpacity}
           showColoredOverlay={showColoredOverlay}
           overlayColor={overlayColor}
           overlayOpacity={overlayOpacity}

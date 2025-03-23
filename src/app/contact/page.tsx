@@ -1,5 +1,6 @@
-import { Hero, ScrollableContent, Section } from "@/components/layout";
+import { PageLayout, Section } from "@/components/layout";
 import { Heading, Text } from "@/components/ui/typography";
+import { ContactForm } from "@/components/sections/contact";
 
 export const metadata = {
   title: "Contact | Jeff Ordway",
@@ -8,26 +9,17 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <>
-      <Hero>
-        <div className="text-center px-4">
-          <Heading size="4xl" weight="bold" tracking="tight">
-            Contact
-          </Heading>
-          <Text size="xl" className="mt-4 max-w-xl">
-            Let's get in touch
-          </Text>
-        </div>
-      </Hero>
-
-      <ScrollableContent>
-        <Section padding="large">
-          <Heading>Contact Me</Heading>
-          <Text className="mt-4">
-            This is a placeholder for the contact page content.
-          </Text>
-        </Section>
-      </ScrollableContent>
-    </>
+    <PageLayout
+      showHero={false}
+    >
+      <Section padding="none" width="narrow" className="pt-20 md:pt-24">
+        <Heading>Get in Touch</Heading>
+        <Text className="mt-6 mb-8">
+          Have a question or want to work together? Fill out the form below and I'll get back to you as soon as possible.
+        </Text>
+        
+        <ContactForm />
+      </Section>
+    </PageLayout>
   );
 }

@@ -11,16 +11,28 @@ export interface HeroProps {
   children: React.ReactNode;
   
   /**
-   * Whether to show the background video
+   * Whether to show background media (video or image)
    * @default false
    */
-  showBackgroundVideo?: boolean;
+  showBackgroundMedia?: boolean;
   
   /**
-   * Video opacity (0-100)
+   * Type of background media to show
+   * @default 'video'
+   */
+  mediaType?: 'video' | 'image';
+  
+  /**
+   * Source path for the background media (video or image)
+   * @default '/videos/background_video.mp4' for video, '/images/background.jpg' for image
+   */
+  mediaSrc?: string;
+  
+  /**
+   * Media opacity (0-100)
    * @default 50
    */
-  videoOpacity?: number;
+  mediaOpacity?: number;
   
   /**
    * Whether to show a colored overlay with blur
@@ -57,8 +69,10 @@ export interface HeroProps {
  */
 const Hero: React.FC<HeroProps> = ({
   children,
-  showBackgroundVideo = false,
-  videoOpacity = 50,
+  showBackgroundMedia = false,
+  mediaType = 'video',
+  mediaSrc,
+  mediaOpacity = 50,
   showColoredOverlay = false,
   overlayColor = 'bg-primary',
   overlayOpacity = 50,
@@ -77,7 +91,7 @@ const Hero: React.FC<HeroProps> = ({
         className
       )}
     >
-      {showBackgroundVideo && (
+      {showBackgroundMedia && (
         <div className={clsx(
           'absolute inset-0', // Positioning
           'w-full h-full', // Dimensions
@@ -89,23 +103,38 @@ const Hero: React.FC<HeroProps> = ({
               'bg-background/80', // Background with opacity
               'z-10' // z-index for layering
             )}
-            style={{ opacity: (100 - videoOpacity) / 100 }}
+            style={{ opacity: (100 - mediaOpacity) / 100 }}
           />
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className={clsx(
-              'absolute inset-0', // Positioning
-              'w-full h-full', // Dimensions
-              'object-cover', // Image handling
-              'z-0' // Base layer
-            )}
-          >
-            <source src="/videos/background_video.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          
+          {mediaType === 'video' && (
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className={clsx(
+                'absolute inset-0', // Positioning
+                'w-full h-full', // Dimensions
+                'object-cover', // Image handling
+                'z-0' // Base layer
+              )}
+            >
+              <source src={mediaSrc || '/videos/background_video.mp4'} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          )}
+          
+          {mediaType === 'image' && (
+            <div 
+              className={clsx(
+                'absolute inset-0', // Positioning
+                'w-full h-full', // Dimensions
+                'bg-cover bg-center bg-no-repeat', // Image handling
+                'z-0' // Base layer
+              )}
+              style={{ backgroundImage: `url(${mediaSrc || '/images/background.jpg'})` }}
+            />
+          )}
         </div>
       )}
       

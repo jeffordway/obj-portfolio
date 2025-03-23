@@ -35,7 +35,7 @@ const Header = ({
   const { scrollY } = useScroll();
   
   // Determine if header should be transparent or solid
-  const isTransparent = dynamicOpacity && transparent ? scrollY <= 20 : transparent;
+  const isTransparent = dynamicOpacity && transparent ? scrollY <= 1000 : transparent;
 
   return (
     <header 
@@ -48,7 +48,6 @@ const Header = ({
       )}
       style={{ 
         backgroundColor: isTransparent ? 'transparent' : 'var(--background)',
-        boxShadow: isTransparent ? 'none' : '0 2px 10px rgba(0,0,0,0.05)'
       }}
     >
       <Container>

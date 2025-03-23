@@ -1,63 +1,141 @@
-import { PageLayout, Section } from "@/components/layout";
-import { Heading, Text } from "@/components/ui/typography";
-import { HeroContent } from "@/components/sections";
+import { PageLayout } from "@/components/layout";
+import { Text, Heading } from "@/components/ui/typography";
+import {
+  AvatarHero,
+  AboutSection,
+  ProjectsSection,
+  SkillsSection,
+  ContactSection,
+  ContentSection,
+} from "@/components/sections";
 
 export default function Home() {
+  // Page content variables for easier management
+  const pageContent = {
+    hero: {
+      title: "Purpose-Driven Design and Development",
+      subtitle: `
+      Hi, I’m Jeff Ordway. I create, design, and code solutions that matter—enjoyable, 
+      impactful, and built to last. My mission is to inspire bold action, ignite purpose, 
+      and drive real change. Guided by faith, enthusiasm, and determination, I stay
+       authentic, work hard, and uplift others. You can rely on me to infuse purpose 
+       into every pixel and line of code.
+      `
+        .trim()
+        .replace(/\s+/g, " "),
+    },
+    main: {
+      heading: "Welcome to my portfolio",
+      subheading: "This is a placeholder for the home page content.",
+    },
+  };
+
   return (
     <PageLayout
       heroContent={
-        <HeroContent
-          title="Jeff Ordway"
-          subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        <AvatarHero
+          title={pageContent.hero.title}
+          subtitle={pageContent.hero.subtitle}
+          avatarSize={100}
         />
       }
-      showBackgroundVideo={true}
-      videoOpacity={5}
+      showBackgroundMedia={true}
+      mediaType="video"
+      mediaSrc="/videos/background_video.mp4"
+      mediaOpacity={5}
       showColoredOverlay={true}
       overlayColor="bg-background"
       overlayOpacity={50}
       blurAmount={8}
     >
-      <Section padding="large">
-          <Heading>Welcome to my portfolio</Heading>
-          <Text className="mt-4">
-            This is a placeholder for the home page content.
+    
+      <ContentSection
+        id="content"
+        title="Portfolio Content"
+        description="This is a sample content section using the new structure"
+      >
+        <div className="space-y-6">
+          <Text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
           </Text>
-          
-          <div className="mt-8 space-y-6">
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Text>
-            
-            <Text>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-            </Text>
-            
-            <Text>
-              Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-            </Text>
-            
-            <Text>
-              At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
-            </Text>
-            
-            <Text>
-              Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
-            </Text>
-            
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Text>
-            
-            <Text>
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-            </Text>
-            
-            <Text>
-              Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-            </Text>
-          </div>
-        </Section>
+
+          <Text>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
+            eos qui ratione voluptatem sequi nesciunt.
+          </Text>
+
+          <Text>
+            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
+            consectetur, adipisci velit, sed quia non numquam eius modi tempora
+            incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut
+            enim ad minima veniam, quis nostrum exercitationem ullam corporis
+            suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis
+            autem vel eum iure reprehenderit qui in ea voluptate velit esse quam
+            nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+            voluptas nulla pariatur?
+          </Text>
+
+          <Text>
+            At vero eos et accusamus et iusto odio dignissimos ducimus qui
+            blanditiis praesentium voluptatum deleniti atque corrupti quos
+            dolores et quas molestias excepturi sint occaecati cupiditate non
+            provident, similique sunt in culpa qui officia deserunt mollitia
+            animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis
+            est et expedita distinctio.
+          </Text>
+
+          <Text>
+            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil
+            impedit quo minus id quod maxime placeat facere possimus, omnis
+            voluptas assumenda est, omnis dolor repellendus. Temporibus autem
+            quibusdam et aut officiis debitis aut rerum necessitatibus saepe
+            eveniet ut et voluptates repudiandae sint et molestiae non
+            recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut
+            aut reiciendis voluptatibus maiores alias consequatur aut
+            perferendis doloribus asperiores repellat.
+          </Text>
+
+          <Text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </Text>
+
+          <Text>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
+            eos qui ratione voluptatem sequi nesciunt.
+          </Text>
+
+          <Text>
+            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
+            consectetur, adipisci velit, sed quia non numquam eius modi tempora
+            incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut
+            enim ad minima veniam, quis nostrum exercitationem ullam corporis
+            suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis
+            autem vel eum iure reprehenderit qui in ea voluptate velit esse quam
+            nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+            voluptas nulla pariatur?
+          </Text>
+        </div>
+      </ContentSection>
     </PageLayout>
   );
 }

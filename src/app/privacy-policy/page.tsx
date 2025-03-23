@@ -6,7 +6,7 @@ export default function PrivacyPolicy() {
     <PageLayout 
       showHero={false}
     >
-      <Section padding="none" className="pt-20 md:pt-24">
+      <Section padding="none" width="narrow" className="pt-20 md:pt-24">
         <Heading>Privacy Policy</Heading>
         <Text className="mt-6 mb-8">
           Last updated: March 21, 2025
