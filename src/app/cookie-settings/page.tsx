@@ -5,7 +5,7 @@ import { PageLayout } from '@/components/layout';
 import { Section, Container } from '@/components/layout';
 import { Heading } from '@/components/ui/typography/Heading';
 import { Text } from '@/components/ui/typography/Text';
-import Checkbox from '@/components/ui/forms/Checkbox';
+import Checkbox from '@/components/ui/form/Checkbox';
 import { useCookieStore } from '@/store/cookieStore';
 
 export default function CookieSettingsPage() {

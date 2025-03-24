@@ -16,7 +16,7 @@ export default function ContactPage() {
         <Container width="narrow">
           <Heading>Get in Touch</Heading>
           <Text className="mt-6 mb-8">
-            Have a question or want to work together? Fill out the form below and I'll get back to you as soon as possible.
+            Have a question or want to chat? Fill out the form below and I'll get back to you as soon as possible.
           </Text>
           
           <ContactForm />

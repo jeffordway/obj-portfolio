@@ -168,14 +168,14 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
   return (
     <div 
       className={clsx(
-        'w-full max-w-2xl mx-auto', // Layout
+        'w-full mx-auto', // Layout
         'bg-background-alt', // Background and padding
         className
       )}
     >
       {status === 'success' ? (
         <div className="py-8">
-          <div className="w-16 h-16 bg-green-100 text-green-500 flex items-center justify-center mb-4">
+          <div className="w-16 h-16 bg-green-100 text-[var(--success)] flex items-center justify-center mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
@@ -192,7 +192,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
         </div>
       ) : status === 'error' ? (
         <div className="py-8">
-          <div className="w-16 h-16 bg-red-100 text-red-500 flex items-center justify-center mb-4">
+          <div className="w-16 h-16 bg-red-100 text-[var(--error)] flex items-center justify-center mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
