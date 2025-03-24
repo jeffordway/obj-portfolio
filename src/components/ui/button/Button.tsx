@@ -71,7 +71,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       className,
       variant = "primary",
-      size = "lg",
+      size = "md",
       rounded = "none",
       isLoading = false,
       disabled = false,
@@ -113,8 +113,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       outline:
         "border-2 border-foreground bg-transparent active:bg-foreground/5 text-foreground",
       ghost:
-        "bg-transparent hover:bg-foreground/10 active:bg-foreground/5 text-foreground",
-      link: "bg-transparent underline-offset-4 hover:underline text-accent p-0 h-auto",
+        "bg-transparent  active:bg-foreground/5 text-foreground",
+      link: "bg-transparent underline-offset-4 text-accent p-0 h-auto",
       danger: "bg-error text-white hover:bg-error/90 active:bg-error/95",
     };
 

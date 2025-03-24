@@ -276,7 +276,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
                 type="submit"
                 isLoading={status === 'submitting'}
                 disabled={status === 'submitting'}
-                size="lg"
+                size="md"
                 rounded="none"
                 
               >

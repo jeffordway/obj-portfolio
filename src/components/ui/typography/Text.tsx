@@ -137,7 +137,7 @@ export const Text: React.FC<TextProps> = ({
         truncate && "truncate",
         "max-w-full", // Ensure text doesn't overflow container
         "break-words", // Allow long words to break
-        !fullWidth && "md:max-w-prose", // Better reading width on medium screens and up
+        !fullWidth && "md:max-w-full", // Better reading width on medium screens and up
         className
       )}
       {...props}
