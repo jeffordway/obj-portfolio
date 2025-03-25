@@ -48,7 +48,7 @@ const AvatarHero: React.FC<AvatarHeroProps> = ({
     <div
       className={clsx(
         "flex flex-col items-center", // Layout
-        "max-w-6xl text-center", // Text alignment
+        "max-w-5xl text-center", // Text alignment
         "gap-6", // Spacing between elements
         className
       )}

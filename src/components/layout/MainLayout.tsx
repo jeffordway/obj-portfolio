@@ -83,6 +83,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
   children,
   heroHeight = 100,
   showHero = true,
+  showHeader = true,
+  showFooter = true,
   className,
 }) => {
   // State to track scroll position and direction

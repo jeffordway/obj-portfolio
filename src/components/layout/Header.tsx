@@ -3,7 +3,7 @@
 import React from "react";
 import { clsx } from "clsx";
 import { useScroll } from "./MainLayout";
-import { Navbar } from "@/components/ui/navbar";
+import { Navbar } from "@/components/ui/navigation";
 import Section from "./Section";
 
 export interface HeaderProps {

@@ -15,11 +15,9 @@ export default function Home() {
     hero: {
       title: "Purpose-Driven Design and Development",
       subtitle: `
-      Hi, I’m Jeff Ordway. I create, design, and code solutions that matter—enjoyable, 
-      impactful, and built to last. My mission is to inspire bold action, ignite purpose, 
-      and drive real change. Guided by faith, enthusiasm, and determination, I stay
-       authentic, work hard, and uplift others. You can rely on me to infuse purpose 
-       into every pixel and line of code.
+      Hey, I'm Jeff Ordway, a creator with a passion for purpose and 
+      a knack for turning faith into action. I build tools to help you 
+      live boldly, pursue excellence, and serve purposefully."
       `
         .trim()
         .replace(/\s+/g, " "),
@@ -48,14 +46,7 @@ export default function Home() {
       overlayOpacity={50}
       blurAmount={8}
     >
-    
-      <ContentSection
-        id="content"
-        title="Portfolio Content"
-        description="This is a sample content section using the new structure"
-        padding="default"
-        width="container"
-      >
+      <ContentSection id="projects" padding="none" width="full">
         <div className="space-y-6">
           <Text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do

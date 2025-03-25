@@ -47,11 +47,10 @@ const ScrollableContent: React.FC<ScrollableContentProps> = ({
       <div className={clsx(
         'relative', // Positioning
         'bg-background', // Background color
-        'px-4 sm:px-5 md:px-6 lg:px-8', // Responsive horizontal padding
         initialTopPadding > 0 ? 'p-0' : 'p-20', // Conditional padding based on hero
         'transition-all duration-300', // Smooth transitions between breakpoints
       )}>
-        <div className="w-full max-w-7xl mx-auto">
+        <div className="w-full mx-auto">
           {children}
         </div>
       </div>

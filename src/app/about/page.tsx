@@ -1,8 +1,12 @@
 import { PageLayout, Section, Container } from "@/components/layout";
 import { Heading, Text } from "@/components/ui/typography";
+import { Divider } from "@/components/ui/divider";
 import { SimpleHero } from "@/components/sections/hero";
+import { BentoImage } from "@/components/ui/images";
 import { clsx } from "clsx";
 import Image from "next/image";
+import Link from "next/link";
+import { ContentSection } from "@/components/sections";
 
 export const metadata = {
   title: "About | Jeff Ordway",
@@ -13,13 +17,14 @@ export default function AboutPage() {
   // Page content variables for easier management
   const pageContent = {
     hero: {
-      title: "Jeff of All Trades, Master of None",
+      title: "My Journey: From Curveballs to Clarity",
       subtitle: `
-      Hey, it's me, Jeff Ordway. I'm glad you stuck around. I love designing 
-      and coding fun stuff with a purpose. I'm inspired by faith and the chance 
-      to make a real difference. I find renewal in getting outside to explore 
-      the world around me, crushing it at the gym, or just laughing with friends 
-      over a meal, game, or some epic trivia.
+   Hey, it's me, Jeff Ordway. I'm glad you stuck around. 
+   I love creating with joy and a sense of fun. But life 
+   throws curveballs, and I've hit some unexpected roadblocks.
+    Yet, through faith, I've seen God turn those broken moments 
+    into purpose. My journey is about discovering clarity in chaos 
+    and embracing my God-given calling.
       `
         .trim()
         .replace(/\s+/g, " "),
@@ -31,10 +36,11 @@ export default function AboutPage() {
   };
   return (
     <PageLayout
-      
-    
-    heroContent={
-        <SimpleHero title={pageContent.hero.title} subtitle={pageContent.hero.subtitle} />
+      heroContent={
+        <SimpleHero
+          title={pageContent.hero.title}
+          subtitle={pageContent.hero.subtitle}
+        />
       }
       showBackgroundMedia={true}
       mediaType="video"
@@ -45,221 +51,249 @@ export default function AboutPage() {
       overlayOpacity={60}
       blurAmount={5}
     >
-          <Section className="py-10 sm:py-12 md:py-16">
-            <Container
-              width="container"
-            >
-            {/* Top section with profile image and intro text */}
-            <div
-              className={clsx(
-                "grid grid-cols-1 lg:grid-cols-12 gap-6", // Grid layout
-                "items-start" // Alignment
-              )}
-          >
-            {/* Left column - Profile image */}
-            <div className="lg:col-span-4">
-              <div
-                className={clsx(
-                  "relative aspect-square w-full",
-                  "rounded-none overflow-hidden"
-                )}
-              >
-                <Image
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                  alt="Jeff Ordway"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            </div>
-
-            {/* Right column - Bio text */}
-            <div className="lg:col-span-8">
-              <div className="prose prose-lg dark:prose-invert max-w-none">
-                <p>
-                  I'm a passionate designer and developer with over 10 years of
-                  experience creating digital solutions that make a difference.
-                  My approach combines strategic thinking with creative
-                  execution to deliver results that exceed expectations.
-                </p>
-
-                <p>
-                  I believe that great design should be purposeful, accessible,
-                  and impactful. Whether I'm designing a brand identity,
-                  building a website, or developing an application, I focus on
-                  creating experiences that resonate with users and drive
-                  meaningful outcomes.
-                </p>
-
-                <p>
-                  My background spans across various industries including
-                  healthcare, education, and technology, giving me a versatile
-                  perspective that I bring to every project. I'm constantly
-                  learning and evolving my skills to stay at the forefront of
-                  design and development practices.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Bento grid layout for project examples */}
-          <div
-            className={clsx(
-              "grid grid-cols-12 gap-4 mb-16", // 12-column grid with consistent gaps
-              "auto-rows-[minmax(120px,auto)]" // Minimum row height
-            )}
-          >
-            {/* Large feature item - spans 8 columns on all screens */}
-            <div
-              className={clsx(
-                "col-span-12 md:col-span-8", // Full width on mobile, 8/12 on larger screens
-                "row-span-2", // Spans 2 rows
-                "relative",
-                "rounded-md overflow-hidden"
-              )}
-            >
+      <ContentSection id="about">
+        {/* Main grid container for the entire page */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-8">
+          {/* Profile image - spans 3 columns on md screens */}
+          <div className="col-span-12 md:col-span-3">
+            <div className="relative aspect-square w-full max-w-xs mx-auto md:max-w-none overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                alt="Project example"
+                src="/images/about/ordway_jeff_brandmark_alt_large.jpg"
+                alt="Jeff Ordway"
                 fill
                 className="object-cover"
-              />
-            </div>
-
-            {/* Tall item - spans 4 columns and 2 rows */}
-            <div
-              className={clsx(
-                "col-span-6 md:col-span-4", // Half width on mobile, 4/12 on larger screens
-                "row-span-2", // Spans 2 rows
-                "relative",
-                "rounded-md overflow-hidden"
-              )}
-            >
-              <Image
-                src="https://images.unsplash.com/photo-1593062096033-9a26b09da705?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Project example"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Square item - spans 6 columns and 1 row */}
-            <div
-              className={clsx(
-                "col-span-6 md:col-span-4", // Half width on mobile, 4/12 on larger screens
-                "row-span-1", // Spans 1 row
-                "relative",
-                "rounded-md overflow-hidden"
-              )}
-            >
-              <Image
-                src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Project example"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Small square item - spans 6 columns and 1 row */}
-            <div
-              className={clsx(
-                "col-span-6 md:col-span-4", // Half width on mobile, 4/12 on larger screens
-                "row-span-1", // Spans 1 row
-                "relative aspect-square", // Square aspect ratio
-                "rounded-md overflow-hidden"
-              )}
-            >
-              <Image
-                src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Project example"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Wide item - spans 12 columns and 1 row */}
-            <div
-              className={clsx(
-                "col-span-12", // Full width on all screens
-                "row-span-1", // Spans 1 row
-                "relative aspect-[16/5]", // Wide aspect ratio
-                "rounded-md overflow-hidden"
-              )}
-            >
-              <Image
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
-                alt="Project example"
-                fill
-                className="object-cover"
+                priority
               />
             </div>
           </div>
 
-          {/* Bottom section with skills and experience */}
-          <div className={clsx("grid grid-cols-1 lg:grid-cols-2 gap-16")}>
-            {/* Left column - Skills */}
-            <div>
-              <Heading as="h3" size="lg" className="mb-6">
-                Skills
-              </Heading>
-              <div className={clsx("grid grid-cols-1 gap-3", "md:grid-cols-2")}>
-                <Text>UI/UX Design</Text>
-                <Text>Web Development</Text>
-                <Text>Brand Identity</Text>
-                <Text>React/Next.js</Text>
-                <Text>TypeScript</Text>
-                <Text>Tailwind CSS</Text>
-              </div>
-            </div>
+          {/* About text - spans 9 columns on md screens */}
+          <div className="col-span-12 md:col-span-9">
+            <Heading className="text-3xl md:text-4xl mb-4">About Me</Heading>
+            <Text className="text-base md:text-lg lg:text-xl xl:text-2xl">
+              Hey, I'm Jeff Ordway. I design and code things to help you live
+              boldly, pursue excellence, and serve purposefully. My faith keeps me grounded, my
+              grit keeps me going, and my love for laughter keeps it all fun.
+              When I'm not coding, you'll find me hiking trails, pushing my
+              limits at the gym, or sharing laughs with friends over a meal or
+              a game.
+            </Text>
+          </div>
+        
+          {/* Bento grid section - spans all 12 columns */}
+          <div className="col-span-12 grid grid-cols-12 gap-8 h-[24rem] md:h-[32rem]">
+            {/* Large feature image */}
+            <BentoImage
+              imageSrc="https://images.unsplash.com/photo-1562593028-2e975fe28a0c?q=80&w=4000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              imageAlt="Jeff hiking through mountains with a backpack, representing his love for adventure and exploration"
+              title="Featured Project"
+              subtitle="I’ve explored the globe, hitting nearly every US state and Major League ballpark. I love chasing adventure one step at a time!"
+              colSpan={12}
+              rowSpan={2}
+              className="md:col-span-8"
+            />
 
-            {/* Right column - Experience */}
-            <div>
-              <Heading as="h3" size="lg" className="mb-6">
-                Experience
-              </Heading>
-              <div className={clsx("flex flex-col", "gap-5")}>
-                <div>
-                  <Text weight="medium">Senior Developer</Text>
-                  <Text size="sm" className="text-foreground/70">
-                    TechInnovate • 2020-Present
-                  </Text>
-                </div>
-                <div>
-                  <Text weight="medium">UX Designer</Text>
-                  <Text size="sm" className="text-foreground/70">
-                    DesignStudio • 2017-2020
-                  </Text>
-                </div>
-                <div>
-                  <Text weight="medium">Frontend Developer</Text>
-                  <Text size="sm" className="text-foreground/70">
-                    WebSolutions • 2015-2017
-                  </Text>
-                </div>
-              </div>
+            {/* Vertical rectangle */}
+            <BentoImage
+              imageSrc="https://images.unsplash.com/photo-1547638375-ebf04735d792?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              imageAlt="Trivia night with friends around a table with quiz cards and drinks"
+              title="Trivia Titan"
+              subtitle="I once won a trivia contest by knowing the only fish that can blink—it's the mudskipper!"
+              colSpan={12}
+              rowSpan={4}
+              className="md:col-span-4"
+            />
 
-              <Heading as="h3" size="lg" className="mt-10 mb-6">
-                Education
-              </Heading>
-              <div className={clsx("flex flex-col", "gap-5")}>
-                <div>
-                  <Text weight="medium">Master of Design</Text>
-                  <Text size="sm" className="text-foreground/70">
-                    Design Institute • 2015
-                  </Text>
-                </div>
-                <div>
-                  <Text weight="medium">Bachelor of Computer Science</Text>
-                  <Text size="sm" className="text-foreground/70">
-                    Tech University • 2013
-                  </Text>
+            {/* Three square items in a row */}
+            <BentoImage
+              imageSrc="https://images.unsplash.com/photo-1526401485004-46910ecc8e51?q=80&w=5184&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              imageAlt="Person lifting weights in a gym, demonstrating strength training"
+              title="Defying Gravity"
+              subtitle="During an intense workout, I let go of a barbell from an overhead posistion, thinking it’d hover—spoiler: gravity won that round!"
+              colSpan={4}
+              rowSpan={2}
+            />
+
+            <BentoImage
+              imageSrc="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?q=80&w=4795&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              imageAlt="Person playing recreational volleybal with friends, showing casual athletic activity"
+              title="Aggressively Average"
+              subtitle="In sports, I'm aggressively average—able to score, but not without tripping over my own feet."
+              colSpan={4}
+              rowSpan={2}
+            />
+
+      
+          </div>
+
+          {/* Column 1: Mission, Vision, Skills (span-3) */}
+          <div className="col-span-12 md:col-span-3 order-2 md:order-1">
+            <div className="space-y-8">
+              <div>
+                <Heading as="h2" size="lg" className="mb-4 text-2xl md:text-3xl">
+                  Mission
+                </Heading>
+                <Text className="mb-4 text-sm md:text-base">
+                  To inspire and equip people to live boldly, pursue excellence, and serve with purpose.
+                </Text>
+              </div>
+              
+              <Divider />
+              
+              <div>
+                <Heading as="h2" size="lg" className="mb-4 text-2xl md:text-3xl">
+                  Vision
+                </Heading>
+                <Text className="mb-4 text-sm md:text-base">
+                  Imagine a world where men and women enthusiastically embrace their God-given purpose, leaving a lasting legacy for future generations. 
+                </Text>
+              </div>
+              
+              <Divider />
+              
+              <div>
+                <Heading as="h2" size="lg" className="mb-4 text-2xl md:text-3xl">
+                  Skills
+                </Heading>
+                <div className="space-y-8">
+                  <div>
+                    <Text><strong className="text-base md:text-lg font-semibold block mb-2">Design</strong></Text>
+                    <div className="space-y-2 text-sm md:text-base">
+                      <Text>UI/UX Design</Text>
+                      <Text>Journey Mapping</Text>
+                      <Text>Wireframing</Text>
+                      <Text>Prototyping</Text>
+                      <Text>Adobe Creative Suite</Text>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <Text><strong className="text-base md:text-lg font-semibold block mb-2">Development</strong></Text>
+                    <div className="space-y-2 text-sm md:text-base">
+                      <Text>Front-End Development</Text>
+                      <Text>Software Development</Text>
+                      <Text>React/Next.js</Text>
+                      <Text>TypeScript</Text>
+                      <Text>HTML/CSS</Text>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <Text><strong className="text-base md:text-lg font-semibold block mb-2">Research & Analytics</strong></Text>
+                    <div className="space-y-2 text-sm md:text-base">
+                      <Text>User Research</Text>
+                      <Text>Market Analysis</Text>
+                      <Text>Customer Engagement</Text>
+                      <Text>Performance Tracking (KPIs)</Text>
+                      <Text>Financial Modeling</Text>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <Text><strong className="text-base md:text-lg font-semibold block mb-2">Leadership & Management</strong></Text>
+                    <div className="space-y-2 text-sm md:text-base">
+                      <Text>Product Management</Text>
+                      <Text>Product Lifecycle Management</Text>
+                      <Text>Functional Leadership</Text>
+                      <Text>Agile Methodologies</Text>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-            </Container>
-          </Section>
+
+          {/* Column 2: Story and Core Values (span-9) */}
+          <div className="col-span-12 md:col-span-9 order-1 md:order-2">
+            <div className="space-y-8">
+              <div>
+                <Heading as="h2" size="lg" className="mb-4 text-2xl md:text-3xl">
+                  My Story
+                </Heading>
+                <div className="space-y-8 text-sm md:text-base">
+                  <Text className="text-sm md:text-base">
+                    Picture this: I'm knee-deep in the chaos of the Parks and
+                    Recreation office, juggling event schedules. Suddenly, the
+                    door slams open, and a wild-eyed woman charges in, thrusting
+                    a goose at me. "It swallowed a bunch of marbles!" she yells.
+                    The bird is chaotic — feathers ruffled, beady eyes glaring.
+                    Papers scatter, coworkers gawk, and I'm wrestling this
+                    honking disaster until Fish & Wildlife arrives. It's absurd,
+                    and I can't help but laugh. That ridiculous moment taught me
+                    resilience isn't just about grit — it's about trusting God
+                    when life turns into a sitcom gone wrong.
+                  </Text>
+                  <Text className="text-sm md:text-base">
+                    Flash forward several years, and I swapped parks for a new
+                    passion: mobile design and development. After grinding
+                    through late nights, I landed my dream job in Nashville,
+                    Tennessee. Life felt like it was clicking into place — until
+                    a sepsis infection blindsided me. One moment, everything was
+                    great; the next, I was flat on my back in a hospital bed,
+                    tubes everywhere, doctors giving me 50-50 odds. The room
+                    smelled of bleach, monitors beeped endlessly, and my body
+                    ached like it was shutting down. Staring at the cracked
+                    ceiling, I realized I'd been holding onto my life too
+                    tightly, thinking I could control it all. I couldn't. Jesus
+                    didn't just save me physically — He pulled me through that
+                    darkness. Faith stopped being an idea and became my anchor.
+                  </Text>
+                  <Text className="text-sm md:text-base">
+                    Surviving changed everything. That bed wasn't a grave — it
+                    was a launchpad. Purpose surged within me — not just
+                    designing and coding for a paycheck but building something
+                    more significant. Now, I create digital tools to help people
+                    grow — spiritually, mentally, and physically — rooted in
+                    faith. It's tough, messy work, but joy creeps in. Life's a
+                    wild ride — goose fiascoes, career highs, near-death lows —
+                    but every twist weaves into a story of guts, grace, and the
+                    steady truth: God's got the wheel, and I'm never alone.
+                  </Text>
+                </div>
+              </div>
+              
+              <Divider />
+              
+              <div>
+                <Heading as="h2" size="lg" className="mb-4 text-2xl md:text-3xl">
+                  Core Values
+                </Heading>
+                <div className="space-y-8">
+                  <div>
+                    <Text className="text-sm md:text-base">
+                      <strong className="text-base md:text-lg font-semibold block mb-2">Live Boldly</strong>
+                      Living boldly in faith, taking purposeful steps to reflect God's design and leave a legacy of impact. 
+                      (<Link href="https://www.bible.com/bible/59/JOS.1.9.ESV" target="_blank" className="text-primary hover:underline">Joshua 1:9</Link>,   
+                      <Link href="https://www.bible.com/bible/59/EPH.6.10.ESV" target="_blank" className="text-primary hover:underline"> Ephesians 6:10</Link>,  
+                      <Link href="https://www.bible.com/bible/59/2TI.1.7.ESV" target="_blank" className="text-primary hover:underline"> 2 Timothy 1:7</Link>)
+                    </Text>
+                  </div>
+                  
+                  <div>
+                    <Text className="text-sm md:text-base">
+                      <strong className="text-base md:text-lg font-semibold block mb-2">Pursue Excellence</strong>
+                      Pursuing excellence with grit and grace, turning challenges into growth opportunities. 
+                      (<Link href="https://www.bible.com/bible/59/COL.3.23.ESV" target="_blank" className="text-primary hover:underline">Colossians 3:23</Link>, 
+                      <Link href="https://www.bible.com/bible/59/PRO.22.29.ESV" target="_blank" className="text-primary hover:underline"> Proverbs 22:29</Link>, 
+                      <Link href="https://www.bible.com/bible/59/1CO.10.31.ESV" target="_blank" className="text-primary hover:underline"> 1 Corinthians 10:31</Link>)
+                    </Text>
+                  </div>
+                  
+                  <div>
+                    <Text className="text-sm md:text-base">
+                      <strong className="text-base md:text-lg font-semibold block mb-2">Serve Purposefully</strong>
+                      Building authentic connections and serving others with strength and humility. 
+                      (<Link href="https://www.bible.com/bible/59/MRK.10.45.ESV" target="_blank" className="text-primary hover:underline">Mark 10:45</Link>, 
+                      <Link href="https://www.bible.com/bible/59/GAL.5.13.ESV" target="_blank" className="text-primary hover:underline"> Galatians 5:13</Link>, 
+                      <Link href="https://www.bible.com/bible/59/1PE.4.10.ESV" target="_blank" className="text-primary hover:underline">1 Peter 4:10</Link>)
+                    </Text>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ContentSection>
     </PageLayout>
   );
 }

@@ -34,7 +34,7 @@ const Section: React.FC<SectionProps> = ({
       id={id}
       className={clsx(
         'w-full', // Full width section
-        'px-4 sm:px-6 md:px-8 lg:px-12', // Responsive horizontal padding
+        'px-4 sm:px-5 md:px-6 lg:px-8', // Responsive horizontal padding
         'transition-all duration-300', // Smooth transitions between breakpoints
         className
       )}

@@ -33,7 +33,7 @@ export const Container: React.FC<ContainerProps> = ({
   // Container width styles with responsive adjustments
   const containerStyles = {
     full: "w-full",
-    container: "w-full max-w-7xl mx-auto",
+    container: "w-full max-w-5xl mx-auto",
     narrow: "w-full max-w-2xl sm:max-w-3xl mx-auto",
   };
 

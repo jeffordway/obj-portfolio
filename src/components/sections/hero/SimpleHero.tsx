@@ -32,7 +32,7 @@ const SimpleHero: React.FC<SimpleHeroProps> = ({
   return (
     <div className={clsx(
       'flex flex-col items-center', // Layout
-      'max-w-6xl text-center', // Text alignment
+      'max-w-5xl text-center', // Text alignment
       'gap-4', // Spacing
       className
     )}>
