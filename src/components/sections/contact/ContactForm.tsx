@@ -130,16 +130,26 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
     setStatus('submitting');
     
     try {
-      // In a real app, you would send the form data to your API here
-      // For now, we'll simulate a successful submission after a delay
-      
       // Parse and validate the data one final time to ensure type safety
       const validatedData = contactFormSchema.parse(formData);
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Send data to our API route
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(validatedData),
+      });
       
-      // Reset form
+      // Parse the response
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to send message');
+      }
+      
+      // Reset form on success
       setFormData({
         name: '',
         email: '',
@@ -150,18 +160,20 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
       // Set success status
       setStatus('success');
       
-      // Reset to idle after 3 seconds
+      // Reset to idle after 5 seconds
       setTimeout(() => {
         setStatus('idle');
-      }, 3000);
+      }, 5000);
     } catch (error) {
+      console.error('Contact form submission error:', error);
+      
       // Set error status
       setStatus('error');
       
-      // Reset to idle after 3 seconds
+      // Reset to idle after 5 seconds
       setTimeout(() => {
         setStatus('idle');
-      }, 3000);
+      }, 5000);
     }
   };
   
