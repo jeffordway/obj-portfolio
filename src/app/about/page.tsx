@@ -1,8 +1,8 @@
-import { PageLayout, Section, Container } from "@/components/layout";
+import { PageLayout } from "@/components/layout";
 import { Heading, Text } from "@/components/ui/typography";
 import { Divider } from "@/components/ui/divider";
 import { SimpleHero } from "@/components/sections/hero";
-import { BentoImage } from "@/components/ui/images";
+import { BentoImage } from "@/components/ui/image";
 import { clsx } from "clsx";
 import Image from "next/image";
 import Link from "next/link";
@@ -86,7 +86,7 @@ export default function AboutPage() {
             <BentoImage
               imageSrc="https://images.unsplash.com/photo-1562593028-2e975fe28a0c?q=80&w=4000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               imageAlt="Jeff hiking through mountains with a backpack, representing his love for adventure and exploration"
-              title="Featured Project"
+              title="Adventure Exploer"
               subtitle="I’ve explored the globe, hitting nearly every US state and Major League ballpark. I love chasing adventure one step at a time!"
               colSpan={12}
               rowSpan={2}

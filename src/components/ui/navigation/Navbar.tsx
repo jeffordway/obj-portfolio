@@ -7,8 +7,7 @@ import { IoMenuSharp, IoCloseSharp } from "react-icons/io5";
 import { FaXTwitter, FaGithub, FaLinkedin } from "react-icons/fa6";
 import { createPortal } from "react-dom";
 
-import { NavLink } from "./NavLink";
-import { NavSocial } from "./NavSocial";
+import { NavigationLink } from "./NavigationLink";
 import { NavLogo } from "./NavLogo";
 import { navItems, socialLinks } from "@/constants";
 
@@ -65,7 +64,7 @@ export const Navbar = ({ className }: NavbarProps) => {
       {/* Centered navigation links */}
       <nav className="flex-1 flex flex-col items-center justify-center gap-8">
         {navItems.map((item) => (
-          <NavLink
+          <NavigationLink
             key={item.href}
             href={item.href}
             isActive={pathname === item.href}
@@ -73,7 +72,7 @@ export const Navbar = ({ className }: NavbarProps) => {
             className="text-xl"
           >
             {item.label}
-          </NavLink>
+          </NavigationLink>
         ))}
       </nav>
 
@@ -97,13 +96,15 @@ export const Navbar = ({ className }: NavbarProps) => {
           }
           
           return (
-            <NavSocial
+            <NavigationLink
               key={link.name}
               href={link.href}
-              name={link.name}
-              icon={icon}
+              ariaLabel={link.name}
               onClick={() => setMobileMenuOpen(false)}
-            />
+              external
+            >
+              {icon}
+            </NavigationLink>
           );
         })}
       </div>
@@ -121,13 +122,13 @@ export const Navbar = ({ className }: NavbarProps) => {
         {/* Left Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           {navItems.map((item) => (
-            <NavLink
+            <NavigationLink
               key={item.href}
               href={item.href}
               isActive={pathname === item.href}
             >
               {item.label}
-            </NavLink>
+            </NavigationLink>
           ))}
         </nav>
 
@@ -158,12 +159,14 @@ export const Navbar = ({ className }: NavbarProps) => {
             }
             
             return (
-              <NavSocial
+              <NavigationLink
                 key={link.name}
                 href={link.href}
-                name={link.name}
-                icon={icon}
-              />
+                ariaLabel={link.name}
+                external
+              >
+                {icon}
+              </NavigationLink>
             );
           })}
         </div>

@@ -21,7 +21,7 @@ export * from './button';
 export * from './form';
 
 // Image components
-export * from './images';
+export * from './image';
 
 // Utility components
 export * from './divider';

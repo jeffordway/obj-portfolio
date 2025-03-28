@@ -5,7 +5,7 @@
 // Hero sections
 export * from './hero';
 
-// About sections
+// About sections (currently empty, placeholder for future components)
 export * from './about';
 
 // Projects sections

@@ -5,7 +5,8 @@
  */
 
 export * from './Navbar';
-export * from './NavLink';
+export * from './NavigationLink';
 export * from './NavLogo';
-export * from './NavSocial';
+// export * from './NavLink';
+// export * from './NavSocial';
 export * from './NavFooter';

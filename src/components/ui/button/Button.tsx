@@ -84,9 +84,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    // Base styles applied to all buttons
-    const baseStyles =
-      "inline-flex items-center justify-center font-medium transition-all duration-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-50 transform whitespace-nowrap";
+    // Base styles grouped by purpose
+    const baseStyles = clsx(
+      'inline-flex items-center justify-center', // Layout
+      'font-medium whitespace-nowrap', // Typography
+      'transition-all duration-400 transform', // Animation
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent', // Focus styles
+      'disabled:pointer-events-none disabled:opacity-50' // Disabled state
+    );
 
     // Size-specific styles (height and padding) with responsive adjustments
     const sizeStyles = {
@@ -149,13 +154,19 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         type={type}
         className={clsx(
           baseStyles,
-          sizeStyles[size],
-          roundedStyles[rounded],
-          variantStyles[variant],
+          sizeStyles[size], // Size-specific styles
+          roundedStyles[rounded], // Border radius styles
+          variantStyles[variant], // Variant-specific styles (colors, etc.)
+          
+          // Layout
           fullWidth ? "w-full" : "",
-          hoverEffect ? "hover:scale-[1.02] sm:hover:scale-[1.05]" : "",
-          "transition-transform active:scale-[0.98] will-change-transform", // Apply the scale animation with CSS
           "max-w-full", // Ensure button doesn't overflow container
+          
+          // Animation and interaction
+          hoverEffect ? "hover:scale-110" : "",
+          "transition-transform active:scale-[0.98] will-change-transform", // Apply the scale animation with CSS
+          
+          // Additional custom classes
           className
         )}
         disabled={disabled || isLoading}

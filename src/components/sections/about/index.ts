@@ -1,15 +1,13 @@
 /**
- * About section components for different layouts
+ * About section components
+ *
+ * Note: This directory previously contained specialized about components
+ * that have been removed in favor of using the more general layout components
+ * and UI components from other parts of the application.
  */
 
-// Standard about section
-export { default as AboutSection } from "./AboutSection";
-export type { AboutSectionProps } from "./AboutSection";
+// Export a placeholder type to make this a valid module
+export type AboutSectionTypes = 'placeholder';
 
-// Profile-style about section with two columns
-export { default as ProfileAboutSection } from "./ProfileAboutSection";
-export type { ProfileAboutSectionProps } from "./ProfileAboutSection";
-
-// About page header component
-export { default as AboutHeader } from "./AboutHeader";
-export type { AboutHeaderProps } from "./AboutHeader";
+// This constant is exported to make the file a valid module
+export const ABOUT_SECTION_PLACEHOLDER = true;

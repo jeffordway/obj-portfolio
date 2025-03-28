@@ -5,8 +5,7 @@ import { usePathname } from "next/navigation";
 import { clsx } from 'clsx';
 import { FaXTwitter, FaGithub, FaLinkedin } from "react-icons/fa6";
 
-import { NavLink } from './NavLink';
-import { NavSocial } from './NavSocial';
+import { NavigationLink } from './NavigationLink';
 import { navItems, footerLinks, socialLinks } from '@/constants';
 
 /**
@@ -41,14 +40,12 @@ export const NavFooter = ({ className }: NavFooterProps) => {
         className="flex flex-wrap justify-center gap-x-12 gap-y-3"
       >
         {navItems.map((item) => (
-          <NavLink
+          <NavigationLink
             key={item.href}
             href={item.href}
-            isActive={pathname === item.href}
-            disableActiveStyles={true}
           >
             {item.label}
-          </NavLink>
+          </NavigationLink>
         ))}
       </nav>
       
@@ -72,12 +69,14 @@ export const NavFooter = ({ className }: NavFooterProps) => {
           }
           
           return (
-            <NavSocial
+            <NavigationLink
               key={link.name}
               href={link.href}
-              name={link.name}
-              icon={icon}
-            />
+              ariaLabel={link.name}
+              external
+            >
+              {icon}
+            </NavigationLink>
           );
         })}
       </div>
@@ -88,15 +87,13 @@ export const NavFooter = ({ className }: NavFooterProps) => {
         className="flex flex-wrap justify-center gap-x-6 gap-y-2"
       >
         {footerLinks.map((item) => (
-          <NavLink
+          <NavigationLink
             key={item.href}
             href={item.href}
-            isActive={pathname === item.href}
-            disableActiveStyles={true}
             className="text-sm text-foreground/70 hover:text-foreground/90 transition-colors"
           >
             {item.label}
-          </NavLink>
+          </NavigationLink>
         ))}
       </nav>
       

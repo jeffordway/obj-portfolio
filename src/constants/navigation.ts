@@ -10,8 +10,7 @@ export interface NavItem {
  * Main navigation items used across the site
  */
 export const navItems: NavItem[] = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
+  { label: "Projects", href: "/" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];

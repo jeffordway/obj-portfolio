@@ -14,3 +14,5 @@ export * from './metadata';
 // Font constants
 export * from './fonts';
 
+// Project data
+export * from './projects';
