@@ -30,14 +30,13 @@ const ScrollableContent: React.FC<ScrollableContentProps> = ({
   initialTopPadding = 100,
   className,
 }) => {
-  // We only need isPastHero for potential future functionality
   const { isPastHero } = useScroll();
   
   return (
     <div 
       className={clsx(
         'relative w-full', // Positioning and width
-        'z-20', // Higher z-index than hero
+        'z-20', // Higher z-index than hero by default
         className
       )}
       style={{ 
@@ -47,12 +46,12 @@ const ScrollableContent: React.FC<ScrollableContentProps> = ({
       <div className={clsx(
         'relative', // Positioning
         'bg-background', // Background color
-        initialTopPadding > 0 ? 'p-0' : 'p-20', // Conditional padding based on hero
+        'rounded-t-3xl', // Rounded top corners for a nice transition over hero
+        'shadow-xl', // Shadow for depth
         'transition-all duration-300', // Smooth transitions between breakpoints
       )}>
-        <div className="w-full mx-auto">
-          {children}
-        </div>
+        {/* Removed max-width constraint to allow child containers to control their own width */}
+        {children}
       </div>
     </div>
   );

@@ -1,56 +1,64 @@
-import { PageLayout } from "@/components/layout";
-import { Text, Heading } from "@/components/ui/typography";
-import {
-  AvatarHero,
-  ProjectsSection,
-  SkillsSection,
-  ContactSection,
-  ContentSection,
-} from "@/components/sections";
-import { CardGrid } from "@/components/ui/card";
-import { getAllProjects } from "@/sanity/lib/queries";
+import { PageLayout } from '@/components/layout';
+import { Container } from '@/components/layout/Container';
+import Hero from '@/components/layout/Hero';
+import { getAllProjects } from '@/sanity/lib/queries';
+import { Heading, Text } from '@/components/ui/typography';
+import { Card } from '@/components/ui/card';
+import { homePageData } from '@/constants/home';
 
+/**
+ * Home page component that showcases the hero section and featured projects
+ */
 export default async function Home() {
-  // Page content variables for easier management
-  const pageContent = {
-    hero: {
-      title: "Purpose-Driven Design and Development",
-      subtitle: `
-      Hey, I'm Jeff Ordway, a creator with a passion for purpose and 
-      a knack for turning faith into action. I build tools to help you 
-      live boldly, pursue excellence, and serve purposefully."
-      `
-        .trim()
-        .replace(/\s+/g, " "),
-    },
-    main: {
-      heading: "Welcome to my portfolio",
-      subheading: "This is a placeholder for the home page content.",
-    },
-  };
+  // Use content from constants file
+  const content = homePageData;
+
+  // No action buttons needed for the home page
+
+  // Fetch projects data
+  const projects = await getAllProjects();
 
   return (
     <PageLayout
+      // Background media configuration
+      showBackgroundMedia={true}
+      mediaType={content.background.mediaType}
+      mediaSrc={content.background.mediaSrc}
+      mediaOpacity={content.background.mediaOpacity}
+      showColoredOverlay={true}
+      overlayColor={content.background.overlayColor}
+      overlayOpacity={content.background.overlayOpacity}
+      blurAmount={content.background.blurAmount}
+      
+      // Custom hero content
       heroContent={
-        <AvatarHero
-          title={pageContent.hero.title}
-          subtitle={pageContent.hero.subtitle}
-          avatarSize={100}
+        <Hero
+          title={content.hero.title}
+          subtitle={content.hero.subtitle}
+          avatar={content.hero.avatar}
+          highlightColor="text-primary"
+          textAlign="center"
+          contentAlign="center"
+          direction="column"
         />
       }
-      showBackgroundMedia={true}
-      mediaType="video"
-      mediaSrc="/videos/background_video.mp4"
-      mediaOpacity={5}
-      showColoredOverlay={true}
-      overlayColor="bg-background"
-      overlayOpacity={50}
-      blurAmount={8}
     >
-      <CardGrid 
-        projects={await getAllProjects()}
-        className="py-12"
-      />
+      {/* Projects section with ID for anchor linking */}
+      <section id="projects">
+        <Container width="full">
+          {/* Projects grid directly without header */}
+
+          {/* Projects grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {projects.map((project) => (
+              <Card
+                key={project._id}
+                project={project}
+              />
+            ))}
+          </div>
+        </Container>
+      </section>
     </PageLayout>
   );
 }

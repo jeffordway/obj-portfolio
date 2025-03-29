@@ -2,8 +2,8 @@
  * Section components for the portfolio site
  */
 
-// Hero sections
-export * from './hero';
+// Note: Hero has been moved to layout folder
+// import Hero from '../layout/Hero';
 
 // About sections (currently empty, placeholder for future components)
 export * from './about';

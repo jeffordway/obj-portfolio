@@ -51,6 +51,7 @@ export interface SanityProject {
     caption?: string;
   }[];
   date?: string;
+  content?: any; // Rich text content from Sanity
 }
 
 // --- GROQ Queries ---
@@ -82,6 +83,23 @@ const projectsQuery = groq`
   }
 `;
 
+const projectBySlugQuery = groq`
+  *[_type == "project" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    headline,
+    heroImage,
+    categories[]->{ _id, title },
+    skills[]->{ _id, title },
+    githubRepo,
+    prototype,
+    additionalImages,
+    date,
+    content
+  }
+`;
+
 // --- Fetch Functions ---
 export async function getCategoriesWithSkills(): Promise<SanityCategoryWithSkills[]> {
   // Fetch data using the configured client
@@ -91,4 +109,8 @@ export async function getCategoriesWithSkills(): Promise<SanityCategoryWithSkill
 
 export async function getAllProjects(): Promise<SanityProject[]> {
   return await client.fetch<SanityProject[]>(projectsQuery);
+}
+
+export async function getProjectBySlug(slug: string): Promise<SanityProject | null> {
+  return await client.fetch<SanityProject | null>(projectBySlugQuery, { slug });
 }

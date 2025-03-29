@@ -5,6 +5,7 @@ import { MainLayout } from './MainLayout';
 import Hero from './Hero';
 import ScrollableContent from './ScrollableContent';
 import Section from './Section';
+import { clsx } from 'clsx';
 
 export interface PageLayoutProps {
   /**
@@ -90,6 +91,7 @@ export interface PageLayoutProps {
 
 /**
  * PageLayout component that provides a consistent page structure with optional hero section
+ * and optional content section. Handles all combinations of showing/hiding hero and content.
  */
 const PageLayout: React.FC<PageLayoutProps> = ({
   title,
@@ -107,33 +109,110 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   blurAmount = 8,
   noHeroPadding = 0,
 }) => {
+  // Determine if we have content to display
+  const hasContent = React.Children.count(children) > 0;
+  
+  // Determine if we should render the hero section
+  const renderHero = showHero;
+  
+  // Determine if we should render the content section
+  const renderContent = hasContent;
+  
   return (
-    <MainLayout showHero={showHero}>
-      {showHero && (
-        <Hero
-          showBackgroundMedia={showBackgroundMedia}
-          mediaType={mediaType}
-          mediaSrc={mediaSrc}
-          mediaOpacity={mediaOpacity}
-          showColoredOverlay={showColoredOverlay}
-          overlayColor={overlayColor}
-          overlayOpacity={overlayOpacity}
-          blurAmount={blurAmount}
-        >
-          {heroContent || (
-            <div className="flex flex-col items-center justify-center h-full text-center px-4">
-              {title && <h1 className="text-4xl font-bold mb-4">{title}</h1>}
-              {subtitle && <p className="text-xl max-w-2xl mx-auto">{subtitle}</p>}
+    <MainLayout showHero={renderHero}>
+      {/* Hero Section - Only rendered if showHero is true */}
+      {renderHero && (
+        <div className={clsx(
+          "w-full", // Full width
+          "overflow-hidden", // Prevent content overflow
+          renderContent ? "fixed inset-0 z-10" : "relative", // Fixed when content scrolls over it, relative when no content
+          "pointer-events-none" // Don't capture pointer events at this level
+        )}>
+          {/* If custom hero content is provided, use it; otherwise use the default Hero component */}
+          {heroContent ? (
+            // Custom Hero Content with background media handling
+            <div className="relative w-full h-screen flex items-center justify-center pointer-events-auto">
+              {/* Background media and overlay - Only rendered if showBackgroundMedia is true */}
+              {showBackgroundMedia && (
+                <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
+                  {/* Background media - Video or Image based on mediaType */}
+                  {mediaType === 'video' ? (
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="absolute inset-0 w-full h-full object-cover z-0"
+                    >
+                      <source src={mediaSrc || '/videos/background_video.mp4'} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  ) : (
+                    <div 
+                      className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-0"
+                      style={{ backgroundImage: `url(${mediaSrc || '/images/background.jpg'})` }}
+                    />
+                  )}
+                  
+                  {/* Media opacity overlay */}
+                  <div 
+                    className="absolute inset-0 bg-background/80 z-10"
+                    style={{ opacity: (100 - mediaOpacity) / 100 }}
+                  />
+                  
+                  {/* Colored overlay with blur - Only rendered if showColoredOverlay is true */}
+                  {showColoredOverlay && (
+                    <div 
+                      className={`absolute inset-0 w-full h-full z-15 ${overlayColor}`}
+                      style={{ 
+                        opacity: overlayOpacity / 100,
+                        backdropFilter: `blur(${blurAmount}px)`,
+                        WebkitBackdropFilter: `blur(${blurAmount}px)` 
+                      }}
+                    />
+                  )}
+                </div>
+              )}
+              
+              {/* Custom hero content wrapper */}
+              <div className="relative z-20 w-full h-full flex items-center justify-center">
+                <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8 flex items-center justify-center">
+                  {heroContent}
+                </div>
+              </div>
             </div>
+          ) : (
+            /* Default Hero Component with all props passed through */
+            <Hero
+              title={title || ""}
+              subtitle={subtitle || ""}
+              textAlign="center"
+              contentAlign="center"
+              direction="column"
+              fullScreen={true}
+              fixed={renderContent} // Only use fixed positioning when content will scroll over it
+              showBackgroundMedia={showBackgroundMedia}
+              mediaType={mediaType}
+              mediaSrc={mediaSrc}
+              mediaOpacity={mediaOpacity}
+              showColoredOverlay={showColoredOverlay}
+              overlayColor={overlayColor}
+              overlayOpacity={overlayOpacity}
+              blurAmount={blurAmount}
+            />
           )}
-        </Hero>
+        </div>
       )}
       
-      <ScrollableContent 
-        initialTopPadding={showHero ? 100 : noHeroPadding}
-      >
-        {children}
-      </ScrollableContent>
+      {/* Content Section - Only rendered if there is content to display */}
+      {renderContent && (
+        <ScrollableContent 
+          initialTopPadding={renderHero ? 100 : noHeroPadding} // Adjust top padding based on hero presence
+          className={renderHero ? "z-20" : undefined} // Higher z-index than hero when hero exists
+        >
+          {children}
+        </ScrollableContent>
+      )}
     </MainLayout>
   );
 };

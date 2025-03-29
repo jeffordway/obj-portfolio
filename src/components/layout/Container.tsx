@@ -32,17 +32,16 @@ export const Container: React.FC<ContainerProps> = ({
 }) => {
   // Container width styles with responsive adjustments
   const containerStyles = {
-    full: "w-full",
-    container: "w-full max-w-5xl mx-auto",
-    narrow: "w-full max-w-2xl sm:max-w-3xl mx-auto",
+    full: "w-full px-8", // Full width with horizontal padding
+    container: "w-full max-w-5xl mx-auto px-8 lg:px-0", // Mobile padding, none on larger screens
+    narrow: "w-full max-w-2xl sm:max-w-3xl mx-auto px-8 lg:px-0", // Mobile padding, none on larger screens
   };
-
-
 
   return (
     <div
       className={clsx(
         containerStyles[width], // Width control
+        "py-8", // Standard vertical padding for all containers
         "transition-all duration-300", // Smooth transitions between breakpoints
         className
       )}

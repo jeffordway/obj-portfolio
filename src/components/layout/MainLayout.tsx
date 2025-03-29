@@ -99,7 +99,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
   useEffect(() => {
     let lastScrollY = window.scrollY;
     const heroThreshold = showHero
-      ? (heroHeight / 100) * window.innerHeight
+      ? (heroHeight / 100) * window.innerHeight * 0.5 // Trigger halfway through hero for better UX
       : 0;
 
     const handleScroll = () => {
@@ -148,6 +148,10 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
       window.removeEventListener("scroll", handleScroll);
     };
   }, [heroHeight, showHero]);
+
+  // Filter children to separate hero and content components
+  // This allows for more precise control over their rendering
+  const childrenArray = React.Children.toArray(children);
 
   return (
     <ScrollContext.Provider value={scrollState}>

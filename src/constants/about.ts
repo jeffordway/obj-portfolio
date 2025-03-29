@@ -1,5 +1,13 @@
 // About page constants
 
+// Header data type
+export interface AboutHeaderData {
+  title: string;
+  bio: string;
+  imageSrc: string;
+  imageAlt: string;
+}
+
 // Scripture reference type
 export interface ScriptureReference {
   text: string;
@@ -12,6 +20,14 @@ export interface CoreValue {
   description: string;
   scriptureRefs: ScriptureReference[];
 }
+
+// Header data
+export const aboutHeaderData: AboutHeaderData = {
+  title: "About Me",
+  bio: "Hey, I'm Jeff Ordway. I design and code things to help you live boldly, pursue excellence, and serve purposefully. My faith keeps me grounded, my grit keeps me going, and my love for laughter keeps it all fun. When I'm not coding, you'll find me hiking trails, pushing my limits at the gym, or sharing laughs with friends over a meal or a game.",
+  imageSrc: "/images/about/ordway_jeff_brandmark_alt_large.jpg",
+  imageAlt: "Jeff Ordway"
+};
 
 // Core values data
 export const coreValues: CoreValue[] = [
