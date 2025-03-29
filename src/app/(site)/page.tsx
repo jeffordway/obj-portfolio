@@ -7,7 +7,7 @@ import {
   ContactSection,
   ContentSection,
 } from "@/components/sections";
-import { ProjectGrid } from "@/components/ui/card";
+import { CardGrid } from "@/components/ui/card";
 import { projects } from "@/constants";
 
 export default function Home() {
@@ -47,7 +47,7 @@ export default function Home() {
       overlayOpacity={50}
       blurAmount={8}
     >
-      <ProjectGrid 
+      <CardGrid 
         projects={projects}
         className="py-12"
       />

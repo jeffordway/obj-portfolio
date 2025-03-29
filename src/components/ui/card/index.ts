@@ -2,8 +2,9 @@
  * Card components for displaying content in card-like containers
  */
 
-export { ProjectCard } from './ProjectCard';
-export type { ProjectCardProps } from './ProjectCard';
+// Re-export components and types
+export { Card } from './Card'; // Renamed from ProjectCard
+export type { CardProps } from './Card'; // Renamed from ProjectCardProps
 
-export { ProjectGrid } from './ProjectGrid';
-export type { ProjectGridProps } from './ProjectGrid';
+export { CardGrid } from './CardGrid'; // Renamed from ProjectGrid
+export type { CardGridProps } from './CardGrid'; // Renamed from ProjectGridProps

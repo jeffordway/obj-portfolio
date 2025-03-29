@@ -1,30 +1,14 @@
 import React from 'react';
 import { clsx } from 'clsx';
-import { Project } from '@/constants/projects';
-import { ProjectCard } from './ProjectCard';
+import { Card } from './Card';
 import { Heading, Text } from '@/components/ui/typography';
+import { Project } from '@/constants/projects';
 
-export interface ProjectGridProps {
+export interface CardGridProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Array of projects to display
    */
   projects: Project[];
-  
-  /**
-   * Optional title for the grid section
-   */
-  title?: string;
-  
-  /**
-   * Optional description for the grid section
-   */
-  description?: string;
-  
-  /**
-   * Number of columns on medium screens and above
-   * @default 2
-   */
-  columns?: number;
   
   /**
    * Optional additional className for the container
@@ -35,22 +19,13 @@ export interface ProjectGridProps {
 /**
  * A grid component for displaying project cards
  */
-export const ProjectGrid: React.FC<ProjectGridProps> = ({
+export const CardGrid: React.FC<CardGridProps> = ({
   projects,
-  title,
-  description,
-  columns = 2,
   className,
 }) => {
   // Generate the grid columns class based on the columns prop
   const getGridColumnsClass = () => {
-    switch(columns) {
-      case 1: return 'md:grid-cols-1';
-      case 2: return 'md:grid-cols-2';
-      case 3: return 'md:grid-cols-3';
-      case 4: return 'md:grid-cols-4';
-      default: return 'md:grid-cols-2';
-    }
+    return 'md:grid-cols-2';
   };
 
   return (
@@ -60,23 +35,6 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
     )}>
       <div className="w-full px-4 md:px-6 lg:px-8">
         <div className="space-y-8">
-          {/* Section header - only shown if title is provided */}
-          {(title || description) && (
-            <div className="space-y-4">
-              {title && (
-                <Heading size="2xl" className="text-center md:text-left">
-                  {title}
-                </Heading>
-              )}
-              
-              {description && (
-                <Text className="text-foreground/70 max-w-3xl text-center md:text-left">
-                  {description}
-                </Text>
-              )}
-            </div>
-          )}
-          
           {/* Projects grid */}
           <div className={clsx(
             'grid grid-cols-2', // Always show 2 columns
@@ -84,7 +42,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
             'max-w-full' // Ensure grid doesn't exceed container width
           )}>
             {projects.map((project) => (
-              <ProjectCard
+              <Card
                 key={project.id}
                 title={project.title}
                 description={project.description}
@@ -102,4 +60,4 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
   );
 };
 
-export default ProjectGrid;
+export default CardGrid;

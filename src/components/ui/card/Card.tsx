@@ -2,8 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { clsx } from 'clsx';
+import { Tag } from '@/components/ui/tag';
 
-export interface ProjectCardProps {
+export interface CardProps {
   /**
    * Project title
    */
@@ -55,7 +56,7 @@ export interface ProjectCardProps {
  * Project card component with image, title, description, and tags
  * Features hover animation and link functionality
  */
-export const ProjectCard: React.FC<ProjectCardProps> = ({
+export const Card: React.FC<CardProps> = ({
   title,
   description,
   imageSrc,
@@ -136,19 +137,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           {/* Tags */}
           {tags.length > 0 && (
             <div className="flex flex-wrap gap-2 justify-center mt-2">
-              {tags.map((tag, index) => (
-                <span 
-                  key={index}
-                  className={clsx(
-                    'px-2 py-1',
-                    'text-xs font-medium',
-                    'bg-foreground/10',
-                    'rounded-full',
-                    'text-foreground/80'
-                  )}
-                >
-                  {tag}
-                </span>
+              {tags.map((tagLabel, index) => (
+                <Tag key={index} label={tagLabel} />
               ))}
             </div>
           )}
@@ -160,4 +150,3 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     </Link>
   );
 };
-
