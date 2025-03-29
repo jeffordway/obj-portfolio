@@ -65,7 +65,6 @@ const ProfileHero: React.FC<ProfileHeroProps> = ({
           size="2xl" 
           align="left" 
           fullWidth={false} 
-          className='text-white'
         >
           {subtitle}
         </Text>

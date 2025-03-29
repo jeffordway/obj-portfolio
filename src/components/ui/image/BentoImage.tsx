@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import { ReactNode } from 'react';
+import { Heading, Text } from '@/components/ui/typography';
+import { clsx } from 'clsx';
 
 interface BentoImageProps {
   /**
@@ -88,18 +90,63 @@ export function BentoImage({
 
   return (
     <div 
-      className={`${getColSpanClass()} ${getRowSpanClass()} relative overflow-hidden group ${className}`}
+      className={clsx(
+        getColSpanClass(),
+        getRowSpanClass(),
+        'relative overflow-hidden group',
+        className
+      )}
     >
+      {/* Background image */}
       <Image
         src={imageSrc}
         alt={imageAlt}
         fill
-        className="object-cover transition-all duration-500 group-hover:scale-110"
+        className="object-cover transition-all duration-500 group-hover:scale-110 z-0"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-      <div className="absolute bottom-0 left-0 p-4 md:p-6 text-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-        <h3 className={`${subtitle ? 'text-xl' : 'text-lg'} font-bold`}>{title}</h3>
-        {subtitle && <p className="text-sm">{subtitle}</p>}
+      
+      {/* Overlay gradient - matches Card component */}
+      <div
+        className={clsx(
+          "absolute inset-0",
+          "bg-radial from-background/90 to-background/60",
+          "opacity-0 group-hover:opacity-100",
+          "transition-opacity duration-500",
+          "z-10" // Above image, below content
+        )}
+      ></div>
+      
+      {/* Content container - matches Card component */}
+      <div
+        className={clsx(
+          "absolute inset-0",
+          "flex flex-col items-center justify-center",
+          "p-4 md:p-6",
+          "text-foreground opacity-0 group-hover:opacity-100",
+          "transition-opacity duration-500",
+          "z-20" // Above overlay
+        )}
+      >
+        <div className="text-center max-w-[85%]">
+          <Heading 
+            as="h3" 
+            size={subtitle ? "md" : "sm"} 
+            weight="semibold"
+            className="mb-1"
+          >
+            {title}
+          </Heading>
+          {subtitle && (
+            <Text 
+              size="sm" 
+              align="center"
+              leading="relaxed"
+              className="text-foreground/90"
+            >
+              {subtitle}
+            </Text>
+          )}
+        </div>
       </div>
       {children}
     </div>

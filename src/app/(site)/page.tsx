@@ -8,9 +8,9 @@ import {
   ContentSection,
 } from "@/components/sections";
 import { CardGrid } from "@/components/ui/card";
-import { projects } from "@/constants";
+import { getAllProjects } from "@/sanity/lib/queries";
 
-export default function Home() {
+export default async function Home() {
   // Page content variables for easier management
   const pageContent = {
     hero: {
@@ -48,7 +48,7 @@ export default function Home() {
       blurAmount={8}
     >
       <CardGrid 
-        projects={projects}
+        projects={await getAllProjects()}
         className="py-12"
       />
     </PageLayout>

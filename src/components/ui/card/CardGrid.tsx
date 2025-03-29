@@ -2,13 +2,13 @@ import React from 'react';
 import { clsx } from 'clsx';
 import { Card } from './Card';
 import { Heading, Text } from '@/components/ui/typography';
-import { Project } from '@/constants/projects';
+import { SanityProject } from '@/sanity/lib/queries';
 
 export interface CardGridProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Array of projects to display
+   * Array of Sanity projects to display
    */
-  projects: Project[];
+  projects: SanityProject[];
   
   /**
    * Optional additional className for the container
@@ -43,14 +43,8 @@ export const CardGrid: React.FC<CardGridProps> = ({
           )}>
             {projects.map((project) => (
               <Card
-                key={project.id}
-                title={project.title}
-                description={project.description}
-                imageSrc={project.imageSrc}
-                imageAlt={project.imageAlt}
-                href={project.href}
-                tags={project.tags}
-                external={project.external}
+                key={project._id}
+                project={project}
               />
             ))}
           </div>

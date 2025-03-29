@@ -10,6 +10,12 @@ import {
   SanityCategoryWithSkills,
 } from "@/sanity/lib/queries";
 import { Tag } from "@/components/ui/tag";
+import React from "react";
+import {
+  coreValues,
+  missionStatement,
+  visionStatement,
+} from "@/constants/about";
 
 export const metadata = {
   title: "About | Jeff Ordway",
@@ -69,7 +75,7 @@ export default async function AboutPage() {
 
           <div className="col-span-12 md:col-span-9">
             <Heading className="text-3xl md:text-4xl mb-4">About Me</Heading>
-            <Text className="text-base">
+            <Text className="text-xl md:text-2xl">
               Hey, I'm Jeff Ordway. I design and code things to help you live
               boldly, pursue excellence, and serve purposefully. My faith keeps
               me grounded, my grit keeps me going, and my love for laughter
@@ -133,10 +139,7 @@ export default async function AboutPage() {
                 >
                   Mission
                 </Heading>
-                <Text className="mb-4 text-base">
-                  To inspire and equip people to live boldly, pursue excellence,
-                  and serve with purpose.
-                </Text>
+                <Text className="mb-4 text-base">{missionStatement}</Text>
               </div>
 
               <Divider />
@@ -149,16 +152,12 @@ export default async function AboutPage() {
                 >
                   Vision
                 </Heading>
-                <Text className="mb-4 text-base">
-                  A world where men and women enthusiastically embrace their
-                  God-given purpose, leaving a lasting legacy for future
-                  generations.
-                </Text>
+                <Text className="mb-4 text-base">{visionStatement}</Text>
               </div>
 
               <Divider />
 
-              {/* Core Values Section - Moved to Column 1, Restyled */}
+              {/* Core Values Section */}
               <div>
                 <Heading
                   as="h2"
@@ -168,135 +167,45 @@ export default async function AboutPage() {
                   Core Values
                 </Heading>
                 <div className="space-y-6">
-                  <div>
-                    <Text>
-                      <strong className="font-semibold block text-base mb-4">
-                        Live Boldly
-                      </strong>
-                      <span className="text-base">
-                        Living boldly in faith, taking purposeful steps to
-                        reflect God's design and leave a legacy of impact.{" "}
-                        <em className="text-foreground/70">
-                          (
-                          <a
-                            href="https://www.bible.com/bible/59/JOS.1.9"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-primary hover:underline transition-colors"
-                          >
-                            Joshua 1:9
-                          </a>
-                          ,{" "}
-                          <a
-                            href="https://www.bible.com/bible/59/EPH.6.10"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-primary hover:underline transition-colors"
-                          >
-                            Ephesians 6:10
-                          </a>
-                          ,{" "}
-                          <a
-                            href="https://www.bible.com/bible/59/2TI.1.7"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-primary hover:underline transition-colors"
-                          >
-                            2 Timothy 1:7
-                          </a>
-                          )
-                        </em>
-                      </span>
-                    </Text>
-                  </div>
-                  <div>
-                    <Text>
-                      <strong className="font-semibold block text-base mb-4">
-                        Pursue Excellence
-                      </strong>
-                      <span className="text-base">
-                        Pursuing excellence with grit and grace, turning
-                        challenges into growth opportunities.{" "}
-                        <em className="text-foreground/70">
-                          (
-                          <a
-                            href="https://www.bible.com/bible/59/COL.3.23"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-primary hover:underline transition-colors"
-                          >
-                            Colossians 3:23
-                          </a>
-                          ,{" "}
-                          <a
-                            href="https://www.bible.com/bible/59/PRO.22.29"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-primary hover:underline transition-colors"
-                          >
-                            Proverbs 22:29
-                          </a>
-                          ,{" "}
-                          <a
-                            href="https://www.bible.com/bible/59/PHP.3.14"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-primary hover:underline transition-colors"
-                          >
-                            Philippians 3:14
-                          </a>
-                          )
-                        </em>
-                      </span>
-                    </Text>
-                  </div>
-                  <div>
-                    <Text>
-                      <strong className="font-semibold block text-base mb-4">
-                        Serve Purposefully
-                      </strong>
-                      <span className="text-base">
-                        Building authentic connections and serving others with
-                        strength and humility.{" "}
-                        <em className="text-foreground/70">
-                          (
-                          <a
-                            href="https://www.bible.com/bible/59/MRK.10.45"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-primary hover:underline transition-colors"
-                          >
-                            Mark 10:45
-                          </a>
-                          ,{" "}
-                          <a
-                            href="https://www.bible.com/bible/59/GAL.5.13"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-primary hover:underline transition-colors"
-                          >
-                            Galatians 5:13
-                          </a>
-                          ,{" "}
-                          <a
-                            href="https://www.bible.com/bible/59/1PE.4.10"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-primary hover:underline transition-colors"
-                          >
-                            1 Peter 4:10
-                          </a>
-                          )
-                        </em>
-                      </span>
-                    </Text>
-                  </div>
+                  {coreValues.map((value, index) => (
+                    <div key={index}>
+                      <Heading
+                        as="h3"
+                        size="sm"
+                        weight="semibold"
+                        muted={false}
+                        className="mb-2 text-base"
+                      >
+                        {value.title}
+                      </Heading>
+                      <Text size="base" className="mb-1">
+                        {value.description}
+                      </Text>
+                      <div className="text-foreground/70 text-sm italic">
+                        (
+                        {value.scriptureRefs.map((ref, refIndex) => (
+                          <React.Fragment key={refIndex}>
+                            {refIndex > 0 && ", "}
+                            <a
+                              href={ref.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="hover:text-primary hover:underline transition-colors"
+                            >
+                              {ref.text}
+                            </a>
+                          </React.Fragment>
+                        ))}
+                        )
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Column 2: Story and Skills (span-9) - Reordered */}
+          {/* Column 2: Story and Skills (span-9) */}
           <div className="col-span-12 md:col-span-9 order-1 md:order-2">
             <div className="space-y-12">
               {/* My Story Section */}
@@ -313,46 +222,48 @@ export default async function AboutPage() {
                     Picture this: I'm knee-deep in the chaos of the Parks and
                     Recreation office, juggling event schedules. Suddenly, the
                     door slams open, and a wild-eyed woman charges in, thrusting
-                    a goose at me. 'It swallowed a bunch of marbles!' she yells.
-                    The bird is chaotic—feathers ruffled, beady eyes glaring.
-                    Papers scatter, coworkers gawk, and I'm wrestling this
-                    honking disaster until Fish & Wildlife arrives. It's absurd,
-                    and I can't help but laugh. That ridiculous moment taught me
-                    resilience isn't just about grit—it's about trusting God
-                    when life turns into a sitcom gone wrong.
+                    a goose at me. "It swallowed a bunch of marbles!" she yells.
+                    The bird is a bundle of chaos—feathers ruffled, beady eyes
+                    glaring. Papers scatter, coworkers gawk, and I'm wrestling
+                    with this honking disaster until Fish & Wildlife arrives.
+                    It's absurd, and I can't help but laugh. That ridiculous
+                    moment taught me that resilience isn't just about grit; it's
+                    about trusting God when life turns into a sitcom gone wrong.
                   </Text>
                   <Text>
-                    Flash forward several years, and I swapped parks for a new
+                    Fast forward several years, and I swapped parks for a new
                     passion: mobile design and development. After grinding
-                    through late nights, I landed my dream job in Florida. Life
-                    felt like it was clicking into place—until a sepsis
-                    infection blindsided me. One moment, everything's great; the
-                    next, I'm flat on my back in a hospital bed, tubes
-                    everywhere, doctors giving me 50-50 odds. The room smelled
-                    of bleach, monitors beeped endlessly, and my body ached like
-                    it was shutting down. Staring at the cracked ceiling, I
-                    realized I'd been holding onto my life too tightly, thinking
-                    I could control it all. I couldn't. Jesus didn't just save
-                    me spiritually—He pulled me through that darkness. Faith
-                    stopped being an idea and became my anchor.
+                    through late nights, I landed my dream job in Nashville,
+                    Tennessee. Life felt like it was finally clicking into
+                    place—until a sepsis infection blindsided me. One moment
+                    everything was great; the next, I found myself flat on my
+                    back in a hospital bed, tubes everywhere, with doctors
+                    giving me 50-50 odds. The room smelled of bleach, monitors
+                    beeped endlessly, and my body ached as if it were shutting
+                    down. Staring at the cracked ceiling, I realized I had been
+                    holding onto my life too tightly, thinking I could control
+                    it all. I couldn't. Jesus didn't just save me spiritually;
+                    He pulled me through that darkness. My faith stopped being
+                    just an idea; it became my anchor.
                   </Text>
                   <Text>
-                    Surviving changed everything. That bed wasn't a grave—it was
-                    a launchpad. Purpose surged within me—not just designing and
-                    coding for a paycheck, but building something bigger. Now, I
-                    create digital tools to help people grow—spiritually,
-                    mentally, and physically—rooted in faith. It's tough, messy
-                    work, but joy creeps in. Life's a wild ride—goose fiascoes,
-                    career highs, near-death lows—but every twist weaves into a
-                    story of guts, grace, and the steady truth: God's got the
-                    wheel, and I'm never alone.
+                    Surviving changed everything. That hospital bed wasn't a
+                    grave; it became a launchpad. A sense of purpose surged
+                    within me—not just designing and coding for a paycheck, but
+                    building something bigger. Now, I create digital tools to
+                    help people grow—spiritually, mentally, and
+                    physically—rooted in faith. It's tough and messy work, but
+                    joy creeps in. Life's a wild ride—filled with goose
+                    fiascoes, career highs, and near-death lows—but every twist
+                    weaves into a story of guts, grace, and the steady truth:
+                    God's got the wheel, and I'm never alone.
                   </Text>
                 </div>
               </div>
 
               <Divider />
 
-              {/* Skills Section - Moved to Column 2 */}
+              {/* Skills Section */}
               <div>
                 <Heading
                   as="h2"
@@ -365,11 +276,15 @@ export default async function AboutPage() {
                   {categoriesWithSkills && categoriesWithSkills.length > 0 ? (
                     categoriesWithSkills.map((category) => (
                       <div key={category._id}>
-                        <Text>
-                          <strong className="text-base font-semibold block mb-4">
-                            {category.title}
-                          </strong>
-                        </Text>
+                        <Heading
+                          as="h3"
+                          size="sm"
+                          weight="semibold"
+                          muted={false}
+                          className="mb-2 text-base"
+                        >
+                          {category.title}
+                        </Heading>
                         {category.skills && category.skills.length > 0 ? (
                           <div className="flex flex-wrap gap-2">
                             {category.skills.map((skill) => (

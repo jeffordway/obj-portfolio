@@ -85,6 +85,7 @@ const AvatarHero: React.FC<AvatarHeroProps> = ({
         size="3xl"
         align="center"
         fullWidth={false}
+        leading="normal"
         className="text-foreground"
       >
         {subtitle}
