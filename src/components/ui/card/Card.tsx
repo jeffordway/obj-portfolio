@@ -34,7 +34,10 @@ export const Card: React.FC<CardProps> = ({ project, className, children }) => {
   const description = project.headline;
   const imageSrc = urlFor(project.heroImage).width(800).height(600).url();
   const imageAlt = `${project.title} project image`;
-  const href = `/${project.slug.current}`;
+  
+  // Safely handle slug - ensure it exists before accessing
+  const slug = project.slug?.current || '';
+  const href = slug ? `/${slug}` : '#';
 
   // Use categories for tags
   const tags = project.categories.map((category) => category.title);
@@ -73,6 +76,7 @@ export const Card: React.FC<CardProps> = ({ project, className, children }) => {
           src={imageSrc}
           alt={imageAlt}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className={clsx(
             "object-cover",
             "transition-all duration-500 group-hover:scale-110",

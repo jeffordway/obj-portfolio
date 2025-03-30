@@ -102,6 +102,7 @@ export function BentoImage({
         src={imageSrc}
         alt={imageAlt}
         fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         className="object-cover transition-all duration-500 group-hover:scale-110 z-0"
       />
       

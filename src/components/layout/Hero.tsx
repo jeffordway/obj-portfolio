@@ -536,6 +536,7 @@ const Hero: React.FC<HeroProps> = ({
             src={profileImageUrl}
             alt="Profile"
             fill
+            sizes="(max-width: 768px) 100vw, 50vw"
             priority
             className="object-cover"
           />

@@ -72,6 +72,7 @@ export default async function AboutPage() {
                   src={aboutHeaderData.imageSrc}
                   alt={aboutHeaderData.imageAlt}
                   fill
+                  sizes="(max-width: 768px) 100vw, 25vw"
                   className="object-cover"
                   priority
                 />

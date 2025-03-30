@@ -13,6 +13,7 @@ export default function NotFound() {
           src="https://images.unsplash.com/photo-1436918671239-a2b72ace4880?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Background"
           fill
+          sizes="100vw"
           priority
           className="object-cover opacity-50"
         />

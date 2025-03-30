@@ -79,6 +79,7 @@ const Avatar: React.FC<AvatarProps> = ({
         alt={alt}
         fill
         priority
+        sizes={`${size}px`}
         className="object-cover"
       />
     </div>

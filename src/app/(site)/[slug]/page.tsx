@@ -27,8 +27,14 @@ interface ProjectPageProps {
   };
 }
 
-export async function generateMetadata({ params }: ProjectPageProps) {
-  const project = await getProjectBySlug(params.slug);
+export async function generateMetadata(props: ProjectPageProps) {
+  // Properly await the params object before accessing its properties
+  const { params } = props;
+  const resolvedParams = await Promise.resolve(params);
+  const slug = resolvedParams.slug;
+  
+  // Now fetch the project with the validated slug
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     return {
@@ -43,10 +49,15 @@ export async function generateMetadata({ params }: ProjectPageProps) {
   };
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
+export default async function ProjectPage(props: ProjectPageProps) {
+  // Properly await the params object before accessing its properties
+  const { params } = props;
+  const resolvedParams = await Promise.resolve(params);
+  const slug = resolvedParams.slug;
+  
   // Fetch both project and categories with skills concurrently
   const [project, categoriesWithSkills] = await Promise.all([
-    getProjectBySlug(params.slug),
+    getProjectBySlug(slug),
     getCategoriesWithSkills(),
   ]);
 
@@ -196,6 +207,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                                 src={urlFor(image).width(800).height(450).url()}
                                 alt={image.alt || `Project image ${index + 1}`}
                                 fill
+                                sizes="(max-width: 768px) 100vw, 50vw"
                                 className="object-cover"
                               />
                             </div>
