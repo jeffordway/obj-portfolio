@@ -25,7 +25,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
         className
       )}
     >
-      <Container width="full">
+      <Container width="full" className="pb-2">
         {/* Navigation and social links */}
         <NavFooter />
       </Container>

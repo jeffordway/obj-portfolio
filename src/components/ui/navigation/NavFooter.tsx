@@ -90,7 +90,7 @@ export const NavFooter = ({ className }: NavFooterProps) => {
           <NavigationLink
             key={item.href}
             href={item.href}
-            className="text-sm text-foreground/70 hover:text-foreground/90 transition-colors"
+            className="text-sm text-foreground/70 hover:text-foreground/90"
           >
             {item.label}
           </NavigationLink>
