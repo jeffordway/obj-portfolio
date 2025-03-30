@@ -11,7 +11,6 @@ export * from './typography';
 export * from './navigation';
 
 // Feedback components
-// Temporarily commented out as we're using CookieYes instead of custom components
 // export * from './feedback';
 
 // Button components

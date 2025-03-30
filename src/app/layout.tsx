@@ -13,6 +13,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Next.js will automatically populate the head with metadata */}
+      </head>
       <body className={`${primaryFont.variable} antialiased`}>
         <ClientProviders>
           {children}

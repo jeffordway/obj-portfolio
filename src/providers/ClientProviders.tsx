@@ -4,10 +4,6 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 
 // Dynamically import providers to avoid SSR issues
-const CookieConsentProvider = dynamic(
-  () => import('./CookieConsentProvider'),
-  { ssr: false }
-);
 
 const AnalyticsProvider = dynamic(
   () => import('./AnalyticsProvider'),
@@ -38,9 +34,7 @@ export default function ClientProviders({ children }: ClientProvidersProps) {
   // After mounting, render with all providers
   return (
     <AnalyticsProvider>
-      <CookieConsentProvider>
-        {children}
-      </CookieConsentProvider>
+      {children}
     </AnalyticsProvider>
   );
 }
