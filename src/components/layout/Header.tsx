@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({
   // Determine if header should be transparent or solid
   // Only make the header solid when we've scrolled enough for content to reach it
   // For a typical header height of 80px, we use that as our threshold
-  const headerHeight = 80; // Approximate header height in pixels
+  const headerHeight = 900; // Approximate header height in pixels
   const isTransparent = 
     dynamicOpacity && transparent ? scrollY < headerHeight : transparent;
 

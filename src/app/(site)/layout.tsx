@@ -1,4 +1,4 @@
-import { MainLayout, Header } from "@/components/layout";
+import { Header } from "@/components/layout";
 
 export default function SiteLayout({
   children,
@@ -6,9 +6,9 @@ export default function SiteLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <MainLayout>
+    <>
       <Header />
       {children}
-    </MainLayout>
+    </>
   );
 }

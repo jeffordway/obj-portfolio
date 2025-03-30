@@ -159,12 +159,13 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
         className={clsx(
           "w-full", // Full width container
           "overflow-x-hidden", // Prevent horizontal scrolling
-          !showHero && "no-hero-page", // Special class for pages without hero
+          showHero ? "with-hero" : "no-hero-page", // Class to control scrollable content margin
           className
         )}
         style={{
-          // Ensure we have enough vertical space for scrolling
-          minHeight: "200vh"
+          // Only add extra height for pages with hero sections
+          // For pages without hero, let the content determine the height
+          ...(showHero ? { minHeight: "200vh" } : {})
         }}
       >
         {children}

@@ -39,9 +39,14 @@ html {
   margin-top: 0 !important;
 }
 
-/* ScrollableContent positioning - starts just off-screen */
-.scrollable-content {
+/* ScrollableContent positioning - only for pages with hero sections */
+.with-hero .scrollable-content {
   margin-top: calc(100vh + 5px);
+}
+
+/* Regular pages don't need the extra margin */
+.scrollable-content {
+  margin-top: 0;
 }
 
 /* Scroll indicator arrow animation */

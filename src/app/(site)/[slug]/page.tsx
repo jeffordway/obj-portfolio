@@ -13,6 +13,7 @@ import {
 import { urlFor } from "@/sanity/lib/image";
 import { FaGithub, FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { ButtonVariant } from "@/components/ui/button";
+import { PortableText } from "@/components/ui/portable-text/PortableText";
 import {
   projectPageLabels,
   projectMetadata,
@@ -113,10 +114,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <div className="space-y-8">
               {/* Skills Section */}
               <div>
-                <Heading as="h2" size="lg" className="mb-8">
+                <Heading as="h2" size="lg" className="mb-4">
                   {projectPageLabels.skillsSectionTitle}
                 </Heading>
-                <div className="space-y-8">
+                <div className="space-y-4">
                   {project.categories?.length > 0 ? (
                     project.categories.map((category) => {
                       // Get skills for this category from the project
@@ -131,15 +132,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
                       return categorySkills.length > 0 ? (
                         <div key={category._id}>
-                          <Heading
-                            as="h3"
+                          <Text
+                            weight="medium"
                             size="sm"
-                            weight="semibold"
-                            muted={false}
-                            className="mb-2"
+                      
+                            className="mb-3 block"
                           >
                             {category.title}
-                          </Heading>
+                          </Text>
                           <div className="flex flex-wrap gap-2">
                             {categorySkills.map((skill) => (
                               <Tag
@@ -159,23 +159,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   )}
                 </div>
               </div>
-
-              <Divider />
-
-              {/* Project Date */}
-              {project.date && (
-                <div>
-                  <Heading as="h2" size="lg" className="mb-4">
-                    {projectPageLabels.completedSectionTitle}
-                  </Heading>
-                  <Text>
-                    {new Date(project.date).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                    })}
-                  </Text>
-                </div>
-              )}
             </div>
           </div>
 
@@ -188,13 +171,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   {projectPageLabels.overviewSectionTitle}
                 </Heading>
                 <div className="space-y-4">
-                  <Text className="text-foreground/80">{project.headline}</Text>
-
                   {project.content ? (
-                    // For now, display project.content as string until portable text rendering is implemented
-                    <Text className="text-foreground/80">
-                      {JSON.stringify(project.content)}
-                    </Text>
+                    <PortableText value={project.content} />
                   ) : (
                     <Text className="text-foreground/60 italic">
                       {projectPageLabels.noContentText}
