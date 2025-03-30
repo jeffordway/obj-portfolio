@@ -232,7 +232,7 @@ export interface HeroProps {
    * Additional CSS classes
    */
   className?: string;
-  
+
   /**
    * Whether to show a scroll down indicator
    * @default true
@@ -363,7 +363,7 @@ const Hero: React.FC<HeroProps> = ({
    */
   const renderTitle = () => {
     if (!title) return null;
-    
+
     return (
       <Heading
         key="title"
@@ -382,7 +382,7 @@ const Hero: React.FC<HeroProps> = ({
    */
   const renderSubtitle = () => {
     if (!subtitle) return null;
-    
+
     return (
       <Text
         key="subtitle"
@@ -464,7 +464,7 @@ const Hero: React.FC<HeroProps> = ({
    */
   const renderActionButtons = () => {
     if (!actionButtons?.length) return null;
-    
+
     return (
       <div
         key="actions"
@@ -486,12 +486,7 @@ const Hero: React.FC<HeroProps> = ({
    */
   const renderContent = () => {
     return (
-      <div className={clsx(
-        "flex flex-col",
-        "items-center",
-        "gap-4",
-        "w-full"
-      )}>
+      <div className={clsx("flex flex-col", "items-center", "gap-4", "w-full")}>
         {renderAvatarAndProfile()}
         {renderTitle()}
         {renderSubtitle()}
@@ -506,7 +501,7 @@ const Hero: React.FC<HeroProps> = ({
    */
   const renderAvatarAndProfile = () => {
     const elements: React.ReactNode[] = [];
-    
+
     // Add avatar if provided
     if (avatar?.src) {
       const avatarElement = (
@@ -523,7 +518,7 @@ const Hero: React.FC<HeroProps> = ({
       );
       elements.push(avatarElement);
     }
-    
+
     // Add profile image if provided
     if (profileImageUrl) {
       const profileImageElement = (
@@ -548,10 +543,10 @@ const Hero: React.FC<HeroProps> = ({
       );
       elements.push(profileImageElement);
     }
-    
+
     // Return null if no elements to render
     if (elements.length === 0) return null;
-    
+
     // Position elements based on direction and position
     if (direction.includes("column") || profileImagePosition === "right") {
       return <>{elements}</>;
@@ -560,7 +555,7 @@ const Hero: React.FC<HeroProps> = ({
       return <>{[...elements].reverse()}</>;
     }
   };
-  
+
   // Standard rendering for non-fixed positioning
   const renderStandardLayout = () => {
     return (
@@ -599,7 +594,7 @@ const Hero: React.FC<HeroProps> = ({
         <div className="w-full max-w-5xl mx-auto flex items-center justify-center relative z-20 pointer-events-auto">
           {renderContent()}
         </div>
-        
+
         {/* Scroll indicator arrow with graceful animation */}
         {showScrollIndicator && (
           <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-40 pointer-events-auto">
@@ -608,20 +603,20 @@ const Hero: React.FC<HeroProps> = ({
                 // Scroll to reveal the scrollable content
                 window.scrollTo({
                   top: window.innerHeight - 100, // Scroll just enough to reveal content
-                  behavior: 'smooth'
+                  behavior: "smooth",
                 });
               }}
               aria-label="Scroll to content"
-              className="text-foreground/60 hover:text-foreground transition-colors p-2 scroll-indicator"
+              className="text-foreground/60 hover:text-foreground p-2 scroll-button scroll-indicator"
             >
-              <FiChevronDown size={48} />
+              <FiChevronDown size={60} />
             </button>
           </div>
         )}
       </div>
     );
   }
-  
+
   // Standard positioning (not fixed)
   return (
     <div

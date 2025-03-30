@@ -60,8 +60,26 @@ html {
   }
 }
 
+/* Scroll indicator styling */
 .scroll-indicator {
+  position: relative;
   animation: float 2s ease-in-out infinite;
+}
+
+/* Button grow effect with proper transition */
+.scroll-button {
+  transition-property: transform, color;
+  transition-duration: 400ms;
+  transition-timing-function: ease;
+}
+
+.scroll-button:hover {
+  transform: scale(1.15);
+}
+
+/* Custom transition duration to match buttons and navigation links */
+.duration-400 {
+  transition-duration: 400ms;
 }
 
 @media (prefers-color-scheme: dark) {
