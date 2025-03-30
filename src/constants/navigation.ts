@@ -21,5 +21,6 @@ export const navItems: NavItem[] = [
 export const footerLinks: NavItem[] = [
   { label: "Terms", href: "/terms" },
   { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Cookie Policy", href: "/cookie-policy" },
   { label: "Disclaimer", href: "/disclaimer" },
 ];

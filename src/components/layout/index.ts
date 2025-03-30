@@ -9,6 +9,7 @@ export type { MainLayoutProps, ScrollContextType } from "./MainLayout";
 // Layout components
 export { default as Header } from "./Header";
 export { default as ScrollableContent } from "./ScrollableContent";
+export { NotFoundPage } from "./NotFoundPage";
 export { default as Footer } from "./Footer";
 export { default as PageLayout } from "./PageLayout";
 export { default as Hero } from "./Hero";

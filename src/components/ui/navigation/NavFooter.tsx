@@ -99,7 +99,7 @@ export const NavFooter = ({ className }: NavFooterProps) => {
       
       {/* Copyright notice */}
       <p className="text-center text-sm text-foreground/60">
-        &copy; {currentYear} Jeff Ordway. All rights reserved.
+        &copy; {currentYear} Nielsen Ossowski Creative LLC. All rights reserved.
       </p>
     </div>
   );
