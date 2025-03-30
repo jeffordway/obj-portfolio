@@ -34,7 +34,7 @@ export const Card: React.FC<CardProps> = ({ project, className, children }) => {
   const description = project.headline;
   const imageSrc = urlFor(project.heroImage).width(800).height(600).url();
   const imageAlt = `${project.title} project image`;
-  const href = `/projects/${project.slug.current}`;
+  const href = `/${project.slug.current}`;
 
   // Use categories for tags
   const tags = project.categories.map((category) => category.title);

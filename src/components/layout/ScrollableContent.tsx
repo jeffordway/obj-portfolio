@@ -1,8 +1,5 @@
-"use client";
-
-import React from 'react';
-import { clsx } from 'clsx';
-import { useScroll } from './MainLayout';
+import React from "react";
+import { clsx } from "clsx";
 
 export interface ScrollableContentProps {
   /**
@@ -11,46 +8,45 @@ export interface ScrollableContentProps {
   children: React.ReactNode;
   
   /**
-   * Initial top padding in viewport height units
-   * @default 100
-   */
-  initialTopPadding?: number;
-  
-  /**
    * Additional CSS classes
    */
   className?: string;
+  
+  /**
+   * Amount of content to peek above the fold in viewport height units (vh)
+   * @default 15
+   */
+  peekHeight?: number;
 }
 
 /**
- * ScrollableContent component that scrolls over the hero
+ * ScrollableContent component following Spencer Peppiatt's implementation pattern.
+ * 
+ * This component creates a section that sits at the bottom of the viewport initially,
+ * with a configurable amount showing (peeking), and then scrolls up over the hero
+ * when the user scrolls down.
  */
 const ScrollableContent: React.FC<ScrollableContentProps> = ({
   children,
-  initialTopPadding = 100,
   className,
+  // Completely hidden with just the edge visible
+  peekHeight = 0
 }) => {
-  const { isPastHero } = useScroll();
-  
   return (
-    <div 
+    <div
       className={clsx(
-        'relative w-full', // Positioning and width
-        'z-20', // Higher z-index than hero by default
+        "scrollable-content", // Global CSS class for positioning
+        "relative", // Standard positioning in document flow
+        "w-full",
+        "bg-background",
+        "rounded-t-3xl",
+        "shadow-xl",
+        "z-10", // Above hero
         className
       )}
-      style={{ 
-        paddingTop: `${initialTopPadding}vh`,
-      }}
+      data-testid="scrollable-content"
     >
-      <div className={clsx(
-        'relative', // Positioning
-        'bg-background', // Background color
-        'rounded-t-3xl', // Rounded top corners for a nice transition over hero
-        'shadow-xl', // Shadow for depth
-        'transition-all duration-300', // Smooth transitions between breakpoints
-      )}>
-        {/* Removed max-width constraint to allow child containers to control their own width */}
+      <div className="w-full px-4 md:px-6 py-8">
         {children}
       </div>
     </div>

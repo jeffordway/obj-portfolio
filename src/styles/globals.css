@@ -39,6 +39,31 @@ html {
   margin-top: 0 !important;
 }
 
+/* ScrollableContent positioning - starts just off-screen */
+.scrollable-content {
+  margin-top: calc(100vh + 5px);
+}
+
+/* Scroll indicator arrow animation */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 0.8;
+  }
+}
+
+.scroll-indicator {
+  animation: float 2s ease-in-out infinite;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground: oklch(0.985 0.002 247.839); /* gray-50 */

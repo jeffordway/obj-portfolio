@@ -4,10 +4,15 @@ import React from 'react';
 import { MainLayout } from './MainLayout';
 import Hero from './Hero';
 import ScrollableContent from './ScrollableContent';
-import Section from './Section';
+import Footer from './Footer';
 import { clsx } from 'clsx';
 
 export interface PageLayoutProps {
+  /**
+   * Custom hero content (overrides title/subtitle if provided)
+   */
+  heroContent?: React.ReactNode;
+  
   /**
    * Page title (used for hero section if shown)
    */
@@ -17,11 +22,6 @@ export interface PageLayoutProps {
    * Page subtitle (used for hero section if shown)
    */
   subtitle?: string;
-  
-  /**
-   * Custom hero content (overrides title/subtitle if provided)
-   */
-  heroContent?: React.ReactNode;
   
   /**
    * Main page content
@@ -124,9 +124,12 @@ const PageLayout: React.FC<PageLayoutProps> = ({
       {renderHero && (
         <div className={clsx(
           "w-full", // Full width
+          "h-screen", // Force full viewport height
           "overflow-hidden", // Prevent content overflow
-          renderContent ? "fixed inset-0 z-10" : "relative", // Fixed when content scrolls over it, relative when no content
-          "pointer-events-none" // Don't capture pointer events at this level
+          "fixed", // Fix in place 
+          "inset-0", // Position at top left
+          "z-10", // Lower z-index than scrollable content
+          "pointer-events-auto" // Ensure hero elements are clickable
         )}>
           {/* If custom hero content is provided, use it; otherwise use the default Hero component */}
           {heroContent ? (
@@ -134,7 +137,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
             <div className="relative w-full h-screen flex items-center justify-center pointer-events-auto">
               {/* Background media and overlay - Only rendered if showBackgroundMedia is true */}
               {showBackgroundMedia && (
-                <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
+                <div className="fixed inset-0 w-full h-full overflow-hidden z-0">
                   {/* Background media - Video or Image based on mediaType */}
                   {mediaType === 'video' ? (
                     <video
@@ -142,7 +145,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
                       muted
                       loop
                       playsInline
-                      className="absolute inset-0 w-full h-full object-cover z-0"
+                      className="fixed inset-0 w-full h-full object-cover z-0"
                     >
                       <source src={mediaSrc || '/videos/background_video.mp4'} type="video/mp4" />
                       Your browser does not support the video tag.
@@ -156,14 +159,14 @@ const PageLayout: React.FC<PageLayoutProps> = ({
                   
                   {/* Media opacity overlay */}
                   <div 
-                    className="absolute inset-0 bg-background/80 z-10"
+                    className="fixed inset-0 bg-background/80 z-10"
                     style={{ opacity: (100 - mediaOpacity) / 100 }}
                   />
                   
                   {/* Colored overlay with blur - Only rendered if showColoredOverlay is true */}
                   {showColoredOverlay && (
                     <div 
-                      className={`absolute inset-0 w-full h-full z-15 ${overlayColor}`}
+                      className={`fixed inset-0 w-full h-full z-15 ${overlayColor}`}
                       style={{ 
                         opacity: overlayOpacity / 100,
                         backdropFilter: `blur(${blurAmount}px)`,
@@ -175,7 +178,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
               )}
               
               {/* Custom hero content wrapper */}
-              <div className="relative z-20 w-full h-full flex items-center justify-center">
+              <div className="relative z-30 w-full h-full flex items-center justify-center">
                 <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8 flex items-center justify-center">
                   {heroContent}
                 </div>
@@ -190,7 +193,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
               contentAlign="center"
               direction="column"
               fullScreen={true}
-              fixed={renderContent} // Only use fixed positioning when content will scroll over it
+              fixed={true} // Always keep fixed positioning for background media
               showBackgroundMedia={showBackgroundMedia}
               mediaType={mediaType}
               mediaSrc={mediaSrc}
@@ -206,12 +209,12 @@ const PageLayout: React.FC<PageLayoutProps> = ({
       
       {/* Content Section - Only rendered if there is content to display */}
       {renderContent && (
-        <ScrollableContent 
-          initialTopPadding={renderHero ? 100 : noHeroPadding} // Adjust top padding based on hero presence
-          className={renderHero ? "z-20" : undefined} // Higher z-index than hero when hero exists
-        >
-          {children}
-        </ScrollableContent>
+        <div className="relative w-full">
+          <ScrollableContent>
+            {children}
+            <Footer />
+          </ScrollableContent>
+        </div>
       )}
     </MainLayout>
   );

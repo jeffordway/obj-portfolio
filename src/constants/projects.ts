@@ -98,6 +98,54 @@ export const projects: Project[] = [
 ];
 
 /**
+ * Projects page constants
+ */
+
+export interface ProjectsPageData {
+  /**
+   * Meta title for SEO
+   */
+  metaTitle: string;
+  
+  /**
+   * Meta description for SEO
+   */
+  metaDescription: string;
+  
+  /**
+   * Hero section title
+   */
+  heroTitle: string;
+  
+  /**
+   * Hero section subtitle
+   */
+  heroSubtitle: string;
+  
+  /**
+   * Hero section background image URL
+   */
+  heroImageUrl: string;
+  
+  /**
+   * Hero section background image alt text
+   */
+  heroImageAlt: string;
+}
+
+/**
+ * Projects page data
+ */
+export const projectsPageData: ProjectsPageData = {
+  metaTitle: "Projects | Jeff Ordway",
+  metaDescription: "View a selection of projects by Jeff Ordway.",
+  heroTitle: "My Projects",
+  heroSubtitle: "A curated selection of my work, showcasing skills in design and development.",
+  heroImageUrl: "/images/hero/projects-hero.jpg", // Replace with your actual image path
+  heroImageAlt: "Abstract digital art representing projects",
+};
+
+/**
  * Get featured projects
  */
 export const getFeaturedProjects = (): Project[] => {

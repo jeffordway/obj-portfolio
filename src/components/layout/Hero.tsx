@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import { Avatar } from "@/components/ui/avatar";
 import { clsx } from "clsx";
+import { FiChevronDown } from "react-icons/fi";
 
 /**
  * Action button configuration for Hero component
@@ -231,6 +232,12 @@ export interface HeroProps {
    * Additional CSS classes
    */
   className?: string;
+  
+  /**
+   * Whether to show a scroll down indicator
+   * @default true
+   */
+  showScrollIndicator?: boolean;
 }
 
 /**
@@ -261,6 +268,7 @@ const Hero: React.FC<HeroProps> = ({
   overlayOpacity = 50,
   blurAmount = 8,
   className,
+  showScrollIndicator = true,
 }) => {
   // Determine text alignment classes
   const textAlignClasses = {
@@ -591,6 +599,25 @@ const Hero: React.FC<HeroProps> = ({
         <div className="w-full max-w-5xl mx-auto flex items-center justify-center relative z-20 pointer-events-auto">
           {renderContent()}
         </div>
+        
+        {/* Scroll indicator arrow with graceful animation */}
+        {showScrollIndicator && (
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-40 pointer-events-auto">
+            <button
+              onClick={() => {
+                // Scroll to reveal the scrollable content
+                window.scrollTo({
+                  top: window.innerHeight - 100, // Scroll just enough to reveal content
+                  behavior: 'smooth'
+                });
+              }}
+              aria-label="Scroll to content"
+              className="text-foreground/60 hover:text-foreground transition-colors p-2 scroll-indicator"
+            >
+              <FiChevronDown size={48} />
+            </button>
+          </div>
+        )}
       </div>
     );
   }

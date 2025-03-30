@@ -1,4 +1,4 @@
-import { MainLayout, Header, Footer } from "@/components/layout";
+import { MainLayout, Header } from "@/components/layout";
 
 export default function SiteLayout({
   children,
@@ -9,7 +9,6 @@ export default function SiteLayout({
     <MainLayout>
       <Header />
       {children}
-      <Footer />
     </MainLayout>
   );
 }

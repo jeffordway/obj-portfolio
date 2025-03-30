@@ -4,7 +4,7 @@ import React from "react";
 import { clsx } from "clsx";
 import { useScroll } from "./MainLayout";
 import { Navbar } from "@/components/ui/navigation";
-import Section from "./Section";
+import { Container } from "./Container";
 
 export interface HeaderProps {
   /**
@@ -33,18 +33,21 @@ const Header: React.FC<HeaderProps> = ({
   dynamicOpacity = true,
   className,
 }: HeaderProps) => {
-  const { scrollY } = useScroll();
+  // Get scroll context
+  const { scrollY, isPastHero } = useScroll();
 
   // Determine if header should be transparent or solid
-  const isTransparent =
-    dynamicOpacity && transparent ? scrollY <= 1000 : transparent;
+  // Only make the header solid when we've scrolled enough for content to reach it
+  // For a typical header height of 80px, we use that as our threshold
+  const headerHeight = 80; // Approximate header height in pixels
+  const isTransparent = 
+    dynamicOpacity && transparent ? scrollY < headerHeight : transparent;
 
   return (
     <header
       className={clsx(
         "fixed top-0 left-0 right-0", // Positioning
-        "z-30", // Higher z-index than hero and content
-        "py-6 md:py-8", // Vertical spacing
+        "z-50", // Highest z-index to always stay on top
         "transition-all duration-200 ease-in-out", // Animation
         className
       )}
@@ -52,9 +55,9 @@ const Header: React.FC<HeaderProps> = ({
         backgroundColor: isTransparent ? "transparent" : "var(--background)",
       }}
     >
-      <Section>
+      <Container width="full">
         <Navbar />
-      </Section>
+      </Container>
     </header>
   );
 };

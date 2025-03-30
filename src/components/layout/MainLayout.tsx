@@ -98,9 +98,9 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
   // Effect to handle scroll events
   useEffect(() => {
     let lastScrollY = window.scrollY;
-    const heroThreshold = showHero
-      ? (heroHeight / 100) * window.innerHeight * 0.5 // Trigger halfway through hero for better UX
-      : 0;
+    // Set a very small threshold to match Spencer's site behavior
+    // We want the header to become visible almost immediately on scroll
+    const heroThreshold = 5; 
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -157,10 +157,15 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
     <ScrollContext.Provider value={scrollState}>
       <div
         className={clsx(
-          "relative min-h-screen w-full",
+          "w-full", // Full width container
+          "overflow-x-hidden", // Prevent horizontal scrolling
           !showHero && "no-hero-page", // Special class for pages without hero
           className
         )}
+        style={{
+          // Ensure we have enough vertical space for scrolling
+          minHeight: "200vh"
+        }}
       >
         {children}
       </div>

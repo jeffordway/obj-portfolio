@@ -2,7 +2,6 @@ import { PageLayout } from '@/components/layout';
 import { Container } from '@/components/layout/Container';
 import Hero from '@/components/layout/Hero';
 import { getAllProjects } from '@/sanity/lib/queries';
-import { Heading, Text } from '@/components/ui/typography';
 import { Card } from '@/components/ui/card';
 import { homePageData } from '@/constants/home';
 

@@ -3,7 +3,7 @@
 import React from "react";
 import { clsx } from "clsx";
 import { NavFooter } from "@/components/ui/navigation";
-import Section from "./Section";
+import { Container } from "./Container";
 
 export interface FooterProps {
   /**
@@ -19,17 +19,16 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
   return (
     <footer
       className={clsx(
-        "pt-8 pb-4 sm:pt-12 sm:pb-6 md:pt-20 md:pb-20",
         "bg-background",
         "transition-all duration-300",
         "relative z-30", // Add z-index higher than ScrollableContent
         className
       )}
     >
-      <Section>
+      <Container width="full">
         {/* Navigation and social links */}
         <NavFooter />
-      </Section>
+      </Container>
     </footer>
   );
 };

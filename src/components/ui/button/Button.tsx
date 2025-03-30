@@ -63,6 +63,12 @@ export interface ButtonProps
    * @default true
    */
   hoverEffect?: boolean;
+  
+  /**
+   * Minimum width for the button to ensure consistent sizing
+   * @default undefined
+   */
+  minWidth?: string;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(

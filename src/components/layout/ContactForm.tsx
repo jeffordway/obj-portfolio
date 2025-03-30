@@ -49,76 +49,61 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
     // Create a partial schema for just this field
     const fieldSchema = z.object({ [name]: contactFormSchema.shape[name] });
     
-    // Validate just this field
-    const result = fieldSchema.safeParse({ [name]: value });
-    
-    if (!result.success) {
-      const error = result.error.errors.find(err => err.path[0] === name);
-      return error ? error.message : null;
+    try {
+      fieldSchema.parse({ [name]: value });
+      return null;
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const fieldError = error.errors[0]?.message;
+        return fieldError || 'Invalid input';
+      }
+      return 'Validation error';
     }
-    
-    return null;
   };
   
-  // Handle input changes with real-time validation
+  // Handle input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    const fieldName = name as keyof ContactFormData;
     
     // Update form data
     setFormData(prev => ({
       ...prev,
-      [fieldName]: value,
+      [name]: value,
     }));
     
-    // Validate the field after a short delay (debounce)
-    const errorMessage = validateField(fieldName, value);
+    // Validate field on change
+    const error = validateField(name as keyof ContactFormData, value);
     
     // Update errors state
-    setErrors(prev => {
-      const newErrors = { ...prev };
-      
-      if (errorMessage) {
-        newErrors[fieldName] = errorMessage;
-      } else {
-        delete newErrors[fieldName];
-      }
-      
-      return newErrors;
-    });
-  };
-  
-  // Validate form using Zod
-  const validateForm = (): boolean => {
-    const result = contactFormSchema.safeParse(formData);
-    
-    if (!result.success) {
-      // Convert Zod errors to our error format
-      const newErrors: Record<string, string> = {};
-      result.error.errors.forEach((error) => {
-        if (error.path.length > 0) {
-          const field = error.path[0].toString();
-          newErrors[field] = error.message;
-        }
-      });
-      
-      setErrors(newErrors);
-      return false;
-    }
-    
-    // Clear any existing errors
-    setErrors({});
-    return true;
+    setErrors(prev => ({
+      ...prev,
+      [name]: error || '',
+    }));
   };
   
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate entire form before submission
-    if (!validateForm()) {
-      // Focus the first field with an error
-      const firstErrorField = Object.keys(errors)[0];
+    // Validate all fields
+    let hasErrors = false;
+    const newErrors: Record<string, string> = {};
+    
+    // Check each field
+    (Object.keys(formData) as Array<keyof ContactFormData>).forEach(field => {
+      const error = validateField(field, formData[field]);
+      if (error) {
+        hasErrors = true;
+        newErrors[field] = error;
+      }
+    });
+    
+    // Update errors state
+    setErrors(newErrors);
+    
+    // If there are errors, focus the first field with an error
+    if (hasErrors) {
+      const firstErrorField = Object.keys(newErrors)[0];
       if (firstErrorField) {
         const element = document.querySelector(`[name="${firstErrorField}"]`) as HTMLElement;
         if (element) element.focus();
@@ -221,7 +206,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-8" style={{ alignItems: 'flex-start' }}>
             <Input
               label="Name"
               name="name"
@@ -253,48 +238,35 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
               required
             />
             
-            <div className="relative">
-              <Textarea
-                label="Message"
-                name="message"
-                placeholder="Your message here..."
-                rows={6}
-                value={formData.message}
-                onChange={handleChange}
-                error={errors.message}
-                helperText={!errors.message ? `${formData.message.length}/1000 characters` : undefined}
-                required
-              />
-              {formData.message.length > 900 && (
-                <div 
-                  className={clsx(
-                    'text-xs mt-1',
-                    formData.message.length > 1000 ? 'text-[var(--error)]' : 
-                    formData.message.length > 950 ? 'text-[var(--warning)]' : 
-                    'text-[var(--info)]'
-                  )}
-                >
-                  {formData.message.length > 1000 ? (
-                    <span>Character limit exceeded by {formData.message.length - 1000} characters</span>
-                  ) : (
-                    <span>You have {1000 - formData.message.length} characters remaining</span>
-                  )}
-                </div>
-              )}
-            </div>
+            <Textarea
+              label="Message"
+              name="message"
+              placeholder="Your message here..."
+              value={formData.message}
+              onChange={handleChange}
+              error={errors.message}
+              rows={6}
+              required
+            />
             
-            <div>
-              <Button
-                type="submit"
-                isLoading={status === 'submitting'}
-                disabled={status === 'submitting'}
-                size="md"
-                rounded="none"
-                
-              >
-                Send Message
-              </Button>
-            </div>
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              fullWidth={false}
+              className="w-auto min-w-[180px]"
+              disabled={status === 'submitting'}
+            >
+              {status === 'submitting' ? (
+                <span className="flex items-center justify-center">
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Sending...
+                </span>
+              ) : 'Send Message'}
+            </Button>
           </div>
         </form>
       )}
