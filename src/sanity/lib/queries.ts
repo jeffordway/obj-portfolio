@@ -1,19 +1,23 @@
-import { groq } from 'next-sanity';
-import { client } from './client';
+import { groq } from "next-sanity";
+import { client } from "./client";
 
-// --- Interfaces ---
+// Type definitions for Sanity content schemas
+
+// Skill type definition
 export interface SanitySkill {
   _id: string;
   title: string;
-  description?: string; // Make description optional as it might not always exist
+  description?: string; // Optional description field
 }
 
+// Category with related skills
 export interface SanityCategoryWithSkills {
   _id: string;
   title: string;
   skills: SanitySkill[];
 }
 
+// Project type definition from Sanity schema
 export interface SanityProject {
   _id: string;
   title: string;
@@ -43,18 +47,29 @@ export interface SanityProject {
     url: string;
     buttonText: string;
   };
+  projectImages?: {
+    asset: {
+      _ref: string;
+    };
+    alt?: string;
+    title?: string;
+    headline?: string;
+  }[];
   additionalImages?: {
     asset: {
       _ref: string;
     };
     alt?: string;
-    caption?: string;
+    title?: string;
+    headline?: string;
   }[];
   date?: string;
   content?: any; // Rich text content from Sanity
 }
 
-// --- GROQ Queries ---
+// GROQ queries for fetching data from Sanity
+
+// Query to fetch all categories with their related skills
 const categoriesWithSkillsQuery = groq`
   *[_type == "category"] | order(title asc) {
     _id,
@@ -67,6 +82,7 @@ const categoriesWithSkillsQuery = groq`
   }
 `;
 
+// Query to fetch all projects ordered by date
 const projectsQuery = groq`
   *[_type == "project"] | order(date desc) {
     _id,
@@ -78,11 +94,13 @@ const projectsQuery = groq`
     skills[]->{ _id, title },
     githubRepo,
     prototype,
+    projectImages,
     additionalImages,
     date
   }
 `;
 
+// Query to fetch a specific project by its slug
 const projectBySlugQuery = groq`
   *[_type == "project" && slug.current == $slug][0] {
     _id,
@@ -94,23 +112,32 @@ const projectBySlugQuery = groq`
     skills[]->{ _id, title },
     githubRepo,
     prototype,
+    projectImages,
     additionalImages,
     date,
     content
   }
 `;
 
-// --- Fetch Functions ---
+// Helper functions to fetch data from Sanity
+
+/**
+ * Fetches all skill categories with their related skills
+ */
 export async function getCategoriesWithSkills(): Promise<SanityCategoryWithSkills[]> {
-  // Fetch data using the configured client
-  const data = await client.fetch<SanityCategoryWithSkills[]>(categoriesWithSkillsQuery);
-  return data;
+  return await client.fetch<SanityCategoryWithSkills[]>(categoriesWithSkillsQuery);
 }
 
+/**
+ * Fetches all projects ordered by date (newest first)
+ */
 export async function getAllProjects(): Promise<SanityProject[]> {
   return await client.fetch<SanityProject[]>(projectsQuery);
 }
 
+/**
+ * Fetches a specific project by its slug
+ */
 export async function getProjectBySlug(slug: string): Promise<SanityProject | null> {
   return await client.fetch<SanityProject | null>(projectBySlugQuery, { slug });
 }

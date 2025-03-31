@@ -1,22 +1,18 @@
-import { PageLayout } from '@/components/layout';
-import { Container } from '@/components/layout/Container';
-import Hero from '@/components/layout/Hero';
-import { getAllProjects } from '@/sanity/lib/queries';
-import { Card } from '@/components/ui/card';
-import { homePageData } from '@/constants/home';
+import { PageLayout } from "@/components/layout";
+import { Container } from "@/components/layout/Container";
+import Hero from "@/components/layout/Hero";
+import { getAllProjects } from "@/sanity/lib/queries";
+import { Card } from "@/components/ui/card";
+import { homePageData } from "@/constants/home";
 
-/**
- * Home page component that showcases the hero section and featured projects
- */
 export default async function Home() {
-  // Use content from constants file
+  // Load content from constants file
   const content = homePageData;
 
-  // No action buttons needed for the home page
-
-  // Fetch projects data
+  // Fetch all projects for the portfolio grid
   const projects = await getAllProjects();
 
+  // Render home page with hero and projects grid
   return (
     <PageLayout
       // Background media configuration
@@ -29,7 +25,7 @@ export default async function Home() {
       overlayOpacity={content.background.overlayOpacity}
       blurAmount={content.background.blurAmount}
       
-      // Custom hero content
+      // Hero section with title and subtitle
       heroContent={
         <Hero
           title={content.hero.title}
@@ -42,13 +38,12 @@ export default async function Home() {
         />
       }
     >
-      {/* Projects section with ID for anchor linking */}
+      {/* Projects Section */}
       <section id="projects">
         <Container width="full">
-          {/* Projects grid directly without header */}
-
-          {/* Projects grid */}
+          {/* Projects Grid - Portfolio Items */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Map through projects and render cards */}
             {projects.map((project) => (
               <Card
                 key={project._id}

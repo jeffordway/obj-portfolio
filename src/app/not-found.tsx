@@ -1,8 +1,6 @@
-import { NotFoundPage } from '@/components/layout';
+import { NotFoundPage } from "@/components/layout";
 
-/**
- * Root-level 404 page that uses the shared NotFoundPage component
- */
 export default function NotFound() {
+  // Render the shared 404 page component at the root level
   return <NotFoundPage />;
 }

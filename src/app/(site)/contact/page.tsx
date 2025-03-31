@@ -9,16 +9,21 @@ export const metadata = {
 };
 
 export default function ContactPage() {
+  // Render contact page with form and footer
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      {/* Main Content Area */}
       <main className="flex-grow">
         <Container width="narrow" className="pt-16 md:pt-30 pb-16">
+          {/* Contact Header */}
           <Heading>{contactData.title}</Heading>
           <Text className="mt-4 mb-8">{contactData.description}</Text>
 
+          {/* Contact Form Component */}
           <ContactForm />
         </Container>
       </main>
+      {/* Page Footer */}
       <Footer />
     </div>
   );

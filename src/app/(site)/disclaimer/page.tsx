@@ -2,14 +2,14 @@ import { Container, PageLayout } from "@/components/layout";
 import { Heading, Text } from "@/components/ui/typography";
 import Link from "next/link";
 
-/**
- * Disclaimer page component
- */
 export default function DisclaimerPage() {
+  // Render disclaimer page with legal content
   return (
     <PageLayout showHero={false}>
       <Container width="narrow" className="py-24">
+        {/* Disclaimer Content */}
         <article className="prose prose-invert max-w-none">
+          {/* Disclaimer Header */}
           <Heading as="h1" size="xl" className="mb-4">
             Disclaimer
           </Heading>
@@ -20,6 +20,7 @@ export default function DisclaimerPage() {
             Effective Date: March 30, 2025
           </Text>
 
+          {/* General Disclaimer */}
           <div className="space-y-4 mb-8">
             <Text>
               jeffordway.com is owned and operated by Nielsen Ossowski Creative
@@ -39,6 +40,7 @@ export default function DisclaimerPage() {
             </Text>
           </div>
 
+          {/* External Links Section */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             External Links Disclaimer
           </Heading>
@@ -51,6 +53,7 @@ export default function DisclaimerPage() {
             </Text>
           </div>
 
+          {/* Professional Advice Section */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             Professional Advice Disclaimer
           </Heading>
@@ -64,6 +67,7 @@ export default function DisclaimerPage() {
             </Text>
           </div>
 
+          {/* Testimonial Section */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             Testimonial Disclaimer
           </Heading>
@@ -73,6 +77,7 @@ export default function DisclaimerPage() {
             </Text>
           </div>
 
+          {/* Governing Law Section */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             Governing Law
           </Heading>
@@ -83,6 +88,7 @@ export default function DisclaimerPage() {
             </Text>
           </div>
 
+          {/* Contact Information Section */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             Contact for Legal Inquiries
           </Heading>

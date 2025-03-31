@@ -2,14 +2,14 @@ import { Container, PageLayout } from "@/components/layout";
 import { Heading, Text } from "@/components/ui/typography";
 import Link from "next/link";
 
-/**
- * Terms and Conditions page component
- */
 export default function TermsPage() {
+  // Render terms and conditions page with legal content
   return (
     <PageLayout showHero={false}>
       <Container width="narrow" className="py-24">
+        {/* Terms Content */}
         <article className="prose prose-invert max-w-none">
+          {/* Terms Header */}
           <Heading as="h1" size="xl" className="mb-4">
             Terms and Conditions
           </Heading>
@@ -20,6 +20,7 @@ export default function TermsPage() {
             Effective Date: March 30, 2025
           </Text>
 
+          {/* Introduction */}
           <div className="space-y-4 mb-8">
             <Text>
               These Terms and Conditions ("Terms") govern your use of
@@ -31,6 +32,7 @@ export default function TermsPage() {
             </Text>
           </div>
 
+          {/* Section 1: Acceptance */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             1. Acceptance of Terms
           </Heading>
@@ -43,6 +45,7 @@ export default function TermsPage() {
             </Text>
           </div>
 
+          {/* Section 2: Ownership */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             2. Ownership and Operation
           </Heading>
@@ -55,6 +58,7 @@ export default function TermsPage() {
             </Text>
           </div>
 
+          {/* Section 3: Website Usage */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             3. Use of the Website
           </Heading>
@@ -84,6 +88,7 @@ export default function TermsPage() {
             </Text>
           </div>
 
+          {/* Section 4: Intellectual Property */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             4. Intellectual Property
           </Heading>
@@ -98,6 +103,7 @@ export default function TermsPage() {
             </Text>
           </div>
 
+          {/* Section 5: Warranties Disclaimer */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             5. Disclaimer of Warranties
           </Heading>
@@ -121,6 +127,7 @@ export default function TermsPage() {
             <Text>You use the Website at your own risk.</Text>
           </div>
 
+          {/* Section 6: Liability Limitation */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             6. Limitation of Liability
           </Heading>
@@ -148,6 +155,7 @@ export default function TermsPage() {
             </Text>
           </div>
 
+          {/* Section 7: Third-Party Links */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             7. Third-Party Links
           </Heading>
@@ -160,6 +168,7 @@ export default function TermsPage() {
             </Text>
           </div>
 
+          {/* Section 8: User Content */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             8. User-Generated Content
           </Heading>
@@ -173,6 +182,7 @@ export default function TermsPage() {
             </Text>
           </div>
 
+          {/* Section 9: Terms Changes */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             9. Changes to the Terms
           </Heading>
@@ -185,6 +195,7 @@ export default function TermsPage() {
             </Text>
           </div>
 
+          {/* Section 10: Governing Law */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             10. Governing Law
           </Heading>
@@ -197,6 +208,7 @@ export default function TermsPage() {
             </Text>
           </div>
 
+          {/* Section 11: Contact Information */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             11. Contact for Legal Inquiries
           </Heading>

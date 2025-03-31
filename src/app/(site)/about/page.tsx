@@ -5,10 +5,7 @@ import { Heading, Text } from "@/components/ui/typography";
 import { Divider } from "@/components/ui/divider";
 import { BentoImage } from "@/components/ui/image";
 import Image from "next/image";
-import {
-  getCategoriesWithSkills,
-  SanityCategoryWithSkills,
-} from "@/sanity/lib/queries";
+import { getCategoriesWithSkills } from "@/sanity/lib/queries";
 import { Tag } from "@/components/ui/tag";
 import React from "react";
 import {
@@ -24,8 +21,10 @@ export const metadata = {
 };
 
 export default async function AboutPage() {
+  // Fetch all skill categories with their skills
   const categoriesWithSkills = await getCategoriesWithSkills();
 
+  // Define page content structure
   const pageContent = {
     hero: {
       title: "My Journey: From Curveballs to Clarity",
@@ -42,6 +41,7 @@ export default async function AboutPage() {
     },
   };
 
+  // Render about page with hero and content sections
   return (
     <PageLayout
       heroContent={
@@ -64,8 +64,9 @@ export default async function AboutPage() {
     >
       <section id="about">
         <Container width="container">
+          {/* Main Content Grid */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-8">
-            {/* --- Intro Section --- */}
+            {/* Profile Image and Bio Section */}
             <div className="col-span-12 md:col-span-3">
               <div className="relative aspect-square w-full max-w-xs mx-auto md:max-w-none overflow-hidden">
                 <Image
@@ -80,13 +81,13 @@ export default async function AboutPage() {
             </div>
 
             <div className="col-span-12 md:col-span-9">
-              <Heading className="text-3xl md:text-4xl mb-4">{aboutHeaderData.title}</Heading>
-              <Text className="text-lg md:text-xl">
-                {aboutHeaderData.bio}
-              </Text>
+              <Heading className="text-3xl md:text-4xl mb-4">
+                {aboutHeaderData.title}
+              </Heading>
+              <Text className="text-lg md:text-xl">{aboutHeaderData.bio}</Text>
             </div>
 
-            {/* --- Bento Grid Section --- */}
+            {/* Personal Interests Bento Grid */}
             <div className="col-span-12 grid grid-cols-2 md:grid-cols-12 gap-4 md:gap-8 md:h-[32rem]">
               <BentoImage
                 imageSrc="https://images.unsplash.com/photo-1562593028-2e975fe28a0c?q=80&w=4000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -129,9 +130,9 @@ export default async function AboutPage() {
               />
             </div>
 
-            {/* --- Main Content Section (2 Columns) --- */}
+            {/* Main Content - Two Column Layout */}
 
-            {/* Column 1: Mission, Vision, Core Values (span-3) */}
+            {/* Column 1: Mission, Vision, Core Values */}
             <div className="col-span-12 md:col-span-3 order-2 md:order-1">
               <div className="space-y-8">
                 <div>
@@ -160,7 +161,7 @@ export default async function AboutPage() {
 
                 <Divider />
 
-                {/* Core Values Section */}
+                {/* Core Values with Scripture References */}
                 <div>
                   <Heading
                     as="h2"
@@ -208,10 +209,10 @@ export default async function AboutPage() {
               </div>
             </div>
 
-            {/* Column 2: Story and Skills (span-9) */}
+            {/* Column 2: Personal Story and Skills */}
             <div className="col-span-12 md:col-span-9 order-1 md:order-2">
               <div className="space-y-12">
-                {/* My Story Section */}
+                {/* Personal Journey Narrative */}
                 <div>
                   <Heading
                     as="h2"
@@ -268,7 +269,7 @@ export default async function AboutPage() {
 
                 <Divider />
 
-                {/* Skills Section */}
+                {/* Skills by Category */}
                 <div>
                   <Heading
                     as="h2"
@@ -279,6 +280,7 @@ export default async function AboutPage() {
                   </Heading>
                   <div className="space-y-8">
                     {categoriesWithSkills && categoriesWithSkills.length > 0 ? (
+                      // Map through each skill category
                       categoriesWithSkills.map((category) => (
                         <div key={category._id}>
                           <Heading

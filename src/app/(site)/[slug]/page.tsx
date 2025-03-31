@@ -1,10 +1,8 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import { PageLayout } from "@/components/layout";
 import Hero from "@/components/layout/Hero";
 import { Container } from "@/components/layout/Container";
 import { Heading, Text } from "@/components/ui/typography";
-import { Divider } from "@/components/ui/divider";
 import { Tag } from "@/components/ui/tag";
 import {
   getProjectBySlug,
@@ -14,6 +12,8 @@ import { urlFor } from "@/sanity/lib/image";
 import { FaGithub, FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { ButtonVariant } from "@/components/ui/button";
 import { PortableText } from "@/components/ui/portable-text/PortableText";
+import { ProjectImage } from "@/components/ui/image/ProjectImage";
+import { SquareImage } from "@/components/ui/image/SquareImage";
 import {
   projectPageLabels,
   projectMetadata,
@@ -28,12 +28,10 @@ interface ProjectPageProps {
 }
 
 export async function generateMetadata(props: ProjectPageProps) {
-  // Properly await the params object before accessing its properties
   const { params } = props;
   const resolvedParams = await Promise.resolve(params);
   const slug = resolvedParams.slug;
-  
-  // Now fetch the project with the validated slug
+
   const project = await getProjectBySlug(slug);
 
   if (!project) {
@@ -49,13 +47,12 @@ export async function generateMetadata(props: ProjectPageProps) {
   };
 }
 
-export default async function ProjectPage(props: ProjectPageProps) {
-  // Properly await the params object before accessing its properties
-  const { params } = props;
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  // Extract and validate slug parameter
   const resolvedParams = await Promise.resolve(params);
   const slug = resolvedParams.slug;
-  
-  // Fetch both project and categories with skills concurrently
+
+  // Fetch project data and categories concurrently
   const [project, categoriesWithSkills] = await Promise.all([
     getProjectBySlug(slug),
     getCategoriesWithSkills(),
@@ -65,10 +62,9 @@ export default async function ProjectPage(props: ProjectPageProps) {
     notFound();
   }
 
-  // Format the hero image URL
+  // Prepare hero image and action buttons
   const heroImageUrl = urlFor(project.heroImage).width(1920).height(1080).url();
 
-  // Prepare action buttons if GitHub repo or prototype links are enabled
   const actionButtons: Array<{
     text: string;
     url: string;
@@ -77,6 +73,7 @@ export default async function ProjectPage(props: ProjectPageProps) {
     isExternal: boolean;
   }> = [];
 
+  // Add GitHub repository button if enabled
   if (project.githubRepo?.showButton) {
     actionButtons.push({
       text: githubButtonText,
@@ -87,6 +84,7 @@ export default async function ProjectPage(props: ProjectPageProps) {
     });
   }
 
+  // Add prototype/demo button if enabled
   if (project.prototype?.showButton) {
     actionButtons.push({
       text: project.prototype.buttonText || defaultPrototypeButtonText,
@@ -97,6 +95,7 @@ export default async function ProjectPage(props: ProjectPageProps) {
     });
   }
 
+  // Render project page with hero and content sections
   return (
     <PageLayout
       heroContent={
@@ -109,11 +108,11 @@ export default async function ProjectPage(props: ProjectPageProps) {
           direction="column"
         />
       }
-      showBackgroundMedia={true}
+      showBackgroundMedia
       mediaType="image"
       mediaSrc={heroImageUrl}
       mediaOpacity={10}
-      showColoredOverlay={true}
+      showColoredOverlay
       overlayColor="bg-background"
       overlayOpacity={60}
       blurAmount={5}
@@ -131,7 +130,7 @@ export default async function ProjectPage(props: ProjectPageProps) {
                 <div className="space-y-4">
                   {project.categories?.length > 0 ? (
                     project.categories.map((category) => {
-                      // Get skills for this category from the project
+                      // Filter skills for this category
                       const categorySkills =
                         categoriesWithSkills
                           .find((cat) => cat._id === category._id)
@@ -146,7 +145,6 @@ export default async function ProjectPage(props: ProjectPageProps) {
                           <Text
                             weight="medium"
                             size="sm"
-                      
                             className="mb-3 block"
                           >
                             {category.title}
@@ -192,30 +190,43 @@ export default async function ProjectPage(props: ProjectPageProps) {
                 </div>
               </div>
 
-              {/* Additional Images */}
+              {/* Project Images - 16:9 ratio, one per column */}
+              {project.projectImages && project.projectImages.length > 0 && (
+                <div>
+                  <div className="grid grid-cols-1 gap-8">
+                    {project.projectImages.map((image, index) => (
+                      <ProjectImage
+                        key={index}
+                        imageSrc={urlFor(image).width(1200).height(675).url()}
+                        imageAlt={image.alt || `Project image ${index + 1}`}
+                        title={image.title}
+                        headline={image.headline}
+                        className="w-full"
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Additional Images - 1:1 ratio, two per column */}
               {project.additionalImages &&
                 project.additionalImages.length > 0 && (
-                  <>
-                    <Divider />
-
-                    <div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {project.additionalImages.map((image, index) => (
-                          <div key={index} className="space-y-2">
-                            <div className="relative aspect-video w-full overflow-hidden">
-                              <Image
-                                src={urlFor(image).width(800).height(450).url()}
-                                alt={image.alt || `Project image ${index + 1}`}
-                                fill
-                                sizes="(max-width: 768px) 100vw, 50vw"
-                                className="object-cover"
-                              />
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+                  <div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      {project.additionalImages.map((image, index) => (
+                        <SquareImage
+                          key={index}
+                          imageSrc={urlFor(image).width(600).height(600).url()}
+                          imageAlt={
+                            image.alt || `Additional image ${index + 1}`
+                          }
+                          title={image.title}
+                          headline={image.headline}
+                          className="w-full"
+                        />
+                      ))}
                     </div>
-                  </>
+                  </div>
                 )}
             </div>
           </div>

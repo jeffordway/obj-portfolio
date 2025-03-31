@@ -1,9 +1,6 @@
-import { NotFoundPage } from '@/components/layout';
+import { NotFoundPage } from "@/components/layout";
 
-/**
- * Site-specific 404 page that uses the shared NotFoundPage component
- * This maintains the (site) route group layout while using the same content
- */
 export default function NotFound() {
+  // Render the shared 404 page component within the site layout
   return <NotFoundPage />;
 }

@@ -2,14 +2,14 @@ import { Container, PageLayout } from "@/components/layout";
 import { Heading, Text } from "@/components/ui/typography";
 import Link from "next/link";
 
-/**
- * Privacy Policy page component
- */
 export default function PrivacyPolicyPage() {
+  // Render privacy policy page with legal content
   return (
     <PageLayout showHero={false}>
       <Container width="narrow" className="py-24">
+        {/* Policy Content */}
         <article className="prose prose-invert max-w-none">
+          {/* Policy Header */}
           <Heading as="h1" size="xl" className="mb-4">
             Privacy Policy
           </Heading>
@@ -20,6 +20,7 @@ export default function PrivacyPolicyPage() {
             Effective Date: March 30, 2025
           </Text>
 
+          {/* Introduction */}
           <div className="space-y-4 mb-8">
             <Text>
               This Privacy Policy outlines how Nielsen Ossowski Creative LLC
@@ -42,7 +43,9 @@ export default function PrivacyPolicyPage() {
             </Text>
           </div>
 
+          {/* Policy Sections */}
           <ol className="list-decimal pl-5 space-y-8 mb-8">
+            {/* Section 1: Information Collection */}
             <li>
               <Heading as="h2" size="lg" className="mt-4 mb-4">
                 How We Collect Your Information
@@ -87,6 +90,7 @@ export default function PrivacyPolicyPage() {
               </div>
             </li>
 
+            {/* Section 2: Information Usage */}
             <li>
               <Heading as="h2" size="lg" className="mt-4 mb-4">
                 How We Use Your Information
@@ -126,6 +130,7 @@ export default function PrivacyPolicyPage() {
               </div>
             </li>
 
+            {/* Section 3: Information Sharing */}
             <li>
               <Heading as="h2" size="lg" className="mt-4 mb-4">
                 How We Share Your Information
@@ -166,6 +171,7 @@ export default function PrivacyPolicyPage() {
               </div>
             </li>
 
+            {/* Section 4: User Rights */}
             <li>
               <Heading as="h2" size="lg" className="mt-4 mb-4">
                 Your Rights
@@ -224,6 +230,7 @@ export default function PrivacyPolicyPage() {
               </div>
             </li>
 
+            {/* Section 5: Cookies */}
             <li>
               <Heading as="h2" size="lg" className="mt-4 mb-4">
                 Cookies and Tracking Technologies
@@ -244,6 +251,7 @@ export default function PrivacyPolicyPage() {
               </div>
             </li>
 
+            {/* Section 6: Security */}
             <li>
               <Heading as="h2" size="lg" className="mt-4 mb-4">
                 Security
@@ -259,6 +267,7 @@ export default function PrivacyPolicyPage() {
               </div>
             </li>
 
+            {/* Section 7: Third-Party Links */}
             <li>
               <Heading as="h2" size="lg" className="mt-4 mb-4">
                 Third-Party Links
@@ -274,6 +283,7 @@ export default function PrivacyPolicyPage() {
               </div>
             </li>
 
+            {/* Section 8: Children's Privacy */}
             <li>
               <Heading as="h2" size="lg" className="mt-4 mb-4">
                 Children's Privacy
@@ -287,6 +297,7 @@ export default function PrivacyPolicyPage() {
               </div>
             </li>
 
+            {/* Section 9: Policy Changes */}
             <li>
               <Heading as="h2" size="lg" className="mt-4 mb-4">
                 Changes to This Privacy Policy
@@ -302,6 +313,7 @@ export default function PrivacyPolicyPage() {
               </div>
             </li>
 
+            {/* Section 10: Contact Information */}
             <li>
               <Heading as="h2" size="lg" className="mt-4 mb-4">
                 Contact Us

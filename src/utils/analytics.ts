@@ -1,78 +1,90 @@
-import { hasAnalyticsConsent } from './state';
+/**
+ * Analytics Utilities
+ * 
+ * This file contains utilities for Google Analytics integration,
+ * including initialization, page view tracking, and event tracking.
+ */
 
-// Google Analytics Measurement ID
-const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // Replace with your actual GA ID
+// Google Analytics Measurement ID from environment variables
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
 
-// Initialize Google Analytics
+/**
+ * Initialize Google Analytics
+ * Sets up GA script and configures consent mode and privacy settings
+ */
 export const initGA = () => {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined" || !GA_MEASUREMENT_ID) return;
   
   // Check if GA script is already loaded
-  if (!window.gtag) {
+  if (typeof window.gtag !== "function") {
     // Add the GA script
-    const script = document.createElement('script');
+    const script = document.createElement("script");
     script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
     script.async = true;
     document.head.appendChild(script);
     
-    // Initialize gtag
+    // Initialize dataLayer and gtag function
+    // @ts-ignore - gtag is a valid property but TypeScript doesn't recognize it
+    window.dataLayer = window.dataLayer || [];
+    // @ts-ignore - gtag is a valid property but TypeScript doesn't recognize it
     window.gtag = function() {
-      // @ts-ignore
-      window.dataLayer = window.dataLayer || [];
-      // @ts-ignore
+      // @ts-ignore - dataLayer is a valid property but TypeScript doesn't recognize it
       window.dataLayer.push(arguments);
     };
     
     // Set the initial timestamp
-    // @ts-ignore - 'js' is a valid gtag command but TypeScript doesn't recognize it
-    window.gtag('js', new Date());
+    // @ts-ignore - gtag is a valid property but TypeScript doesn't recognize it
+    window.gtag("js", new Date());
   }
   
-  // Set default consent to 'denied' until user provides consent
-  window.gtag('consent', 'default', {
-    'analytics_storage': 'denied',
-    'ad_storage': 'denied',
-    'functionality_storage': 'denied',
-    'personalization_storage': 'denied',
-    'security_storage': 'granted', // Always grant security storage
+  // Configure Google Consent Mode v2 with default settings
+  // CookieYes will update these settings based on user consent
+  // @ts-ignore - gtag is a valid property but TypeScript doesn't recognize it
+  window.gtag("consent", "default", {
+    "analytics_storage": "denied",
+    "ad_storage": "denied",
+    "functionality_storage": "denied",
+    "personalization_storage": "denied",
+    "security_storage": "granted", // Always grant security storage
+    "wait_for_update": 500 // Wait for CookieYes to update consent
   });
   
-  // Check if user has already given consent
-  if (hasAnalyticsConsent()) {
-    window.gtag('consent', 'update', {
-      'analytics_storage': 'granted',
-      'functionality_storage': 'granted',
-      'personalization_storage': 'granted',
-    });
-  }
-  
-  // Configure GA with anonymized IP
-  window.gtag('config', GA_MEASUREMENT_ID, {
+  // Configure GA4 with privacy settings
+  // @ts-ignore - gtag is a valid property but TypeScript doesn't recognize it
+  window.gtag("config", GA_MEASUREMENT_ID, {
     anonymize_ip: true,
-    send_page_view: false, // We'll handle page views manually
+    send_page_view: false, // We'll handle page views manually for better control
   });
 };
 
-// Track page views
+/**
+ * Track page views in Google Analytics
+ * @param url - The URL path to track
+ */
 export const pageview = (url: string) => {
-  if (typeof window === 'undefined' || !hasAnalyticsConsent()) return;
+  if (typeof window === "undefined" || typeof window.gtag !== "function") return;
   
-  window.gtag('event', 'page_view', {
+  // @ts-ignore - gtag is a valid property but TypeScript doesn't recognize it
+  window.gtag("event", "page_view", {
     page_path: url,
     send_to: GA_MEASUREMENT_ID,
   });
 };
 
-// Track events
+/**
+ * Track custom events in Google Analytics
+ * @param params - Event parameters including action, category, optional label and value
+ */
 export const event = ({ action, category, label, value }: {
   action: string;
   category: string;
   label?: string;
   value?: number;
 }) => {
-  if (typeof window === 'undefined' || !hasAnalyticsConsent()) return;
+  if (typeof window === "undefined" || typeof window.gtag !== "function") return;
   
-  window.gtag('event', action, {
+  // @ts-ignore - gtag is a valid property but TypeScript doesn't recognize it
+  window.gtag("event", action, {
     event_category: category,
     event_label: label,
     value: value,

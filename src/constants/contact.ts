@@ -1,32 +1,21 @@
-/**
- * Contact page constants
- */
+// Contact page constants
 
+// Contact data interface
 export interface ContactData {
-  /**
-   * Page title
-   */
+  // Page title
   title: string;
   
-  /**
-   * Page description
-   */
+  // Page description
   description: string;
   
-  /**
-   * Meta title for SEO
-   */
+  // Meta title for SEO
   metaTitle: string;
   
-  /**
-   * Meta description for SEO
-   */
+  // Meta description for SEO
   metaDescription: string;
 }
 
-/**
- * Contact page data
- */
+// Contact page data
 export const contactData: ContactData = {
   title: "Get in Touch",
   description: "Have a question or want to chat? Fill out the form below and I'll get back to you as soon as possible.",

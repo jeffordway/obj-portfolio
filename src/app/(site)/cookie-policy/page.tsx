@@ -3,14 +3,14 @@ import { Heading, Text } from "@/components/ui/typography";
 import { CookieSettingsButton } from "@/components/cookie";
 import Link from "next/link";
 
-/**
- * Cookie Policy page component
- */
 export default function CookiePolicyPage() {
+  // Render cookie policy page with legal content
   return (
     <PageLayout showHero={false}>
       <Container width="narrow" className="py-24">
+        {/* Policy Content */}
         <article className="prose prose-invert max-w-none">
+          {/* Policy Header */}
           <Heading as="h1" size="xl" className="mb-4">
             Cookie Policy
           </Heading>
@@ -21,6 +21,7 @@ export default function CookiePolicyPage() {
             Last Updated: March 30, 2025
           </Text>
 
+          {/* Introduction */}
           <div className="space-y-4 mb-8">
             <Text>
               This Cookie Policy explains how Nielsen Ossowski Creative LLC
@@ -31,6 +32,7 @@ export default function CookiePolicyPage() {
             </Text>
           </div>
 
+          {/* What Are Cookies Section */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             What Are Cookies?
           </Heading>
@@ -43,6 +45,7 @@ export default function CookiePolicyPage() {
             </Text>
           </div>
 
+          {/* How We Use Cookies Section */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             How We Use Cookies
           </Heading>
@@ -68,6 +71,7 @@ export default function CookiePolicyPage() {
             </Text>
           </div>
 
+          {/* Types of Cookies Section */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             Types of Cookies We Use
           </Heading>
@@ -104,6 +108,7 @@ export default function CookiePolicyPage() {
             <div className="cky-audit-table-element"></div>
           </div>
 
+          {/* Managing Cookie Preferences Section */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             Managing Cookie Preferences
           </Heading>
@@ -177,6 +182,7 @@ export default function CookiePolicyPage() {
             </Text>
           </div>
 
+          {/* Policy Changes Section */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             Changes to This Cookie Policy
           </Heading>
@@ -190,6 +196,7 @@ export default function CookiePolicyPage() {
             </Text>
           </div>
 
+          {/* Contact Information Section */}
           <Heading as="h2" size="lg" className="mt-8 mb-4">
             Contact Us
           </Heading>

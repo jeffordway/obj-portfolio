@@ -1,14 +1,11 @@
-import { Container } from '@/components/layout';
-import { Heading, Text } from '@/components/ui/typography';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import Image from 'next/image';
+import { Container } from "@/components/layout";
+import { Heading, Text } from "@/components/ui/typography";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
-/**
- * Shared 404 Not Found page component
- * Can be used at both root level and within route groups
- */
 export function NotFoundPage() {
+  // Render 404 page with background image and content
   return (
     <div className="min-h-screen relative flex items-center justify-center text-center">
       {/* Background image with overlay */}

@@ -3,16 +3,13 @@
  */
 
 // Navigation constants
-export * from './navigation';
+export * from "./navigation";
 
 // Social media constants
-export * from './social';
+export * from "./social";
 
 // Metadata constants
-export * from './metadata';
+export * from "./metadata";
 
 // Font constants
-export * from './fonts';
-
-// Project data
-export * from './projects';
+export * from "./fonts";

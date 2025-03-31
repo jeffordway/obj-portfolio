@@ -1,15 +1,11 @@
-/**
- * Social link type with icon identifier
- */
+// Social link type with icon identifier
 export interface SocialLink {
   name: string;
   href: string;
-  iconName: 'github' | 'linkedin' | 'twitter';
+  iconName: "github" | "linkedin" | "twitter";
 }
 
-/**
- * Social media links used across the site
- */
+// Social media links used across the site
 export const socialLinks: SocialLink[] = [
   {
     name: "GitHub",
