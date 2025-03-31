@@ -1,6 +1,7 @@
 import React from "react";
 import { Heading } from "./Heading";
 import { Text } from "./Text";
+import { SafeText } from "./SafeText";
 
 export const TypographyExample: React.FC = () => {
   return (
@@ -103,9 +104,9 @@ export const TypographyExample: React.FC = () => {
             Small Text - Useful for secondary information, captions, or when space is limited but legibility is still important.
           </Text>
           
-          <Text size="xs">
-            Extra Small Text - Best for legal text, footnotes, or other supplementary content that doesn't need to be prominent.
-          </Text>
+          <SafeText as="p" className="text-xs">
+            Extra Small Text - Best for legal text, footnotes, or other supplementary content that doesn&apos;t need to be prominent.
+          </SafeText>
         </div>
       </section>
 

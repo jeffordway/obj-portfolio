@@ -63,7 +63,7 @@ export default function DisclaimerPage() {
               advice, including but not limited to legal, financial, or medical
               guidance. It should not substitute for consultation with qualified
               professionals. Nielsen Ossowski Creative LLC is not responsible for
-              actions taken based on this website's content.
+              actions taken based on this website&apos;s content.
             </Text>
           </div>
 

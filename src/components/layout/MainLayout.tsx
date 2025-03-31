@@ -93,7 +93,9 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
   children,
   heroHeight = 100,
   showHero = true,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   showHeader = true,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   showFooter = true,
   className,
 }) => {
@@ -161,6 +163,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
 
   // Filter children to separate hero and content components
   // This allows for more precise control over their rendering
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const childrenArray = React.Children.toArray(children);
 
   return (

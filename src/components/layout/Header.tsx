@@ -38,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({
   className,
 }: HeaderProps) => {
   // Get scroll context
-  const { scrollY, isPastHero } = useScroll();
+  const { scrollY } = useScroll();
 
   // Determine if header should be transparent or solid
   // Only make the header solid when we've scrolled past a certain threshold

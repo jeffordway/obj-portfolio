@@ -25,9 +25,9 @@ export default function CookiePolicyPage() {
           <div className="space-y-4 mb-8">
             <Text>
               This Cookie Policy explains how Nielsen Ossowski Creative LLC
-              ("we," "us," or "our"), a Florida-based limited liability company,
+              (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;), a Florida-based limited liability company,
               uses cookies and similar technologies on our website,
-              jeffordway.com (the "Website"). By using the Website, you consent
+              jeffordway.com (the &quot;Website&quot;). By using the Website, you consent
               to our use of cookies as described in this policy.
             </Text>
           </div>
@@ -115,7 +115,7 @@ export default function CookiePolicyPage() {
           <div className="space-y-4 mb-8">
             <Text>
               You can manage your cookie preferences at any time through our
-              cookie consent tool, accessible via the "Cookie Settings" button
+              cookie consent tool, accessible via the &quot;Cookie Settings&quot; button
               on the Website. This tool allows you to accept or reject
               non-essential cookies.
             </Text>
@@ -178,7 +178,7 @@ export default function CookiePolicyPage() {
             <Text>
               If you use a different browser, please refer to its official
               support documentation. Be aware that disabling cookies may impact
-              the Website's functionality.
+              the Website&apos;s functionality.
             </Text>
           </div>
 
@@ -189,8 +189,8 @@ export default function CookiePolicyPage() {
           <div className="space-y-4 mb-8">
             <Text>
               We may update this Cookie Policy from time to time to reflect
-              changes in our practices or legal requirements. The "Last
-              Updated" date at the top of this page indicates when the policy
+              changes in our practices or legal requirements. The &quot;Last
+              Updated&quot; date at the top of this page indicates when the policy
               was last revised. We encourage you to review this policy
               periodically to stay informed.
             </Text>

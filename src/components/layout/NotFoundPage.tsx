@@ -1,5 +1,6 @@
 import { Container } from "@/components/layout";
-import { Heading, Text } from "@/components/ui/typography";
+import { Heading } from "@/components/ui/typography";
+import { SafeText } from "@/components/ui/typography/SafeText";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -41,14 +42,12 @@ export function NotFoundPage() {
           </Heading>
           
           {/* Error message */}
-          <Text 
-            size="3xl" 
-            align="center" 
-            leading="relaxed"
-            className="max-w-3xl mx-auto"
+          <SafeText 
+            className="text-3xl text-center leading-relaxed max-w-3xl mx-auto"
+            as="p"
           >
-            Oops! The page you were looking for doesn't seem to exist.
-          </Text>
+            Oops! The page you were looking for doesn&apos;t seem to exist.
+          </SafeText>
           
           {/* Navigation button */}
           <div className="flex flex-wrap gap-4 justify-center mt-2 z-50 relative pointer-events-auto">

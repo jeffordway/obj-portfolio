@@ -2,7 +2,7 @@ import React from "react";
 import {
   PortableText as BasePortableText,
   PortableTextReactComponents,
-  PortableTextComponentProps,
+  PortableTextBlock,
 } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
 import { Text, Heading } from "@/components/ui/typography";
@@ -79,18 +79,26 @@ const components: Partial<PortableTextReactComponents> = {
     },
   },
   types: {
-    image: ({ value }) => {
+    image: ({ value, index }) => {
       if (!value?.asset?._ref) {
         return null;
       }
+      
+      // Get optimized image dimensions
+      const imageWidth = value.width || 800;
+      const imageHeight = value.height || 500;
+      
       return (
         <div className="my-6 relative w-full h-auto rounded-lg overflow-hidden">
           <Image
             src={urlFor(value).url()}
             alt={value.alt || ""}
-            width={800}
-            height={500}
+            width={imageWidth}
+            height={imageHeight}
+            priority={index === 0} // Add priority loading for first image
+            loading={index === 0 ? "eager" : "lazy"}
             className="w-full h-auto object-cover rounded-lg"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 75vw, 800px"
           />
           {value.caption && (
             <div className="mt-2 text-sm text-foreground/60 italic">
@@ -110,8 +118,9 @@ const components: Partial<PortableTextReactComponents> = {
 export interface PortableTextProps {
   /**
    * Portable Text content from Sanity to be rendered
+   * Using a specific type for Portable Text blocks
    */
-  value: any;
+  value: PortableTextBlock | PortableTextBlock[];
   /**
    * Optional additional CSS classes
    */

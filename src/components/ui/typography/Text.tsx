@@ -138,6 +138,43 @@ export const Text: React.FC<TextProps> = ({
     loose: "leading-relaxed sm:leading-loose",
   };
 
+  // Process children to escape special characters if it's a string
+  const processContent = () => {
+    if (typeof children === 'string') {
+      // Replace apostrophes and quotes with their HTML entity equivalents
+      const processedText = children
+        .replace(/'/g, '&#39;')
+        .replace(/"/g, '&#34;');
+      
+      return processedText;
+    }
+    
+    return children;
+  };
+
+  // If children is a string, use dangerouslySetInnerHTML to render the escaped content
+  if (typeof children === 'string') {
+    return (
+      <Component
+        className={clsx(
+          sizeStyles[size],
+          weightStyles[weight],
+          alignStyles[align],
+          leadingStyles[leading],
+          muted && getMutedTextClass(),
+          truncate && "truncate",
+          "max-w-full", // Ensure text doesn't overflow container
+          "break-words", // Allow long words to break
+          !fullWidth && "md:max-w-full", // Better reading width on medium screens and up
+          className
+        )}
+        dangerouslySetInnerHTML={{ __html: processContent() as string }}
+        {...props}
+      />
+    );
+  }
+  
+  // If children is not a string (e.g., a React element), render normally
   return (
     <Component
       className={clsx(

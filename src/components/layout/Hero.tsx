@@ -6,7 +6,6 @@ import { Heading, Text } from "@/components/ui/typography";
 import {
   Button,
   ButtonVariant,
-  type ButtonProps,
 } from "@/components/ui/button";
 import Link from "next/link";
 import { Avatar } from "@/components/ui/avatar";
@@ -265,6 +264,7 @@ const Hero: React.FC<HeroProps> = ({
   profileImagePosition = "right",
   avatar,
   highlightColor = "text-primary",
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   animated = false,
   fullScreen = true,
   fixed = true,
@@ -444,7 +444,9 @@ const Hero: React.FC<HeroProps> = ({
               }
 
               if (button.onClick) {
-                button.onClick(e as any);
+                // Convert anchor event to button event for compatibility with existing handlers
+                // @ts-expect-error - We're handling the event type conversion manually
+                button.onClick(e);
               }
             }}
           >

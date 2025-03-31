@@ -23,9 +23,9 @@ export default function TermsPage() {
           {/* Introduction */}
           <div className="space-y-4 mb-8">
             <Text>
-              These Terms and Conditions ("Terms") govern your use of
-              jeffordway.com (the "Website"), which is owned and operated by
-              Nielsen Ossowski Creative LLC ("we," "us," or "our"), a limited
+              These Terms and Conditions (&quot;Terms&quot;) govern your use of
+              jeffordway.com (the &quot;Website&quot;), which is owned and operated by
+              Nielsen Ossowski Creative LLC (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;), a limited
               liability company registered in the State of Florida. By accessing
               or using this Website, you agree to be bound by these Terms. If
               you do not agree, please refrain from using the Website.
@@ -76,7 +76,7 @@ export default function TermsPage() {
                 <Text>Impersonating individuals or entities.</Text>
               </li>
               <li>
-                <Text>Disrupting the Website's functionality or security.</Text>
+                <Text>Disrupting the Website&apos;s functionality or security.</Text>
               </li>
               <li>
                 <Text>Transmitting harmful code, such as viruses or malware.</Text>
@@ -109,8 +109,8 @@ export default function TermsPage() {
           </Heading>
           <div className="space-y-4 mb-8">
             <Text>
-              The Website and its content are provided "as is" and "as
-              available," without any warranties, whether express or implied.
+              The Website and its content are provided &quot;as is&quot; and &quot;as
+              available,&quot; without any warranties, whether express or implied.
               Nielsen Ossowski Creative LLC disclaims all warranties, including:
             </Text>
             <ul className="list-disc pl-5 space-y-2">
@@ -150,7 +150,7 @@ export default function TermsPage() {
               </li>
             </ul>
             <Text>
-              This applies even if we've been notified of the potential for such
+              This applies even if we&apos;ve been notified of the potential for such
               damages.
             </Text>
           </div>
@@ -189,7 +189,7 @@ export default function TermsPage() {
           <div className="space-y-4 mb-8">
             <Text>
               We may update these Terms at any time. Changes will be posted here
-              with an updated "Last Updated" date. Your continued use of the
+              with an updated &quot;Last Updated&quot; date. Your continued use of the
               Website after such changes indicates your acceptance of the
               revised Terms.
             </Text>

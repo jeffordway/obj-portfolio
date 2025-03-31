@@ -21,16 +21,22 @@ import {
   defaultPrototypeButtonText,
 } from "@/constants/project";
 
-interface ProjectPageProps {
-  params: {
-    slug: string;
-  };
-}
+import type { Metadata } from 'next';
 
-export async function generateMetadata(props: ProjectPageProps) {
-  const { params } = props;
-  const resolvedParams = await Promise.resolve(params);
-  const slug = resolvedParams.slug;
+// Define the correct types for Next.js 15 App Router page props
+type ProjectParams = {
+  slug: string;
+};
+
+type ProjectPageProps = {
+  params: Promise<ProjectParams>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata(
+  { params }: ProjectPageProps
+): Promise<Metadata> {
+  const { slug } = await params;
 
   const project = await getProjectBySlug(slug);
 
@@ -48,9 +54,8 @@ export async function generateMetadata(props: ProjectPageProps) {
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-  // Extract and validate slug parameter
-  const resolvedParams = await Promise.resolve(params);
-  const slug = resolvedParams.slug;
+  // Extract slug parameter
+  const { slug } = await params;
 
   // Fetch project data and categories concurrently
   const [project, categoriesWithSkills] = await Promise.all([

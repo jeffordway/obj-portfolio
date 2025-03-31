@@ -24,22 +24,21 @@ export const initGA = () => {
     document.head.appendChild(script);
     
     // Initialize dataLayer and gtag function
-    // @ts-ignore - gtag is a valid property but TypeScript doesn't recognize it
+    // Initialize dataLayer and gtag function
     window.dataLayer = window.dataLayer || [];
-    // @ts-ignore - gtag is a valid property but TypeScript doesn't recognize it
-    window.gtag = function() {
-      // @ts-ignore - dataLayer is a valid property but TypeScript doesn't recognize it
-      window.dataLayer.push(arguments);
+    window.gtag = function(...args: [string, string | Date, Record<string, unknown>?]) {
+      // Use rest parameters instead of arguments object
+      window.dataLayer.push(args);
     };
     
     // Set the initial timestamp
-    // @ts-ignore - gtag is a valid property but TypeScript doesn't recognize it
+    // Set the initial timestamp
     window.gtag("js", new Date());
   }
   
   // Configure Google Consent Mode v2 with default settings
   // CookieYes will update these settings based on user consent
-  // @ts-ignore - gtag is a valid property but TypeScript doesn't recognize it
+  // Configure consent mode
   window.gtag("consent", "default", {
     "analytics_storage": "denied",
     "ad_storage": "denied",
@@ -50,7 +49,7 @@ export const initGA = () => {
   });
   
   // Configure GA4 with privacy settings
-  // @ts-ignore - gtag is a valid property but TypeScript doesn't recognize it
+  // Configure Google Analytics
   window.gtag("config", GA_MEASUREMENT_ID, {
     anonymize_ip: true,
     send_page_view: false, // We'll handle page views manually for better control
@@ -64,7 +63,7 @@ export const initGA = () => {
 export const pageview = (url: string) => {
   if (typeof window === "undefined" || typeof window.gtag !== "function") return;
   
-  // @ts-ignore - gtag is a valid property but TypeScript doesn't recognize it
+  // Track page view
   window.gtag("event", "page_view", {
     page_path: url,
     send_to: GA_MEASUREMENT_ID,
@@ -83,7 +82,7 @@ export const event = ({ action, category, label, value }: {
 }) => {
   if (typeof window === "undefined" || typeof window.gtag !== "function") return;
   
-  // @ts-ignore - gtag is a valid property but TypeScript doesn't recognize it
+  // Track custom event
   window.gtag("event", action, {
     event_category: category,
     event_label: label,

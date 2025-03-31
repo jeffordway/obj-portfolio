@@ -10,11 +10,22 @@
  * Enables proper typing for Google Analytics tracking functions
  */
 interface Window {
-  gtag: (
-    command: "consent" | "config" | "event" | "set",
-    target: string,
-    config?: {
-      [key: string]: any;
-    }
-  ) => void;
+  /**
+   * Google Analytics data layer array
+   */
+  dataLayer: unknown[];
+
+  /**
+   * Google Analytics gtag function
+   */
+  gtag: {
+    // Function overloads to handle different command types
+    (command: "js", timestamp: Date): void;
+    (command: "consent" | "config" | "event" | "set", 
+     target: string,
+     config?: {
+       [key: string]: string | number | boolean | null | undefined | Record<string, unknown>;
+     }
+    ): void;
+  };
 }

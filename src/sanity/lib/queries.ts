@@ -1,4 +1,5 @@
 import { groq } from "next-sanity";
+import { PortableTextBlock } from "@portabletext/react";
 import { client } from "./client";
 
 // Type definitions for Sanity content schemas
@@ -64,7 +65,10 @@ export interface SanityProject {
     headline?: string;
   }[];
   date?: string;
-  content?: any; // Rich text content from Sanity
+  /**
+   * Rich text content from Sanity as Portable Text blocks
+   */
+  content?: PortableTextBlock[];
 }
 
 // GROQ queries for fetching data from Sanity

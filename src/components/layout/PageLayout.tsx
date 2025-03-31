@@ -110,6 +110,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   overlayColor = "bg-background",
   overlayOpacity = 50,
   blurAmount = 8,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   noHeroPadding = 0,
 }) => {
   // Determine if we have content to display

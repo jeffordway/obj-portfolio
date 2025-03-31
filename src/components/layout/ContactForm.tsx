@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Input, Textarea } from "@/components/ui/form";
 import Button from "@/components/ui/button/Button";
+import { SafeText } from "@/components/ui/typography/SafeText";
 import { clsx } from "clsx";
 import { z } from "zod";
 
@@ -185,7 +186,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
             </svg>
           </div>
           <h3 className="text-xl font-medium text-foreground mb-2">Message Sent!</h3>
-          <p className="text-muted mb-6">Thank you for reaching out. I'll get back to you as soon as possible.</p>
+          <SafeText as="p" className="text-muted mb-6">Thank you for reaching out. I&apos;ll get back to you as soon as possible.</SafeText>
           <Button 
             onClick={() => setStatus('idle')}
             variant="outline"

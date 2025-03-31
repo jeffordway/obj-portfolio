@@ -25,7 +25,7 @@ export default function ClientProviders({ children }: ClientProvidersProps) {
   React.useEffect(() => {
     // Suppress warnings from browser extensions that modify the DOM
     const originalConsoleError = console.error;
-    console.error = (...args: any[]) => {
+    console.error = (...args: unknown[]) => {
       if (
         typeof args[0] === "string" &&
         args[0].includes("Warning: Prop `%s` did not match") &&

@@ -24,10 +24,10 @@ export default function PrivacyPolicyPage() {
           <div className="space-y-4 mb-8">
             <Text>
               This Privacy Policy outlines how Nielsen Ossowski Creative LLC
-              ("we," "us," or "our"), a limited liability company registered in
+              (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;), a limited liability company registered in
               the State of Florida, collects, uses, and discloses your
               information when you access or use our website, jeffordway.com
-              (the "Service" or "Website"). By using the Service, you consent to
+              (the &quot;Service&quot; or &quot;Website&quot;). By using the Service, you consent to
               the collection, use, and disclosure of your information as
               described in this Privacy Policy. If you do not agree, please
               refrain from accessing or using the Service.
@@ -35,7 +35,7 @@ export default function PrivacyPolicyPage() {
 
             <Text>
               We may update this Privacy Policy periodically. The revised policy
-              will be posted on the Website with an updated "Last Updated" date.
+              will be posted on the Website with an updated &quot;Last Updated&quot; date.
               Significant changes will take effect 180 days after posting, and
               your continued use of the Service thereafter signifies your
               acceptance of the revised terms. We recommend reviewing this page
@@ -111,7 +111,7 @@ export default function PrivacyPolicyPage() {
                   <li>
                     <Text>
                       <strong>Administrative Purposes:</strong> To respond to
-                      inquiries, manage requests, and improve the Service's
+                      inquiries, manage requests, and improve the Service&apos;s
                       functionality.
                     </Text>
                   </li>
@@ -286,7 +286,7 @@ export default function PrivacyPolicyPage() {
             {/* Section 8: Children's Privacy */}
             <li>
               <Heading as="h2" size="lg" className="mt-4 mb-4">
-                Children's Privacy
+                Children&apos;s Privacy
               </Heading>
               <div className="space-y-4">
                 <Text>

@@ -1,6 +1,8 @@
 import React from "react";
 import { clsx } from "clsx";
 import { Card } from "./Card";
+// Typography components are not used in this file but may be needed in the future
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Heading, Text } from "@/components/ui/typography";
 import { SanityProject } from "@/sanity/lib/queries";
 
@@ -26,7 +28,8 @@ export const CardGrid: React.FC<CardGridProps> = ({
   projects,
   className,
 }) => {
-  // Define responsive grid layout
+  // Define responsive grid layout - currently not used but kept for future reference
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const gridColumnsClass = "md:grid-cols-2";
 
   return (

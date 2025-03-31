@@ -141,6 +141,42 @@ export const Heading: React.FC<HeadingProps> = ({
     ? "bg-gradient-to-r from-accent to-foreground bg-clip-text text-transparent"
     : "";
 
+  // Process children to escape special characters if it's a string
+  const processContent = () => {
+    if (typeof children === 'string') {
+      // Replace apostrophes and quotes with their HTML entity equivalents
+      const processedText = children
+        .replace(/'/g, '&#39;')
+        .replace(/"/g, '&#34;');
+      
+      return processedText;
+    }
+    
+    return children;
+  };
+
+  // If children is a string, use dangerouslySetInnerHTML to render the escaped content
+  if (typeof children === 'string') {
+    return (
+      <Component
+        className={clsx(
+          sizeStyles[size],
+          weightStyles[weight],
+          trackingStyles[tracking],
+          muted && getMutedTextClass(),
+          truncate && "truncate",
+          gradientStyles,
+          "max-w-full", // Ensure text doesn't overflow container
+          "break-words", // Allow long words to break
+          className
+        )}
+        dangerouslySetInnerHTML={{ __html: processContent() as string }}
+        {...props}
+      />
+    );
+  }
+  
+  // If children is not a string (e.g., a React element), render normally
   return (
     <Component
       className={clsx(

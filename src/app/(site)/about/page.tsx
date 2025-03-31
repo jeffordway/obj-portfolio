@@ -223,16 +223,16 @@ export default async function AboutPage() {
                   </Heading>
                   <div className="space-y-4 text-base">
                     <Text>
-                      Picture this: I'm knee-deep in the chaos of the Parks and
+                      Picture this: I&apos;m knee-deep in the chaos of the Parks and
                       Recreation office, juggling event schedules. Suddenly, the
                       door slams open, and a wild-eyed woman charges in,
-                      thrusting a goose at me. "It swallowed a bunch of
-                      marbles!" she yells. The bird is a bundle of
+                      thrusting a goose at me. &quot;It swallowed a bunch of
+                      marbles!&quot; she yells. The bird is a bundle of
                       chaos—feathers ruffled, beady eyes glaring. Papers
-                      scatter, coworkers gawk, and I'm wrestling with this
-                      honking disaster until Fish & Wildlife arrives. It's
-                      absurd, and I can't help but laugh. That ridiculous moment
-                      taught me that resilience isn't just about grit; it's
+                      scatter, coworkers gawk, and I&apos;m wrestling with this
+                      honking disaster until Fish &amp; Wildlife arrives. It&apos;s
+                      absurd, and I can&apos;t help but laugh. That ridiculous moment
+                      taught me that resilience isn&apos;t just about grit; it&apos;s
                       about trusting God when life turns into a sitcom gone
                       wrong.
                     </Text>
@@ -248,21 +248,21 @@ export default async function AboutPage() {
                       beeped endlessly, and my body ached as if it were shutting
                       down. Staring at the cracked ceiling, I realized I had
                       been holding onto my life too tightly, thinking I could
-                      control it all. I couldn't. Jesus didn't just save me
+                      control it all. I couldn&apos;t. Jesus didn&apos;t just save me
                       spiritually; He pulled me through that darkness. My faith
                       stopped being just an idea; it became my anchor.
                     </Text>
                     <Text>
-                      Surviving changed everything. That hospital bed wasn't a
+                      Surviving changed everything. That hospital bed wasn&apos;t a
                       grave; it became a launchpad. A sense of purpose surged
                       within me—not just designing and coding for a paycheck,
                       but building something bigger. Now, I create digital tools
                       to help people grow—spiritually, mentally, and
-                      physically—rooted in faith. It's tough and messy work, but
-                      joy creeps in. Life's a wild ride—filled with goose
+                      physically—rooted in faith. It&apos;s tough and messy work, but
+                      joy creeps in. Life&apos;s a wild ride—filled with goose
                       fiascoes, career highs, and near-death lows—but every
                       twist weaves into a story of guts, grace, and the steady
-                      truth: God's got the wheel, and I'm never alone.
+                      truth: God&apos;s got the wheel, and I&apos;m never alone.
                     </Text>
                   </div>
                 </div>

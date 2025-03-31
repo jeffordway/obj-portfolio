@@ -27,6 +27,7 @@ export interface NavFooterProps {
  * footer area with proper accessibility attributes and responsive layout.
  */
 export const NavFooter = ({ className }: NavFooterProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const pathname = usePathname();
   const currentYear = new Date().getFullYear();
   

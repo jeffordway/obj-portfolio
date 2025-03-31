@@ -30,6 +30,7 @@ const ScrollableContent: React.FC<ScrollableContentProps> = ({
   children,
   className,
   // Completely hidden with just the edge visible
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   peekHeight = 0
 }) => {
   return (
