@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { clsx } from "clsx";
 
@@ -50,6 +50,8 @@ export interface AvatarProps {
  * 
  * A flexible component for displaying user profile images with customizable size,
  * border, and styling options. Optimized for use with Next.js Image component.
+ * 
+ * Includes hydration safety measures to prevent client/server rendering mismatches.
  */
 const Avatar: React.FC<AvatarProps> = ({
   src,
@@ -60,6 +62,35 @@ const Avatar: React.FC<AvatarProps> = ({
   borderWidth = 2,
   className,
 }) => {
+  // Use client-side only rendering to prevent hydration mismatches
+  const [isMounted, setIsMounted] = useState(false);
+  
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  
+  // Render a placeholder during SSR to prevent hydration issues
+  if (!isMounted) {
+    return (
+      <div
+        className={clsx(
+          "relative",
+          "rounded-full overflow-hidden",
+          showBorder && [
+            "border",
+            borderColor,
+          ],
+          className
+        )}
+        style={{
+          width: size,
+          height: size,
+          borderWidth: showBorder ? borderWidth : 0,
+        }}
+      />
+    );
+  }
+  
   return (
     <div
       className={clsx(
