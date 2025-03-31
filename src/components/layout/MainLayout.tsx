@@ -77,7 +77,16 @@ export interface MainLayoutProps {
 }
 
 /**
- * MainLayout component that provides scroll context and coordinates layout elements
+ * MainLayout Component
+ * 
+ * A core layout component that provides scroll context and coordinates all layout elements.
+ * This component manages scroll state and behavior throughout the application, including:
+ * - Tracking scroll position and direction
+ * - Determining when content has scrolled past the hero section
+ * - Calculating overall scroll progress through the page
+ * - Providing context to child components via ScrollContext
+ * 
+ * Use this component as the top-level layout wrapper for pages that need scroll-aware behavior.
  */
 export const MainLayout: React.FC<MainLayoutProps> = ({
   children,

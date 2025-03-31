@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { Heading, Text } from '@/components/ui/typography';
-import { clsx } from 'clsx';
+import Image from "next/image";
+import { Heading, Text } from "@/components/ui/typography";
+import { clsx } from "clsx";
 
 interface SquareImageProps {
   /**
@@ -32,17 +32,18 @@ interface SquareImageProps {
 }
 
 /**
- * SquareImage component
+ * SquareImage Component
  * 
- * Displays an image in 1:1 ratio with hover effect
- * Shows title and headline on hover if provided
+ * A specialized image component for displaying images in a perfect 1:1 square aspect ratio.
+ * Features a hover effect that reveals title and headline information when available.
+ * Ideal for grid layouts, thumbnails, and consistent image presentations.
  */
 export function SquareImage({
   imageSrc,
   imageAlt,
   title,
   headline,
-  className = '',
+  className = "",
 }: SquareImageProps) {
   // Check if we should show hover effect (only if title or headline exists)
   const hasHoverContent = Boolean(title || headline);
@@ -50,8 +51,8 @@ export function SquareImage({
   return (
     <div 
       className={clsx(
-        'relative overflow-hidden',
-        hasHoverContent && 'group',
+        "relative overflow-hidden",
+        hasHoverContent && "group",
         className
       )}
     >

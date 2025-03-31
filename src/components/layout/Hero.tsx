@@ -241,8 +241,18 @@ export interface HeroProps {
 }
 
 /**
- * Hero component that stays fixed while content scrolls over it
- * A complete, self-contained hero component with no external dependencies
+ * Hero Component
+ * 
+ * A comprehensive, feature-rich hero section that can be configured in multiple ways:
+ * - Supports fixed positioning where content scrolls over it
+ * - Configurable with title, subtitle, and action buttons
+ * - Optional background media (video or image) with customizable opacity
+ * - Optional avatar or profile image display
+ * - Flexible content alignment and direction options
+ * - Scroll indicator for better user experience
+ * 
+ * This is a complete, self-contained component that handles all hero section needs
+ * without requiring external dependencies beyond standard UI components.
  */
 const Hero: React.FC<HeroProps> = ({
   title,

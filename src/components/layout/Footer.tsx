@@ -13,7 +13,11 @@ export interface FooterProps {
 }
 
 /**
- * Footer layout component that handles positioning and background effects
+ * Footer Component
+ * 
+ * Renders the site footer with navigation links and social media icons.
+ * Handles positioning and background effects with proper z-index to ensure
+ * it appears above scrollable content.
  */
 const Footer: React.FC<FooterProps> = ({ className }) => {
   return (

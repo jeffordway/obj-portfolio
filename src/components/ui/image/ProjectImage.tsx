@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { Heading, Text } from '@/components/ui/typography';
-import { clsx } from 'clsx';
+import Image from "next/image";
+import { Heading, Text } from "@/components/ui/typography";
+import { clsx } from "clsx";
 
 interface ProjectImageProps {
   /**
@@ -32,17 +32,18 @@ interface ProjectImageProps {
 }
 
 /**
- * ProjectImage component
+ * ProjectImage Component
  * 
- * Displays a project image in 16:9 ratio with hover effect
- * Shows title and headline on hover if provided
+ * A specialized image component for displaying project images in a 16:9 aspect ratio.
+ * Features a hover effect that reveals title and headline information when available.
+ * Optimized for project showcases and portfolio displays with consistent styling.
  */
 export function ProjectImage({
   imageSrc,
   imageAlt,
   title,
   headline,
-  className = '',
+  className = "",
 }: ProjectImageProps) {
   // Check if we should show hover effect (only if title or headline exists)
   const hasHoverContent = Boolean(title || headline);
@@ -50,8 +51,8 @@ export function ProjectImage({
   return (
     <div 
       className={clsx(
-        'relative overflow-hidden',
-        hasHoverContent && 'group',
+        "relative overflow-hidden",
+        hasHoverContent && "group",
         className
       )}
     >

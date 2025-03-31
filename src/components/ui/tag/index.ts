@@ -1,6 +1,9 @@
 /**
- * Tag component for displaying labels or keywords
+ * Tag Components
+ * 
+ * This module exports components for displaying labels, categories, or status indicators:
+ * - Tag: A lightweight component with optional tooltip support
  */
 
-export { Tag } from './Tag';
-export type { TagProps } from './Tag'; // If the interface is exported from Tag.tsx
+export { Tag } from "./Tag";
+export type { TagProps } from "./Tag";

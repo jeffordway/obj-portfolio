@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import { ReactNode } from 'react';
-import { Heading, Text } from '@/components/ui/typography';
-import { clsx } from 'clsx';
+import Image from "next/image";
+import { ReactNode } from "react";
+import { Heading, Text } from "@/components/ui/typography";
+import { clsx } from "clsx";
 
 interface BentoImageProps {
   /**
@@ -47,6 +47,13 @@ interface BentoImageProps {
   children?: ReactNode;
 }
 
+/**
+ * BentoImage Component
+ * 
+ * A responsive image component designed for use in grid layouts with hover effects.
+ * Supports customizable column and row spans for flexible grid positioning.
+ * Shows title and optional subtitle on hover with a consistent overlay effect.
+ */
 export function BentoImage({
   imageSrc,
   imageAlt,
@@ -54,37 +61,37 @@ export function BentoImage({
   subtitle,
   colSpan = 4,
   rowSpan = 1,
-  className = '',
+  className = "",
   children,
 }: BentoImageProps) {
   // Create a className based on the colSpan and rowSpan props
   const getColSpanClass = () => {
     switch(colSpan) {
-      case 1: return 'col-span-1';
-      case 2: return 'col-span-2';
-      case 3: return 'col-span-3';
-      case 4: return 'col-span-4';
-      case 5: return 'col-span-5';
-      case 6: return 'col-span-6';
-      case 7: return 'col-span-7';
-      case 8: return 'col-span-8';
-      case 9: return 'col-span-9';
-      case 10: return 'col-span-10';
-      case 11: return 'col-span-11';
-      case 12: return 'col-span-12';
-      default: return 'col-span-4';
+      case 1: return "col-span-1";
+      case 2: return "col-span-2";
+      case 3: return "col-span-3";
+      case 4: return "col-span-4";
+      case 5: return "col-span-5";
+      case 6: return "col-span-6";
+      case 7: return "col-span-7";
+      case 8: return "col-span-8";
+      case 9: return "col-span-9";
+      case 10: return "col-span-10";
+      case 11: return "col-span-11";
+      case 12: return "col-span-12";
+      default: return "col-span-4";
     }
   };
 
   const getRowSpanClass = () => {
-    if (rowSpan <= 1) return '';
+    if (rowSpan <= 1) return "";
     switch(rowSpan) {
-      case 2: return 'row-span-2';
-      case 3: return 'row-span-3';
-      case 4: return 'row-span-4';
-      case 5: return 'row-span-5';
-      case 6: return 'row-span-6';
-      default: return '';
+      case 2: return "row-span-2";
+      case 3: return "row-span-3";
+      case 4: return "row-span-4";
+      case 5: return "row-span-5";
+      case 6: return "row-span-6";
+      default: return "";
     }
   };
 
@@ -93,7 +100,7 @@ export function BentoImage({
       className={clsx(
         getColSpanClass(),
         getRowSpanClass(),
-        'relative overflow-hidden group',
+        "relative overflow-hidden group",
         className
       )}
     >

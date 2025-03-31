@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { Button, ButtonVariant } from './Button';
+import React from "react";
+import Link from "next/link";
+import { Button, ButtonVariant } from "./Button";
 
 export interface ActionButtonProps {
   /**
@@ -39,13 +39,13 @@ export interface ActionButtonProps {
    * Button size (sm, md, lg)
    * @default 'md'
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   
   /**
    * Button border radius (none, sm, md, lg, full)
    * @default 'md'
    */
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full';
+  rounded?: "none" | "sm" | "md" | "lg" | "full";
   
   /**
    * Optional click handler for the button
@@ -54,8 +54,13 @@ export interface ActionButtonProps {
 }
 
 /**
- * ActionButton component that handles both internal and external links
- * with proper event handling for anchor links
+ * ActionButton Component
+ * 
+ * A versatile button component that handles both internal and external links with proper
+ * event handling for anchor links. Provides smooth scrolling for anchor links and
+ * appropriate attributes for external links.
+ * 
+ * Built on top of the base Button component with added link functionality.
  */
 const ActionButton: React.FC<ActionButtonProps> = ({
   text,
@@ -64,12 +69,12 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   isExternal = false,
   leftIcon,
   rightIcon,
-  size = 'md',
-  rounded = 'md',
+  size = "md",
+  rounded = "md",
   onClick
 }) => {
   // Handle anchor links (URLs starting with #)
-  const isAnchorLink = !isExternal && url.startsWith('#');
+  const isAnchorLink = !isExternal && url.startsWith("#");
   
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     // If we have an onClick handler, call it
@@ -102,7 +107,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
           const targetElement = document.getElementById(targetId);
           
           if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth' });
+            targetElement.scrollIntoView({ behavior: "smooth" });
           }
         }}
       >
@@ -124,8 +129,8 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   return (
     <Link 
       href={url}
-      target={isExternal ? '_blank' : undefined}
-      rel={isExternal ? 'noopener noreferrer' : undefined}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
       className="inline-block"
     >
       <Button

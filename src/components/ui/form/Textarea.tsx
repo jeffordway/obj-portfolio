@@ -1,8 +1,8 @@
 "use client";
 
-import React from 'react';
-import { clsx } from 'clsx';
-import { Text } from '@/components/ui/typography';
+import React from "react";
+import { clsx } from "clsx";
+import { Text } from "@/components/ui/typography";
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
@@ -33,7 +33,11 @@ export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextArea
 }
 
 /**
- * Textarea component with label, error, and helper text
+ * Textarea Component
+ * 
+ * A flexible textarea component with support for labels, error messages, and helper text.
+ * Includes proper styling for different states (error, disabled) and maintains consistent
+ * design language with other form components.
  */
 const Textarea: React.FC<TextareaProps> = ({
   label,
@@ -51,8 +55,8 @@ const Textarea: React.FC<TextareaProps> = ({
   return (
     <div 
       className={clsx(
-        'flex flex-col', // Layout
-        fullWidth ? 'w-full' : 'w-auto', // Width
+        "flex flex-col", // Layout
+        fullWidth ? "w-full" : "w-auto", // Width
         className
       )}
     >
@@ -75,16 +79,16 @@ const Textarea: React.FC<TextareaProps> = ({
         id={textareaId}
         rows={rows}
         className={clsx(
-          'p-4', // Padding
-          'rounded-none', // Shape
-          'bg-background', // Background
-          'text-foreground', // Text color
-          'border border-foreground', // Border
-          'focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary', // Focus
-          'transition duration-200', // Animation
-          'resize-y', // Allow vertical resizing
-          error ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' : '', // Error state
-          props.disabled ? 'opacity-60 cursor-not-allowed' : '' // Disabled state
+          "p-4", // Padding
+          "rounded-none", // Shape
+          "bg-background", // Background
+          "text-foreground", // Text color
+          "border border-foreground", // Border
+          "focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary", // Focus
+          "transition duration-200", // Animation
+          "resize-y", // Allow vertical resizing
+          error ? "border-red-500 focus:ring-red-500/50 focus:border-red-500" : "", // Error state
+          props.disabled ? "opacity-60 cursor-not-allowed" : "" // Disabled state
         )}
         {...props}
       />

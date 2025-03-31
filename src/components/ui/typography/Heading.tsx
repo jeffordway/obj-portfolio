@@ -80,6 +80,18 @@ export interface HeadingProps {
   children: React.ReactNode;
 }
 
+/**
+ * Heading Component
+ * 
+ * A versatile heading component with extensive customization options for size,
+ * weight, tracking, and special effects. Automatically adjusts for responsive layouts
+ * and supports gradient text effects.
+ * 
+ * @example
+ * <Heading as="h1" size="2xl" weight="bold" gradient>
+ *   Welcome to My Portfolio
+ * </Heading>
+ */
 export const Heading: React.FC<HeadingProps> = ({
   as: Component = "h2",
   size = "lg",

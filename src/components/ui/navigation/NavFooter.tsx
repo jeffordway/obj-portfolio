@@ -1,12 +1,12 @@
 "use client";
 
-import React from 'react';
+import React from "react";
 import { usePathname } from "next/navigation";
-import { clsx } from 'clsx';
+import { clsx } from "clsx";
 import { FaXTwitter, FaGithub, FaLinkedin } from "react-icons/fa6";
 
-import { NavigationLink } from './NavigationLink';
-import { navItems, footerLinks, socialLinks } from '@/constants';
+import { NavigationLink } from "./NavigationLink";
+import { navItems, footerLinks, socialLinks } from "@/constants";
 
 /**
  * Props for the NavFooter component
@@ -20,8 +20,11 @@ export interface NavFooterProps {
 }
 
 /**
- * Footer navigation component with links and social media icons
- * Provides consistent navigation experience in the footer area
+ * NavFooter Component
+ * 
+ * A comprehensive footer navigation component with site links, social media icons,
+ * and copyright information. Provides a consistent navigation experience in the
+ * footer area with proper accessibility attributes and responsive layout.
  */
 export const NavFooter = ({ className }: NavFooterProps) => {
   const pathname = usePathname();
@@ -55,13 +58,13 @@ export const NavFooter = ({ className }: NavFooterProps) => {
           // Determine which icon to use based on iconName
           let icon;
           switch (link.iconName) {
-            case 'github':
+            case "github":
               icon = <FaGithub size={20} />;
               break;
-            case 'linkedin':
+            case "linkedin":
               icon = <FaLinkedin size={20} />;
               break;
-            case 'twitter':
+            case "twitter":
               icon = <FaXTwitter size={20} />;
               break;
             default:

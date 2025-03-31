@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { clsx } from 'clsx';
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { clsx } from "clsx";
 
 /**
  * Props for the NavLogo component
@@ -30,11 +30,14 @@ export interface NavLogoProps {
 }
 
 /**
- * Navigation logo component with synchronized hover effects
- * Dynamically loads an SVG wordmark and applies interactive styling
+ * NavLogo Component
+ * 
+ * A specialized logo component for navigation headers that dynamically loads an SVG wordmark.
+ * Features synchronized hover effects with smooth color transitions and scaling animations.
+ * Optimized for consistent branding across the application with customizable sizing.
  */
 export const NavLogo = ({
-  href = '/',
+  href = "/",
   size = 160,
   className,
 }: NavLogoProps) => {
@@ -42,7 +45,7 @@ export const NavLogo = ({
 
   useEffect(() => {
     // Fetch the SVG content
-    fetch('/images/icons/ordway_jeff_wordmark.svg')
+    fetch("/images/icons/ordway_jeff_wordmark.svg")
       .then(response => response.text())
       .then(data => {
         // Create a wrapper for the SVG that isolates its styles
@@ -50,24 +53,24 @@ export const NavLogo = ({
           .replace('<svg', '<svg class="h-full w-auto logo-svg"');
         setSvgContent(processedSvg);
       })
-      .catch(error => console.error('Error loading SVG:', error));
+      .catch(error => console.error("Error loading SVG:", error));
   }, []);
 
   return (
     <Link 
       href={href}
       className={clsx(
-        'group block h-12',
+        "group block h-12",
         className
       )}
     >
       {/* Single container with all transitions applied */}
       <div 
         className={clsx(
-          'h-full flex items-center',
-          'text-foreground group-hover:text-accent',
-          'group-hover:scale-110 transform',
-          'transition-all duration-300 ease-in-out'
+          "h-full flex items-center",
+          "text-foreground group-hover:text-accent",
+          "group-hover:scale-110 transform",
+          "transition-all duration-300 ease-in-out"
         )}
         style={{ width: size }}
         dangerouslySetInnerHTML={{ __html: svgContent }}

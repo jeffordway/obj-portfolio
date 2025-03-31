@@ -1,14 +1,19 @@
-import React from 'react';
+import React from "react";
 import {
   PortableText as BasePortableText,
   PortableTextReactComponents,
   PortableTextComponentProps,
-} from '@portabletext/react';
-import { urlFor } from '@/sanity/lib/image';
-import { Text, Heading } from '@/components/ui/typography';
-import Image from 'next/image';
+} from "@portabletext/react";
+import { urlFor } from "@/sanity/lib/image";
+import { Text, Heading } from "@/components/ui/typography";
+import Image from "next/image";
 
-// Define custom components for the PortableText renderer
+/**
+ * Custom components for the PortableText renderer
+ * 
+ * Defines how different block types, marks, and custom types should be rendered with
+ * consistent styling that matches the application's design system.
+ */
 const components: Partial<PortableTextReactComponents> = {
   block: {
     // Different block styles
@@ -60,12 +65,12 @@ const components: Partial<PortableTextReactComponents> = {
       <code className="bg-muted px-1.5 py-0.5 rounded font-mono text-sm">{children}</code>
     ),
     link: ({ value, children }) => {
-      const target = (value?.href || '').startsWith('http') ? '_blank' : undefined;
+      const target = (value?.href || "").startsWith("http") ? "_blank" : undefined;
       return (
         <a 
           href={value?.href} 
           target={target} 
-          rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+          rel={target === "_blank" ? "noopener noreferrer" : undefined}
           className="text-primary hover:underline transition-colors"
         >
           {children}
@@ -82,7 +87,7 @@ const components: Partial<PortableTextReactComponents> = {
         <div className="my-6 relative w-full h-auto rounded-lg overflow-hidden">
           <Image
             src={urlFor(value).url()}
-            alt={value.alt || ''}
+            alt={value.alt || ""}
             width={800}
             height={500}
             className="w-full h-auto object-cover rounded-lg"
@@ -99,13 +104,29 @@ const components: Partial<PortableTextReactComponents> = {
   },
 };
 
-interface PortableTextProps {
+/**
+ * Props for the PortableText component
+ */
+export interface PortableTextProps {
+  /**
+   * Portable Text content from Sanity to be rendered
+   */
   value: any;
+  /**
+   * Optional additional CSS classes
+   */
   className?: string;
 }
 
 /**
- * PortableText component for rendering Sanity's Portable Text format
+ * PortableText Component
+ * 
+ * Renders Sanity's Portable Text format with custom styling and components.
+ * Handles various content types including headings, lists, images, and rich text formatting.
+ * Provides consistent typography, spacing, and visual styling across all rendered content.
+ * 
+ * @example
+ * <PortableText value={content.body} className="my-custom-class" />
  */
 export const PortableText: React.FC<PortableTextProps> = ({ value, className }) => {
   if (!value) {

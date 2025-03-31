@@ -1,6 +1,6 @@
 import { Container, PageLayout } from "@/components/layout";
 import { Heading, Text } from "@/components/ui/typography";
-import { CookieSettingsButton } from "@/components/cookie";
+import { CookieSettingsButton } from "@/components/cookies";
 import Link from "next/link";
 
 export default function CookiePolicyPage() {

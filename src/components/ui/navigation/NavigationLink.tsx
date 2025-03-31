@@ -1,6 +1,6 @@
-import React from 'react';
-import Link from 'next/link';
-import { clsx } from 'clsx';
+import React from "react";
+import Link from "next/link";
+import { clsx } from "clsx";
 
 export interface NavigationLinkProps {
   /**
@@ -37,8 +37,12 @@ export interface NavigationLinkProps {
 }
 
 /**
+ * NavigationLink Component
+ * 
  * A versatile link component for navigation, supporting both internal
  * active states and external links (like social icons).
+ * Features automatic external link detection, accessibility enhancements,
+ * and consistent hover animations.
  */
 export const NavigationLink = ({
   href,
@@ -50,24 +54,24 @@ export const NavigationLink = ({
   ariaLabel,
 }: NavigationLinkProps) => {
   // Treat links starting with 'http' as external automatically
-  const isExternal = external || href.startsWith('http');
+  const isExternal = external || href.startsWith("http");
 
   const linkProps = isExternal
-    ? { target: '_blank', rel: 'noopener noreferrer' }
+    ? { target: "_blank", rel: "noopener noreferrer" }
     : {};
     
-  const defaultAriaLabel = isExternal ? `${ariaLabel || 'External Link'} (opens in new tab)` : ariaLabel;
+  const defaultAriaLabel = isExternal ? `${ariaLabel || "External Link"} (opens in new tab)` : ariaLabel;
 
   return (
     <Link
       href={href}
       className={clsx(
-        'text-sm font-medium transition-all duration-400', // Base styles + user-defined duration
-        'transform hover:scale-110', // Hover scale effect
+        "text-sm font-medium transition-all duration-400", // Base styles + user-defined duration
+        "transform hover:scale-110", // Hover scale effect
         // Conditional styling based on active/external state
         isActive && !isExternal
-          ? 'text-foreground font-semibold' // Active internal link
-          : 'text-foreground/60 hover:text-foreground', // Inactive internal or any external link
+          ? "text-foreground font-semibold" // Active internal link
+          : "text-foreground/60 hover:text-foreground", // Inactive internal or any external link
         className // Allow overriding/extending styles
       )}
       onClick={onClick}

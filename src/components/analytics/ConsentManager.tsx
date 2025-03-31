@@ -1,23 +1,27 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { useAnalyticsStore } from '@/store/analyticsStore';
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { useAnalyticsStore } from "@/store/analyticsStore";
 
 interface ConsentManagerProps {
+  /** Optional CSS class name for styling */
   className?: string;
 }
 
 /**
  * Analytics Consent Manager Component
  * 
- * Allows users to manage their consent for Google Analytics tracking
+ * Provides a user interface for managing Google Analytics tracking consent.
+ * Users can enable or disable analytics tracking through this component.
+ * The component uses the analyticsStore to persist user preferences.
  */
 export function ConsentManager({ className }: ConsentManagerProps) {
   const { consent, setConsent } = useAnalyticsStore();
   const [mounted, setMounted] = useState(false);
   
-  // Handle hydration mismatch by only rendering after mount
+  // Prevent hydration mismatch by only rendering client-side
+  // This ensures the consent state from localStorage is properly loaded
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -27,7 +31,7 @@ export function ConsentManager({ className }: ConsentManagerProps) {
   }
   
   return (
-    <div className={`space-y-4 ${className || ''}`}>
+    <div className={`space-y-4 ${className || ""}`}>
       <div className="flex items-center justify-between p-4 bg-muted/20 rounded-md">
         <div>
           <p className="font-medium">Google Analytics</p>
@@ -39,7 +43,8 @@ export function ConsentManager({ className }: ConsentManagerProps) {
         </div>
         <Button
           onClick={() => setConsent(!consent)}
-          variant={consent ? "outline" : "default"}
+          variant={consent ? "outline" : "primary"}
+          type="button"
         >
           {consent ? "Disable" : "Enable"}
         </Button>

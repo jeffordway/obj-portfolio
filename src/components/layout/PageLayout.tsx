@@ -1,11 +1,11 @@
 "use client";
 
-import React from 'react';
-import { MainLayout } from './MainLayout';
-import Hero from './Hero';
-import ScrollableContent from './ScrollableContent';
-import Footer from './Footer';
-import { clsx } from 'clsx';
+import React from "react";
+import { MainLayout } from "./MainLayout";
+import Hero from "./Hero";
+import ScrollableContent from "./ScrollableContent";
+import Footer from "./Footer";
+import { clsx } from "clsx";
 
 export interface PageLayoutProps {
   /**
@@ -44,7 +44,7 @@ export interface PageLayoutProps {
    * Type of background media to show
    * @default 'video'
    */
-  mediaType?: 'video' | 'image';
+  mediaType?: "video" | "image";
   
   /**
    * Source path for the background media (video or image)
@@ -66,7 +66,7 @@ export interface PageLayoutProps {
   
   /**
    * Overlay color
-   * @default 'bg-primary'
+   * @default "bg-primary"
    */
   overlayColor?: string;
   
@@ -90,8 +90,11 @@ export interface PageLayoutProps {
 }
 
 /**
- * PageLayout component that provides a consistent page structure with optional hero section
- * and optional content section. Handles all combinations of showing/hiding hero and content.
+ * PageLayout Component
+ * 
+ * Provides a consistent page structure with optional hero section and scrollable content.
+ * Handles all combinations of showing/hiding hero and content sections.
+ * Supports background media (video or image) with customizable opacity and overlay effects.
  */
 const PageLayout: React.FC<PageLayoutProps> = ({
   title,
@@ -100,11 +103,11 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   children,
   showHero = true,
   showBackgroundMedia = false,
-  mediaType = 'video',
+  mediaType = "video",
   mediaSrc,
   mediaOpacity = 90,
   showColoredOverlay = false,
-  overlayColor = 'bg-background',
+  overlayColor = "bg-background",
   overlayOpacity = 50,
   blurAmount = 8,
   noHeroPadding = 0,
@@ -139,7 +142,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
               {showBackgroundMedia && (
                 <div className="fixed inset-0 w-full h-full overflow-hidden z-0">
                   {/* Background media - Video or Image based on mediaType */}
-                  {mediaType === 'video' ? (
+                  {mediaType === "video" ? (
                     <video
                       autoPlay
                       muted
@@ -147,13 +150,13 @@ const PageLayout: React.FC<PageLayoutProps> = ({
                       playsInline
                       className="fixed inset-0 w-full h-full object-cover z-0"
                     >
-                      <source src={mediaSrc || '/videos/background_video.mp4'} type="video/mp4" />
+                      <source src={mediaSrc || "/videos/background_video.mp4"} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   ) : (
                     <div 
                       className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-0"
-                      style={{ backgroundImage: `url(${mediaSrc || '/images/background.jpg'})` }}
+                      style={{ backgroundImage: `url(${mediaSrc || "/images/background.jpg"})` }}
                     />
                   )}
                   

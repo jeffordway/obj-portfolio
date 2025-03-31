@@ -22,8 +22,11 @@ export interface ContainerProps {
 }
 
 /**
- * Container component that constrains content width
- * Use this inside Section when you want content that doesn't span the full width
+ * Container Component
+ * 
+ * A responsive container that constrains content width based on the specified size.
+ * Use this component inside sections when you want content that doesn't span the full width.
+ * Provides consistent padding and responsive behavior across different screen sizes.
  */
 export const Container: React.FC<ContainerProps> = ({
   children,

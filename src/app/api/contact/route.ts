@@ -1,20 +1,37 @@
-import { NextRequest, NextResponse } from 'next/server';
-import sgMail from '@sendgrid/mail';
-import { z } from 'zod';
+import { NextRequest, NextResponse } from "next/server";
+import sgMail from "@sendgrid/mail";
+import { z } from "zod";
 
-// Configure SendGrid with API key
-sgMail.setApiKey(process.env.SENDGRID_CONTACT_FORM_API_KEY || '');
+/**
+ * Configure SendGrid with API key from environment variables
+ * Falls back to empty string if not provided (will fail gracefully)
+ */
+sgMail.setApiKey(process.env.SENDGRID_CONTACT_FORM_API_KEY || "");
 
-// Define the contact form schema with Zod (same as in the form component)
+/**
+ * Contact Form Schema
+ * 
+ * Defines validation rules for the contact form submission using Zod.
+ * This schema should match the client-side validation in the ContactForm component.
+ */
 const contactFormSchema = z.object({
-  name: z.string().min(1, { message: 'Name is required' }),
-  email: z.string().min(1, { message: 'Email is required' }).email({ message: 'Please enter a valid email address' }),
-  subject: z.string().min(1, { message: 'Subject is required' }),
+  name: z.string().min(1, { message: "Name is required" }),
+  email: z.string().min(1, { message: "Email is required" }).email({ message: "Please enter a valid email address" }),
+  subject: z.string().min(1, { message: "Subject is required" }),
   message: z.string()
-    .min(10, { message: 'Message must be at least 10 characters' })
-    .max(1000, { message: 'Message cannot exceed 1000 characters' }),
+    .min(10, { message: "Message must be at least 10 characters" })
+    .max(1000, { message: "Message cannot exceed 1000 characters" }),
 });
 
+/**
+ * Contact Form API Route Handler
+ * 
+ * Processes contact form submissions, validates input data,
+ * and sends emails using SendGrid.
+ * 
+ * @param request The incoming Next.js request object
+ * @returns JSON response indicating success or failure
+ */
 export async function POST(request: NextRequest) {
   try {
     // Parse the request body
@@ -28,7 +45,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { 
           success: false, 
-          message: 'Validation failed', 
+          message: "Validation failed", 
           errors: result.error.errors 
         }, 
         { status: 400 }
@@ -44,9 +61,9 @@ export async function POST(request: NextRequest) {
     
     // Verify environment variables
     if (!toEmail || !fromEmail) {
-      console.error('Missing email configuration in environment variables');
+      console.error("Missing email configuration in environment variables");
       return NextResponse.json(
-        { success: false, message: 'Server configuration error' },
+        { success: false, message: "Server configuration error" },
         { status: 500 }
       );
     }
@@ -70,7 +87,7 @@ ${message}
 <p><strong>Email:</strong> ${email}</p>
 <p><strong>Subject:</strong> ${subject}</p>
 <h4>Message:</h4>
-<p>${message.replace(/\n/g, '<br>')}</p>
+<p>${message.replace(/\n/g, "<br>")}</p>
       `,
     };
     
@@ -79,16 +96,16 @@ ${message}
     
     // Return success response
     return NextResponse.json(
-      { success: true, message: 'Message sent successfully' },
+      { success: true, message: "Message sent successfully" },
       { status: 200 }
     );
   } catch (error) {
     // Log the error
-    console.error('Contact form error:', error);
+    console.error("Contact form error:", error);
     
     // Return error response
     return NextResponse.json(
-      { success: false, message: 'Failed to send message' },
+      { success: false, message: "Failed to send message" },
       { status: 500 }
     );
   }

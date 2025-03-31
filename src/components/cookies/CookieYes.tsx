@@ -1,13 +1,15 @@
-'use client';
+"use client";
 
-import Script from 'next/script';
+import Script from "next/script";
 
 /**
- * CookieYes Component
+ * CookieYes Consent Management Component
  * 
- * Implements CookieYes cookie consent management
- * Uses the beforeInteractive strategy as specified in the CookieYes documentation
- * for Next.js 13+ applications
+ * Implements CookieYes cookie consent management for GDPR and other privacy regulations compliance.
+ * This component loads the CookieYes script using Next.js Script component with the beforeInteractive
+ * strategy as recommended in the CookieYes documentation for Next.js 13+ applications.
+ * 
+ * The script adds a cookie banner and consent management interface to the website.
  */
 export default function CookieYes() {
   return (

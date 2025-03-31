@@ -74,6 +74,18 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
 }
 
+/**
+ * Text Component
+ * 
+ * A versatile text component for paragraphs, spans, and other text elements with
+ * extensive customization options for size, weight, alignment, and line height.
+ * Automatically adjusts for responsive layouts and supports various text styling options.
+ * 
+ * @example
+ * <Text size="lg" weight="medium" align="center" muted>
+ *   This is a sample paragraph with custom styling
+ * </Text>
+ */
 export const Text: React.FC<TextProps> = ({
   as: Component = "p",
   size = "base",

@@ -1,8 +1,8 @@
 "use client";
 
-import React from 'react';
-import { clsx } from 'clsx';
-import { RiCheckLine } from 'react-icons/ri';
+import React from "react";
+import { clsx } from "clsx";
+import { RiCheckLine } from "react-icons/ri";
 
 export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
   /**
@@ -32,7 +32,11 @@ export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputE
 }
 
 /**
- * Custom checkbox component that aligns with the design system
+ * Checkbox Component
+ * 
+ * A custom checkbox component that aligns with the design system, featuring
+ * custom styling, accessibility support, and various states (checked, disabled).
+ * Includes a label option and smooth transitions for interactive states.
  */
 const Checkbox: React.FC<CheckboxProps> = ({
   label,
@@ -46,9 +50,9 @@ const Checkbox: React.FC<CheckboxProps> = ({
   return (
     <label 
       className={clsx(
-        'inline-flex items-center',
-        disabled && 'opacity-50 cursor-not-allowed',
-        !disabled && 'cursor-pointer',
+        "inline-flex items-center",
+        disabled && "opacity-50 cursor-not-allowed",
+        !disabled && "cursor-pointer",
         containerClassName
       )}
     >
@@ -63,10 +67,10 @@ const Checkbox: React.FC<CheckboxProps> = ({
         />
         <div 
           className={clsx(
-            'h-6 w-6 flex items-center justify-center',
-            'border-2 transition-colors',
-            checked ? 'bg-accent border-accent' : 'bg-transparent border-border',
-            !disabled && !checked && 'hover:border-accent/70',
+            "h-6 w-6 flex items-center justify-center",
+            "border-2 transition-colors",
+            checked ? "bg-accent border-accent" : "bg-transparent border-border",
+            !disabled && !checked && "hover:border-accent/70",
             className
           )}
         >
@@ -77,8 +81,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
       </div>
       {label && (
         <span className={clsx(
-          'ml-4 text-sm', // Increased margin from ml-2 to ml-4
-          disabled ? 'text-foreground/50' : 'text-foreground'
+          "ml-4 text-sm", // Increased margin from ml-2 to ml-4
+          disabled ? "text-foreground/50" : "text-foreground"
         )}>
           {label}
         </span>

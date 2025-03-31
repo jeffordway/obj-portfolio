@@ -1,8 +1,8 @@
 "use client";
 
-import React from 'react';
-import Image from 'next/image';
-import { clsx } from 'clsx';
+import React from "react";
+import Image from "next/image";
+import { clsx } from "clsx";
 
 export interface AvatarProps {
   /**
@@ -46,24 +46,27 @@ export interface AvatarProps {
 }
 
 /**
- * Avatar component for displaying user profile images
+ * Avatar Component
+ * 
+ * A flexible component for displaying user profile images with customizable size,
+ * border, and styling options. Optimized for use with Next.js Image component.
  */
 const Avatar: React.FC<AvatarProps> = ({
   src,
   alt,
   size = 120,
   showBorder = true,
-  borderColor = 'border-foreground',
+  borderColor = "border-foreground",
   borderWidth = 2,
   className,
 }) => {
   return (
     <div
       className={clsx(
-        'relative',
-        'rounded-full overflow-hidden',
+        "relative",
+        "rounded-full overflow-hidden",
         showBorder && [
-          'border',
+          "border",
           borderColor,
         ],
         className

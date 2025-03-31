@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Input, Textarea } from '@/components/ui/form';
-import Button from '@/components/ui/button/Button';
-import { clsx } from 'clsx';
-import { z } from 'zod';
+import React, { useState } from "react";
+import { Input, Textarea } from "@/components/ui/form";
+import Button from "@/components/ui/button/Button";
+import { clsx } from "clsx";
+import { z } from "zod";
 
 export interface ContactFormProps {
   /**
@@ -13,29 +13,36 @@ export interface ContactFormProps {
   className?: string;
 }
 
-// Define the contact form schema with Zod
+/**
+ * Contact form validation schema
+ * Defines validation rules for each form field
+ */
 const contactFormSchema = z.object({
-  name: z.string().min(1, { message: 'Name is required' }),
-  email: z.string().min(1, { message: 'Email is required' }).email({ message: 'Please enter a valid email address' }),
-  subject: z.string().min(1, { message: 'Subject is required' }),
+  name: z.string().min(1, { message: "Name is required" }),
+  email: z.string().min(1, { message: "Email is required" }).email({ message: "Please enter a valid email address" }),
+  subject: z.string().min(1, { message: "Subject is required" }),
   message: z.string()
-    .min(10, { message: 'Message must be at least 10 characters' })
-    .max(1000, { message: 'Message cannot exceed 1000 characters' }),
+    .min(10, { message: "Message must be at least 10 characters" })
+    .max(1000, { message: "Message cannot exceed 1000 characters" }),
 });
 
 // Infer the type from the schema
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
 /**
- * Contact form component with validation and submission handling
+ * Contact Form Component
+ * 
+ * Provides a complete contact form with client-side validation using Zod schema.
+ * Handles form submission to the /api/contact endpoint and displays success/error states.
+ * Includes field-level validation with error messages and form-level validation on submit.
  */
 const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
   // Form state
   const [formData, setFormData] = useState<ContactFormData>({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
   
   // Form status
@@ -131,15 +138,15 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
       const result = await response.json();
       
       if (!response.ok) {
-        throw new Error(result.message || 'Failed to send message');
+        throw new Error(result.message || "Failed to send message");
       }
       
       // Reset form on success
       setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
       });
       
       // Set success status
@@ -150,7 +157,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
         setStatus('idle');
       }, 5000);
     } catch (error) {
-      console.error('Contact form submission error:', error);
+      console.error("Contact form submission error:", error);
       
       // Set error status
       setStatus('error');
@@ -165,8 +172,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ className }) => {
   return (
     <div 
       className={clsx(
-        'w-full mx-auto', // Layout
-        'bg-background-alt', // Background and padding
+        "w-full mx-auto", // Layout
+        "bg-background-alt", // Background and padding
         className
       )}
     >

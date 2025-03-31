@@ -26,7 +26,11 @@ export interface HeaderProps {
 }
 
 /**
- * Header layout component that handles positioning and background effects
+ * Header Component
+ * 
+ * Renders the site header with navigation menu and handles dynamic transparency effects.
+ * The header can be configured to change opacity based on scroll position,
+ * creating a smooth transition from transparent to solid background as the user scrolls.
  */
 const Header: React.FC<HeaderProps> = ({
   transparent = true,
@@ -37,9 +41,9 @@ const Header: React.FC<HeaderProps> = ({
   const { scrollY, isPastHero } = useScroll();
 
   // Determine if header should be transparent or solid
-  // Only make the header solid when we've scrolled enough for content to reach it
-  // For a typical header height of 80px, we use that as our threshold
-  const headerHeight = 900; // Approximate header height in pixels
+  // Only make the header solid when we've scrolled past a certain threshold
+  // This creates a smooth transition as the user scrolls down the page
+  const headerHeight = 900; // Threshold for transparency transition in pixels
   const isTransparent = 
     dynamicOpacity && transparent ? scrollY < headerHeight : transparent;
 
