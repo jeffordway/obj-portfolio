@@ -2,6 +2,7 @@
 
 import React from "react";
 import dynamic from "next/dynamic";
+import ThemeProvider from "./ThemeProvider";
 
 // Dynamically import providers to avoid SSR issues
 const AnalyticsProvider = dynamic(() => import("./AnalyticsProvider"), {
@@ -53,7 +54,9 @@ export default function ClientProviders({ children }: ClientProvidersProps) {
   return (
     <>
       <CookieYes />
-      <AnalyticsProvider>{children}</AnalyticsProvider>
+      <ThemeProvider>
+        <AnalyticsProvider>{children}</AnalyticsProvider>
+      </ThemeProvider>
     </>
   );
 }

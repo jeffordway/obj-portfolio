@@ -11,7 +11,7 @@ import {
 import Link from "next/link";
 import { Avatar } from "@/components/ui/avatar";
 import { clsx } from "clsx";
-import { FiChevronDown } from "react-icons/fi";
+import { RiArrowDownSLine } from "react-icons/ri";
 
 /**
  * Action button configuration for Hero component
@@ -620,7 +620,7 @@ const Hero: React.FC<HeroProps> = ({
               aria-label="Scroll to content"
               className="text-foreground/60 hover:text-foreground p-2 scroll-button scroll-indicator"
             >
-              <FiChevronDown size={60} />
+              <RiArrowDownSLine size={60} />
             </button>
           </div>
         )}

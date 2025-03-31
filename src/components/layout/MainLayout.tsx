@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { clsx } from "clsx";
+import { ColorModeToggle } from "@/components/ui/theme";
 
 // Define the scroll context type
 export interface ScrollContextType {
@@ -178,6 +179,9 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
         }}
       >
         {children}
+        
+        {/* Color Mode Toggle FAB */}
+        <ColorModeToggle position="bottom-right" />
       </div>
     </ScrollContext.Provider>
   );

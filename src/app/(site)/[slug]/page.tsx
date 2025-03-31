@@ -9,7 +9,7 @@ import {
   getCategoriesWithSkills,
 } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
-import { FaGithub, FaArrowUpRightFromSquare } from "react-icons/fa6";
+import { RiGithubFill, RiExternalLinkLine } from "react-icons/ri";
 import { ButtonVariant } from "@/components/ui/button";
 import { PortableText } from "@/components/ui/portable-text/PortableText";
 import { ProjectImage } from "@/components/ui/image/ProjectImage";
@@ -79,7 +79,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       text: githubButtonText,
       url: project.githubRepo.url,
       variant: "outline",
-      icon: <FaGithub />,
+      icon: <RiGithubFill />,
       isExternal: true,
     });
   }
@@ -90,7 +90,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       text: project.prototype.buttonText || defaultPrototypeButtonText,
       url: project.prototype.url,
       variant: "primary",
-      icon: <FaArrowUpRightFromSquare />,
+      icon: <RiExternalLinkLine />,
       isExternal: true,
     });
   }

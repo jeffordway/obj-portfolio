@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
-import { IoMenuSharp, IoCloseSharp } from "react-icons/io5";
-import { FaXTwitter, FaGithub, FaLinkedin } from "react-icons/fa6";
+import { RiMenuLine, RiCloseLine, RiTwitterXFill, RiGithubFill, RiLinkedinBoxFill } from "react-icons/ri";
 import { createPortal } from "react-dom";
 
 import { NavigationLink } from "./NavigationLink";
@@ -57,7 +56,7 @@ export const Navbar = ({ className }: NavbarProps) => {
           onClick={() => setMobileMenuOpen(false)}
           aria-label="Close menu"
         >
-          <IoCloseSharp size={24} />
+          <RiCloseLine size={24} />
         </button>
       </div>
       
@@ -83,13 +82,13 @@ export const Navbar = ({ className }: NavbarProps) => {
           let icon;
           switch (link.iconName) {
             case 'github':
-              icon = <FaGithub size={20} />;
+              icon = <RiGithubFill size={20} />;
               break;
             case 'linkedin':
-              icon = <FaLinkedin size={20} />;
+              icon = <RiLinkedinBoxFill size={20} />;
               break;
             case 'twitter':
-              icon = <FaXTwitter size={20} />;
+              icon = <RiTwitterXFill size={20} />;
               break;
             default:
               icon = null;
@@ -146,13 +145,13 @@ export const Navbar = ({ className }: NavbarProps) => {
             let icon;
             switch (link.iconName) {
               case 'github':
-                icon = <FaGithub size={20} />;
+                icon = <RiGithubFill size={20} />;
                 break;
               case 'linkedin':
-                icon = <FaLinkedin size={20} />;
+                icon = <RiLinkedinBoxFill size={20} />;
                 break;
               case 'twitter':
-                icon = <FaXTwitter size={20} />;
+                icon = <RiTwitterXFill size={20} />;
                 break;
               default:
                 icon = null;
@@ -178,9 +177,9 @@ export const Navbar = ({ className }: NavbarProps) => {
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
         >
           {mobileMenuOpen ? (
-            <IoCloseSharp size={24} />
+            <RiCloseLine size={24} />
           ) : (
-            <IoMenuSharp size={24} />
+            <RiMenuLine size={24} />
           )}
         </button>
       </div>

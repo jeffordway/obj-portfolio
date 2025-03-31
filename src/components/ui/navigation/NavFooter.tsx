@@ -3,7 +3,7 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
-import { FaXTwitter, FaGithub, FaLinkedin } from "react-icons/fa6";
+import { RiTwitterXFill, RiGithubFill, RiLinkedinBoxFill } from "react-icons/ri";
 
 import { NavigationLink } from "./NavigationLink";
 import { navItems, footerLinks, socialLinks } from "@/constants";
@@ -59,13 +59,13 @@ export const NavFooter = ({ className }: NavFooterProps) => {
           let icon;
           switch (link.iconName) {
             case "github":
-              icon = <FaGithub size={20} />;
+              icon = <RiGithubFill size={20} />;
               break;
             case "linkedin":
-              icon = <FaLinkedin size={20} />;
+              icon = <RiLinkedinBoxFill size={20} />;
               break;
             case "twitter":
-              icon = <FaXTwitter size={20} />;
+              icon = <RiTwitterXFill size={20} />;
               break;
             default:
               icon = null;
