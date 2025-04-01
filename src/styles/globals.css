@@ -173,6 +173,25 @@ body {
   font-family: var(--font-m);
 }
 
+/* ===== Third-Party Integrations ===== */
+
+/* CookieYes Banner - ensure proper z-index */
+#cookie-consent-banner,
+#cky-consent-container,
+.cky-consent-container,
+.cky-modal-backdrop,
+.cky-consent-bar,
+.cky-btn-wrapper,
+.cky-preference-center {
+  z-index: 9999 !important; /* Ensure it's above all other elements */
+  position: relative;
+}
+
+/* Make sure CookieYes elements are visible */
+.cky-overlay {
+  z-index: 9998 !important;
+}
+
 /* ===== SVG Components ===== */
 
 /* Isolate SVG styling for the logo only */
