@@ -65,6 +65,7 @@ export const NavigationLink = ({
   return (
     <Link
       href={href}
+      prefetch={!isExternal} // Prefetch internal links for faster navigation
       className={clsx(
         "text-sm font-medium transition-all duration-400", // Base styles + user-defined duration
         "transform hover:scale-110", // Hover scale effect

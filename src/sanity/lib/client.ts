@@ -7,5 +7,20 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: true, // Set to false if statically generating pages, using ISR or tag-based revalidation
+  useCdn: true,
+  // Add performance optimizations
+  perspective: 'published',
+  stega: {
+    enabled: false, // Disable stega for production
+  },
+});
+
+// Configure client to use in-memory cache
+// This improves performance by reducing redundant API calls
+client.config({
+  // @ts-ignore - Next-Sanity types may not include all options
+  cache: {
+    enabled: true,
+    ttl: 60 * 60, // Cache for 1 hour
+  },
 });

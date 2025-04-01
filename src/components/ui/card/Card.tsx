@@ -76,13 +76,17 @@ export const Card: React.FC<CardProps> = ({ project, className, children }) => {
           src={imageSrc}
           alt={imageAlt}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          loading="eager"
+          fetchPriority="high"
+          quality={80}
+          placeholder="blur"
+          blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMjAyMDIwIi8+PC9zdmc+"
           className={clsx(
             "object-cover",
             "transition-all duration-500 group-hover:scale-110",
             "z-0" // Ensure image is behind content
           )}
-          priority
         />
       </div>
 

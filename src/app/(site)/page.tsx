@@ -5,11 +5,14 @@ import { getAllProjects } from "@/sanity/lib/queries";
 import { Card } from "@/components/ui/card";
 import { homePageData } from "@/constants/home";
 
+// Add proper Next.js caching and revalidation
+export const revalidate = 3600; // Revalidate content every hour
+
 export default async function Home() {
   // Load content from constants file
   const content = homePageData;
 
-  // Fetch all projects for the portfolio grid
+  // Fetch all projects for the portfolio grid with caching
   const projects = await getAllProjects();
 
   // Render home page with hero and projects grid

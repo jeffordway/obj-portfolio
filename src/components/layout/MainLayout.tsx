@@ -107,59 +107,74 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
     scrollProgress: 0,
   });
 
-  // Effect to handle scroll events
+  // Effect to handle scroll events with debounce for performance
   useEffect(() => {
     let lastScrollY = window.scrollY;
-    // Set a very small threshold to match Spencer's site behavior
-    // We want the header to become visible almost immediately on scroll
-    const heroThreshold = 5; 
-
+    let ticking = false;
+    // Set a threshold for header visibility
+    const heroThreshold = 5;
+    
+    // Use requestAnimationFrame for better performance
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const direction =
-        currentScrollY > lastScrollY
-          ? 1
-          : currentScrollY < lastScrollY
-            ? -1
-            : 0;
-      const isPastHero = showHero ? currentScrollY > heroThreshold : true;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          const direction =
+            currentScrollY > lastScrollY
+              ? 1
+              : currentScrollY < lastScrollY
+                ? -1
+                : 0;
+          const isPastHero = showHero ? currentScrollY > heroThreshold : true;
 
-      // Calculate scroll progress (0-1)
-      const documentHeight =
-        Math.max(
-          document.body.scrollHeight,
-          document.body.offsetHeight,
-          document.documentElement.clientHeight,
-          document.documentElement.scrollHeight,
-          document.documentElement.offsetHeight
-        ) - window.innerHeight;
+          // Calculate scroll progress (0-1) more efficiently
+          const documentHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
 
-      const scrollProgress = Math.min(
-        Math.max(currentScrollY / documentHeight, 0),
-        1
-      );
+          const scrollProgress = documentHeight <= 0 
+            ? 0 
+            : Math.min(Math.max(currentScrollY / documentHeight, 0), 1);
 
-      setScrollState({
-        scrollY: currentScrollY,
-        scrollDirection: direction,
-        isPastHero,
-        scrollProgress,
-      });
+          // Only update state if values have changed significantly
+          // This reduces unnecessary re-renders
+          const shouldUpdate = 
+            Math.abs(scrollState.scrollY - currentScrollY) > 5 ||
+            scrollState.scrollDirection !== direction ||
+            scrollState.isPastHero !== isPastHero ||
+            Math.abs(scrollState.scrollProgress - scrollProgress) > 0.01;
+            
+          if (shouldUpdate) {
+            setScrollState({
+              scrollY: currentScrollY,
+              scrollDirection: direction,
+              isPastHero,
+              scrollProgress,
+            });
+          }
 
-      lastScrollY = currentScrollY;
+          lastScrollY = currentScrollY;
+          ticking = false;
+        });
+        
+        ticking = true;
+      }
     };
 
-    // Add scroll event listener
+    // Add scroll event listener with passive flag for better performance
     window.addEventListener("scroll", handleScroll, { passive: true });
+    
+    // Add resize listener to recalculate dimensions when window size changes
+    window.addEventListener("resize", handleScroll, { passive: true });
 
     // Initial call to set correct initial state
     handleScroll();
 
-    // Clean up event listener on unmount
+    // Clean up event listeners on unmount
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
-  }, [heroHeight, showHero]);
+  }, [heroHeight, showHero, scrollState]);
 
   // Filter children to separate hero and content components
   // This allows for more precise control over their rendering

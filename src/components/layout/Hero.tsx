@@ -335,12 +335,18 @@ const Hero: React.FC<HeroProps> = ({
             Your browser does not support the video tag.
           </video>
         ) : (
-          <div
-            className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-0"
-            style={{
-              backgroundImage: `url(${mediaSrc || "/images/background.jpg"})`,
-            }}
-          />
+          <div className="absolute inset-0 w-full h-full z-0">
+            <Image
+              src={mediaSrc || "/images/background.jpg"}
+              alt="Background image"
+              fill
+              priority
+              fetchPriority="high"
+              sizes="100vw"
+              quality={85}
+              className="object-cover"
+            />
+          </div>
         )}
 
         {/* Media opacity overlay */}

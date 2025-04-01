@@ -62,7 +62,9 @@ export function ProjectImage({
           src={imageSrc}
           alt={imageAlt}
           fill
-          sizes="(max-width: 768px) 100vw, 800px"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          loading="eager"
+          fetchPriority="high"
           className={clsx(
             "object-cover",
             hasHoverContent && "transition-all duration-500 group-hover:scale-110"
