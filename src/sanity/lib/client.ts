@@ -18,7 +18,7 @@ export const client = createClient({
 // Configure client to use in-memory cache
 // This improves performance by reducing redundant API calls
 client.config({
-  // @ts-ignore - Next-Sanity types may not include all options
+  // @ts-expect-error - Next-Sanity types may not include all options
   cache: {
     enabled: true,
     ttl: 60 * 60, // Cache for 1 hour

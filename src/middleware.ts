@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 
 /**
  * Next.js Middleware for performance optimization
@@ -7,7 +6,7 @@ import type { NextRequest } from 'next/server';
  * This middleware adds performance-enhancing headers to responses
  * since the custom server with compression isn't used on Vercel.
  */
-export function middleware(request: NextRequest) {
+export function middleware() {
   const response = NextResponse.next();
   
   // Add performance-related headers

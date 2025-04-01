@@ -3,13 +3,10 @@
  * 
  * This file configures Next.js behavior including image domains
  * for external image optimization, ESLint and TypeScript checking configuration,
- * and bundle analysis for performance optimization.
+ * and performance optimizations.
  * 
  * @type {import('next').NextConfig}
  */
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
 
 const nextConfig = {
   images: {
@@ -29,13 +26,12 @@ const nextConfig = {
     // Run type checking during build for type safety
     ignoreBuildErrors: false,
   },
-  // Add experimental optimizations
-  experimental: {
-    optimizeCss: true,
-    scrollRestoration: true,
-    workerThreads: true,
-    optimisticClientCache: true,
-  },
+  // Temporarily disable experimental features to fix build issues
+  // experimental: {
+  //   optimizeCss: true,
+  //   scrollRestoration: true,
+  //   workerThreads: true,
+  // },
   // Configure headers for better caching
   async headers() {
     return [
@@ -78,4 +74,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withBundleAnalyzer(nextConfig);
+module.exports = nextConfig;
