@@ -132,7 +132,7 @@ export default async function AboutPage() {
 
             {/* Main Content - Two Column Layout */}
 
-            {/* Column 1: Mission, Vision, Core Values */}
+            {/* Column 1: Mission, Vision, and Core Values */}
             <div className="col-span-12 md:col-span-3 order-2 md:order-1">
               <div className="space-y-8">
                 <div>
